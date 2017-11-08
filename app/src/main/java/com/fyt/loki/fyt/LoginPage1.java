@@ -11,7 +11,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
-import static com.facebook.FacebookSdk.getApplicationContext;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -48,15 +48,19 @@ public class LoginPage1 extends AnimListener {
 
 
         loginBackground = (ImageView)getActivity().findViewById(R.id.loginBack);
-        Glide.with(getApplicationContext()).load(R.drawable.signup_background).asBitmap().centerCrop().into(loginBackground);
+        Glide.with(getContext()).load(R.drawable.signup_background).asBitmap().centerCrop().into(loginBackground);
+
         logIn = (Button)loginPage1.findViewById(R.id.logIn);
+
         ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+
         logIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enterfromright,R.anim.exittoleft,R.anim.enterfromleft,R.anim.exittoright).replace(R.id.loginPageContainer,new LoginPage2()).addToBackStack(null).commit();
             }
         });
+
         return loginPage1;
     }
 }

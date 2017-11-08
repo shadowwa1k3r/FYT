@@ -67,7 +67,7 @@ public class LoginPage2 extends AnimListener {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // lp2backimg.setImageDrawable(null);
+               lp2backimg.setImageDrawable(null);
                 getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enterfromright,R.anim.exittoleft,R.anim.enterfromleft,R.anim.exittoright).replace(R.id.loginPageContainer,new LoginPage3()).addToBackStack(null).commit();
             }
         });

@@ -153,7 +153,7 @@
                 android:id="@+id/button9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@android:color/white"
+                android:background="@android:color/transparent"
                 android:text="Button"/>
 
             <View
@@ -173,7 +173,7 @@
                 android:id="@+id/button8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@android:color/background_light"
+                android:background="@android:color/transparent"
                 android:text="sign up"/>
         </LinearLayout>
     </LinearLayout>
