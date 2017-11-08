@@ -1,20 +1,28 @@
 package com.fyt.loki.fyt;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.ImageView;
-
-import com.bumptech.glide.Glide;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
 public class LoginActivity extends AppCompatActivity {
 
-    ImageView loginBackground;
+
+    Toolbar tb;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        loginBackground = (ImageView)findViewById(R.id.loginBack);
-        Glide.with(getApplicationContext()).load(R.drawable.signup_background).asBitmap().centerCrop().into(loginBackground);
+
+
+
+        tb = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(tb)
+        ;
+
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.loginPageContainer,new LoginPage1()).commit();
+
+        getSupportActionBar().hide();
 
 
     }

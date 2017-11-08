@@ -2,4 +2,7 @@
     <string name="app_name">FYT</string>
     <string name="appsName">Find your training</string>
     <string name="lp_text">Our map will help you to find all sport activity around you, where ever you, any city, any country, anywhere all over the world.</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
