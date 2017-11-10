@@ -15,6 +15,7 @@ public class AnimListener extends Fragment {
 
     protected void onAnimationRepeated () {}
 
+
     @Override
     public Animation onCreateAnimation (int transit, boolean enter, int nextAnim) {
         //Check if the superclass already created the animation

@@ -26,9 +26,29 @@
         </FrameLayout>
 
         <include
+
             layout="@layout/login_signup_toolbar"
             android:layout_width="match_parent"
             android:layout_height="60dp"/>
+
+        <com.kofigyan.stateprogressbar.StateProgressBar
+            android:id="@+id/stateProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="65dp"
+            app:spb_animateToCurrentProgressState="true"
+            app:spb_checkStateCompleted="true"
+            app:spb_currentStateDescriptionColor="#009688"
+            app:spb_currentStateNumber="one"
+            app:spb_maxStateNumber="five"
+            app:spb_stateBackgroundColor="#BDBDBD"
+            app:spb_stateDescriptionColor="#808080"
+            app:spb_stateForegroundColor="#009688"
+            app:spb_stateNumberBackgroundColor="#808080"
+            app:spb_stateNumberForegroundColor="#eeeeee"/>
 
     </RelativeLayout>
 

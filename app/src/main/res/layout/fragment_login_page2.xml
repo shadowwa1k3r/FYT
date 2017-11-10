@@ -111,10 +111,14 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="10dp"
+            android:background="@drawable/et_baorder2"
             android:ems="10"
             android:hint="Username or Email"
             android:inputType="textPersonName"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
             android:textColor="@android:color/background_light"
+            android:textColorHint="#ffffff"
             android:textColorLink="@android:color/transparent"/>
 
         <EditText
@@ -124,10 +128,14 @@
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
+            android:background="@drawable/et_baorder2"
             android:ems="10"
             android:hint="Password"
             android:inputType="textPassword"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
             android:textColor="@android:color/background_light"
+            android:textColorHint="#ffffff"
             android:textColorLink="@android:color/transparent"/>
 
         <Button

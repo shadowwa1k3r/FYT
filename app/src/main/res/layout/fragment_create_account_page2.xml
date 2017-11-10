@@ -1,71 +1,65 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:app="http://schemas.android.com/apk/res-auto"
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context="com.fyt.loki.fyt.CreateAccountPage1">
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             tools:context="com.fyt.loki.fyt.CreateAccountPage2">
 
     <!-- TODO: Update blank fragment layout -->
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="158dp"
-        android:orientation="vertical"
-        android:weightSum="1">
+        android:layout_marginTop="104dp"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="90dp"
+            android:layout_marginBottom="5dp"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/button6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_weight="1"
-                android:text="fb"/>
+            <com.hbb20.CountryCodePicker
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="10"
+                app:ccp_contentColor="#ffffff"
+                app:ccp_showFlag="false"/>
 
-            <Button
-                android:id="@+id/button5"
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="vk"/>
+                android:layout_weight="6"
+                android:background="@drawable/et_baorder2"
+                android:ems="10"
+                android:hint="Your mobile phone"
+                android:inputType="phone"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:textColor="#ffffff"
+                android:textColorHint="#ffffff"
+                />
         </LinearLayout>
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/textView9"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
-                android:layout_weight="1"
-                android:text="tw"/>
-
-            <Button
-                android:id="@+id/button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="g+"/>
-        </LinearLayout>
+            android:layout_marginTop="15dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="You will use this number to login and reset password"
+            android:textAlignment="center"
+            android:textColor="#ffffff"
+            android:textSize="18sp"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="92dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_weight="0.02">
+            android:layout_height="94dp"
+            >
 
             <View
                 android:id="@+id/view"
@@ -93,13 +87,28 @@
 
         </RelativeLayout>
 
-        <Button
-            android:id="@+id/signupphone"
+        <EditText
+            android:id="@+id/editText4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/et_baorder"
+            android:ems="10"
+            android:hint="Your E-mail"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:textColor="#ffffff"
+            android:textColorHint="#ffffff"/>
+
+        <Button
+            android:id="@+id/topage3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:layout_weight="1"
             android:background="@drawable/loginbuttons"
             android:duplicateParentState="false"
-            android:text="sign up with email/phone"
+            android:text="Done"
             android:textColor="@android:color/background_light"/>
 
         <LinearLayout
