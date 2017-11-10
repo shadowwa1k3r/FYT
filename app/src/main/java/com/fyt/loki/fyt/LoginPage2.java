@@ -61,7 +61,7 @@ public class LoginPage2 extends AnimListener {
         // Inflate the layout for this fragment
         View loginPage2 = inflater.inflate(R.layout.fragment_login_page2, container, false);
         lp2backimg = (ImageView)loginPage2.findViewById(R.id.lp2backimg);
-        login = (Button)loginPage2.findViewById(R.id.logInto);
+        login = (Button)loginPage2.findViewById(R.id.signup);
         final StateProgressBar stateProgressBar = (StateProgressBar)getActivity().findViewById(R.id.stateProgressBar);
         stateProgressBar.setVisibility(View.GONE);
 
@@ -90,6 +90,7 @@ public class LoginPage2 extends AnimListener {
 
 
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(null);
 
 
 

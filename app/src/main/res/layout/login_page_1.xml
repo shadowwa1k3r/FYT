@@ -14,6 +14,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <TextView
@@ -25,7 +28,7 @@
             android:paddingRight="5dp"
             android:text="FIND"
             android:textColor="@android:color/background_light"
-            android:textSize="34sp"
+            android:textSize="30sp"
             android:textStyle="bold"/>
 
         <TextView
@@ -34,7 +37,7 @@
             android:layout_height="wrap_content"
             android:text="YOUR"
             android:textColor="@color/colorAccent"
-            android:textSize="34sp"
+            android:textSize="30sp"
             android:textStyle="bold"/>
 
         <TextView
@@ -44,7 +47,7 @@
             android:paddingLeft="5dp"
             android:text="TRAINING"
             android:textColor="@android:color/background_light"
-            android:textSize="34sp"
+            android:textSize="30sp"
             android:textStyle="bold"/>
     </LinearLayout>
 
