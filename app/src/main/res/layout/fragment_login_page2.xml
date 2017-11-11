@@ -31,19 +31,26 @@
 
             <Button
                 android:id="@+id/fb"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:text="FB"/>
+                android:background="#3b5998"
+                android:drawableLeft="@drawable/fb"
+                android:text="Facebook"
+                android:textColor="#ffffff"/>
 
             <Button
                 android:id="@+id/vk"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="VK"/>
+                android:background="#4d76a1"
+                android:drawableLeft="@drawable/vk"
+                android:text="vkontakte"
+                android:textAlignment="center"
+                android:textColor="#ffffff"/>
         </LinearLayout>
 
         <LinearLayout
@@ -56,18 +63,25 @@
 
             <Button
                 android:id="@+id/tw"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:text="Twitter"/>
+                android:background="#55acee"
+                android:drawableLeft="@drawable/tw"
+                android:text=" Twitter   "
+                android:textColor="#ffffff"/>
 
             <Button
                 android:id="@+id/gp"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="G+"/>
+                android:background="#dc4e41"
+                android:drawableLeft="@drawable/gp"
+                android:text="google       "
+                android:textAlignment="center"
+                android:textColor="#ffffff"/>
         </LinearLayout>
 
         <RelativeLayout
