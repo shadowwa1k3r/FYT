@@ -21,6 +21,10 @@
 
 
     </style>
+    <style name="buttonvk" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:colorButtonNormal">#1e88e5</item>
+        
+    </style>
 
 
 </resources>

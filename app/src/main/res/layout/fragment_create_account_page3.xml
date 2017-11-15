@@ -12,6 +12,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="262dp"
+        android:gravity="bottom"
         android:orientation="vertical">
 
         <EditText

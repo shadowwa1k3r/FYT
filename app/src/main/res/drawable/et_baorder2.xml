@@ -2,9 +2,9 @@
     <stroke
         android:width="2dp"
         android:color="#ffffff" />
-    <corners
+    <!--<corners
         android:radius="10dp"/>
-    <size
+    --><size
 
         android:height="40dp"/>
 

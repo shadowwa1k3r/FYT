@@ -3,4 +3,14 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#ff6f00</color>
+    <color name="white">#ffffff</color>
+    <color name="vk">#4d76a1</color>
+    <color name="fb">#3b5998</color>
+    <color name="tw">#55acee</color>
+    <color name="gp">#dc4e41</color>
+    <color name="rip">#ffc947</color>
+    <color name="fbrip">#5e92f3</color>
+    <color name="vkrip">#0097a7</color>
+    <color name="twrip">#90caf9</color>
+    <color name="gprip">#ff6e40</color>
 </resources>

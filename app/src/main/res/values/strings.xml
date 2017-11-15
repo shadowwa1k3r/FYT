@@ -216,4 +216,14 @@
         <item>260,ZM</item>
         <item>263,ZW</item>
     </string-array>
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer orci nisi, gravida vel elit et, posuere facilisis lorem. In luctus egestas sapien quis ornare. Pellentesque in odio quis justo blandit efficitur. Vivamus sed ullamcorper magna. Proin luctus varius nunc eget hendrerit. Nam pharetra lectus ut diam molestie cursus. Donec ac nisi ex. Vestibulum tristique, ligula eu commodo lacinia, purus enim vestibulum enim, sed ullamcorper nibh lacus eu lorem. Praesent ac viverra massa, non ornare risus.
+
+Quisque scelerisque viverra enim, quis laoreet sapien mattis in. Nunc commodo dictum lacus, non consequat tortor. Vestibulum dui ligula, elementum non tellus vitae, viverra tincidunt nulla. Donec id semper ligula. Donec fermentum diam ut nisi viverra placerat. Aliquam et finibus felis, at vehicula neque. Cras pharetra justo ac orci ornare, quis pellentesque ligula mattis.
+
+Praesent malesuada tortor tempor quam euismod aliquet. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Pellentesque vel orci hendrerit est laoreet mattis ac eget quam. Nam accumsan libero et ex feugiat pellentesque. Nulla rutrum nisl sed risus convallis pulvinar. Donec eu pharetra arcu, vel aliquam nisi. Mauris id dui et odio sodales tempor. Cras faucibus dolor non augue pellentesque, ac facilisis tellus porta.
+
+Fusce facilisis sagittis tortor, commodo maximus nisl aliquam id. Quisque dapibus purus vitae lorem varius pellentesque. Quisque odio mi, tristique in urna iaculis, mattis tincidunt purus. Integer ac libero ex. Sed urna ex, posuere vitae commodo semper, pellentesque in tellus. Nam tempus maximus tempor. Nunc eu porttitor elit. Donec eget consectetur urna, sit amet viverra urna. Quisque sed semper metus. Etiam dictum eleifend arcu in aliquam. Donec tincidunt tempus augue, at malesuada nisi tempus sit amet. Sed semper metus id ornare varius. Phasellus ultrices, mauris at molestie dapibus, eros dolor finibus eros, id molestie velit risus a tortor. Curabitur ultrices purus tortor, a pulvinar lectus ultrices tincidunt. Maecenas finibus tincidunt felis eu auctor.
+
+Mauris pulvinar id eros a viverra. Nam orci nisi, consequat non elit ut, blandit dignissim justo. Fusce ultrices massa nec aliquam consectetur. Nam a elementum lacus, sit amet condimentum odio. Vestibulum congue, risus eu ultrices mattis, lectus orci efficitur lorem, quis feugiat mi lectus vestibulum turpis. Fusce tincidunt viverra nibh, a tempor odio euismod non. Donec suscipit volutpat arcu, sit amet viverra mauris pulvinar at. Pellentesque lobortis finibus ante, porttitor ullamcorper lectus dapibus porttitor. Etiam tristique consectetur eros, lobortis vulputate nibh ultricies vel. Phasellus lobortis at diam at mollis. Nam quis risus faucibus, interdum augue eu, efficitur metus.</string>
+
 </resources>
