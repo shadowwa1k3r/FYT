@@ -6,6 +6,7 @@ import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -48,16 +49,24 @@ public class ProfilePage extends Fragment implements AppBarLayout.OnOffsetChange
 
     private CircleImageView iAvatar,iAvatar2;
     private TextView tFull_name,tBirth_date,tGender,tCountry,tCity,tEmail,tPhone;
-    private Button edit,status;
+    private Button edit,status,list_friends;
+    private myCustomPane friendsPanel;
 
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private FriendItemAdapter mAdapter;
     private ArrayList<FriendItemType> mDataset;
 
+    private RecyclerView mRecyclerView_panel;
+    private RecyclerView.LayoutManager mLayoutManager_panel;
+    private FriendItemAdapterPanel mAdapter_panel;
+    private ArrayList<FriendItemType> mDataset_panel;
 
-    String BASE_URL = "http://192.168.1.103:8000/";
-    String BASE_URL_API =BASE_URL+"api/";
+
+
+
+    String BASE_URL = "http://192.168.1.104:8000";
+    String BASE_URL_API =BASE_URL+"/api/";
 
      public ProfileInterface profileInterface;
 
@@ -103,7 +112,12 @@ public class ProfilePage extends Fragment implements AppBarLayout.OnOffsetChange
         tPhone = (TextView)Ppage.findViewById(R.id.phone);
         iAvatar =(CircleImageView)Ppage.findViewById(R.id.avatar);
         iAvatar2 =(CircleImageView)Ppage.findViewById(R.id.myava);
+
         edit = (Button)Ppage.findViewById(R.id.edit);
+        list_friends=(Button)Ppage.findViewById(R.id.see_all_friends);
+
+
+        friendsPanel = (myCustomPane)Ppage.findViewById(R.id.pane);
 
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -125,13 +139,31 @@ public class ProfilePage extends Fragment implements AppBarLayout.OnOffsetChange
         mRecyclerView = (RecyclerView)Ppage.findViewById(R.id.friends_rv);
         mRecyclerView.setHasFixedSize(true);
 
+        mRecyclerView_panel=(RecyclerView)Ppage.findViewById(R.id.rv_panel);
+        mRecyclerView_panel.setHasFixedSize(true);
+
         mLayoutManager = new GridLayoutManager(getActivity(),3);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
+        mLayoutManager_panel = new LinearLayoutManager(getActivity());
+        mRecyclerView_panel.setLayoutManager(mLayoutManager_panel);
+
         mDataset = new ArrayList<FriendItemType>();
+        mDataset_panel = new ArrayList<FriendItemType>();
 
         View inflatedView = getActivity().getLayoutInflater().inflate(R.layout.friend_item, null);
          status = (Button) inflatedView.findViewById(R.id.button8);
+        View inflatedViewpanel = getActivity().getLayoutInflater().inflate(R.layout.friend_item_panel, null);
+        status = (Button) inflatedView.findViewById(R.id.status_friend);
+
+        list_friends.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(friendsPanel.isOpen()==true)
+                    friendsPanel.closePane();
+                else friendsPanel.openPane();
+            }
+        });
 
 
 
@@ -161,14 +193,23 @@ public class ProfilePage extends Fragment implements AppBarLayout.OnOffsetChange
                                 public void onResponse(Call<List<FriendInfoModel>> call, Response<List<FriendInfoModel>> response) {
                                     if(response.isSuccessful()){
                                         mDataset.clear();
+                                        mDataset_panel.clear();
+
+
                                         for (int i=0; i<response.body().size();i++){
-                                            mDataset.add(new FriendItemType(response.body().get(i).getAvatar(),response.body().get(i).getUsername(),response.body().get(i).getIs_online()));
+                                            mDataset_panel.add(new FriendItemType(response.body().get(i).getAvatar(), response.body().get(i).getUsername(), response.body().get(i).getIs_online()));
+                                            if(response.body().get(i).getIs_online()) {
+                                                mDataset.add(new FriendItemType(response.body().get(i).getAvatar(), response.body().get(i).getUsername(), response.body().get(i).getIs_online()));
+
+                                            }
 
 
                                         }
                                         mAdapter = new FriendItemAdapter(getActivity(),mDataset);
+                                        mAdapter_panel = new FriendItemAdapterPanel(getActivity(),mDataset_panel);
 
                                         mRecyclerView.setAdapter(mAdapter);
+                                        mRecyclerView_panel.setAdapter(mAdapter_panel);
                                     }
                                 }
 

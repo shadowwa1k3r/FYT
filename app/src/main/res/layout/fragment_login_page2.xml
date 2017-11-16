@@ -132,11 +132,11 @@
             android:inputType="textPersonName"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
+            android:text="farrukh"
             android:textColor="@android:color/background_light"
             android:textColorHint="#ffffff"
             android:textColorLink="@android:color/transparent"
-            android:textSize="16sp"
-            />
+            android:textSize="16sp"/>
 
         <EditText
             android:id="@+id/passwordtext"
@@ -151,6 +151,7 @@
             android:inputType="textPassword"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
+            android:text="qwerty12345"
             android:textColor="@android:color/background_light"
             android:textColorHint="#ffffff"
             android:textColorLink="@android:color/transparent"

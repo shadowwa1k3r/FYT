@@ -17,19 +17,19 @@ import java.util.ArrayList;
  * Created by ergas on 11/15/2017.
  */
 
-public class FriendItemAdapter extends RecyclerView.Adapter<FriendItemAdapter.FVHolder> {
+public class FriendItemAdapterPanel extends RecyclerView.Adapter<FriendItemAdapterPanel.FVHolder> {
 
     private ArrayList<FriendItemType> mData;
     private Context mContext;
     String BASE_URL ;
 
-    FriendItemAdapter(Context context,ArrayList<FriendItemType> data){
+    FriendItemAdapterPanel(Context context, ArrayList<FriendItemType> data){
         this.mData=data;
         this.mContext=context;
     }
     @Override
-    public FriendItemAdapter.FVHolder onCreateViewHolder(ViewGroup parent ,int viewType){
-        return new FVHolder(LayoutInflater.from(mContext).inflate(R.layout.friend_item,parent,false));
+    public FriendItemAdapterPanel.FVHolder onCreateViewHolder(ViewGroup parent , int viewType){
+        return new FVHolder(LayoutInflater.from(mContext).inflate(R.layout.friend_item_panel,parent,false));
     }
 
     @Override
@@ -54,9 +54,9 @@ public class FriendItemAdapter extends RecyclerView.Adapter<FriendItemAdapter.FV
         FVHolder(final View itemview)
         {
             super(itemview);
-            imgv =(ImageView)itemview.findViewById(R.id.friend_item);
-            txtv = (TextView)itemview.findViewById(R.id.FriendFullName);
-            status = (Button)itemview.findViewById(R.id.button8);
+            imgv =(ImageView)itemview.findViewById(R.id.friend_item_panel);
+            txtv = (TextView)itemview.findViewById(R.id.FriendFullName_panel);
+            status = (Button)itemview.findViewById(R.id.status_friend);
         }
 
         void  bindTo(FriendItemType current){
