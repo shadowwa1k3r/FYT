@@ -1,0 +1,28 @@
+
+<tabs>
+    <tab
+        id  = "@+id/item1"
+        icon = "@drawable/bottom_item1"
+        title = "News"/>
+
+    <tab
+        id  = "@+id/item2"
+        icon = "@drawable/bottom_item2"
+        title = "Messages"/>
+
+    <tab
+        id  = "@+id/item3"
+        icon = "@drawable/bottom_item3"
+        title = "Schedule"/>
+
+    <tab
+        id  = "@+id/item4"
+        icon = "@drawable/bottom_item4"
+        title = "Map"/>
+
+    <tab
+        id  = "@+id/item5"
+        icon = "@drawable/bottom_item5"
+        title  = "Menu"/>
+
+</tabs>

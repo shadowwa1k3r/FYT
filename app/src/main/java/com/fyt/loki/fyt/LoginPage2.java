@@ -29,7 +29,7 @@ public class LoginPage2 extends AnimListener {
     Toolbar tb;
     private EditText loginT,passwordT;
     private Button fb,vk,tw,gp,loginb,signup;
-    private String login,password,TokenAuth;
+    private String login,password,TokenAuth,username;
 
     private AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.8F);
     private Realm mRealm;
@@ -87,7 +87,7 @@ public class LoginPage2 extends AnimListener {
         // Inflate the layout for this fragment
         View loginPage2 = inflater.inflate(R.layout.fragment_login_page2, container, false);
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.104:8000"+"/api/")
+                .baseUrl("http://192.168.1.106:8000"+"/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         Realm.init(this.getContext());
@@ -147,7 +147,8 @@ public class LoginPage2 extends AnimListener {
 
 
                             TokenAuth = response.body().token;
-                            getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enterfromright,R.anim.exittoleft,R.anim.enterfromleft,R.anim.exittoright).replace(R.id.loginPageContainer,new ProfilePage().newInstance(TokenAuth)).addToBackStack(null).commit();
+                            username = response.body().username;
+                            getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enterfromright,R.anim.exittoleft,R.anim.enterfromleft,R.anim.exittoright).replace(R.id.loginPageContainer,new ProfilePage().newInstance(TokenAuth,username)).addToBackStack(null).commit();
                             dialog.dismiss();
                         }
                         else {

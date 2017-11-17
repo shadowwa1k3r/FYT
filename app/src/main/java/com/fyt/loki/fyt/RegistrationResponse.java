@@ -6,6 +6,7 @@ package com.fyt.loki.fyt;
 
 public class RegistrationResponse {
     public String token;
+    public String username;
 
 
 }

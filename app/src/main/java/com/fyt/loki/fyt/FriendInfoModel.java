@@ -16,20 +16,10 @@ public class FriendInfoModel {
     public String first_name;
     @SerializedName("last_name")
     public String last_name;
-    @SerializedName("email")
-    public String email;
+    @SerializedName("full_name")
+    public String full_name;
     @SerializedName("avatar")
     public String avatar;
-    @SerializedName("birth_date")
-    public String birth_date;
-    @SerializedName("phone")
-    public String phone;
-    @SerializedName("address")
-    public String address;
-    @SerializedName("country")
-    public String country;
-    @SerializedName("city")
-    public String city;
     @SerializedName("is_online")
     public Boolean is_online;
 
@@ -65,12 +55,12 @@ public class FriendInfoModel {
         this.last_name = last_name;
     }
 
-    public String getEmail() {
-        return email;
+    public String getFull_name() {
+        return full_name;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setFull_name(String full_name) {
+        this.full_name = full_name;
     }
 
     public String getAvatar() {
@@ -79,46 +69,6 @@ public class FriendInfoModel {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
-    }
-
-    public String getBirth_date() {
-        return birth_date;
-    }
-
-    public void setBirth_date(String birth_date) {
-        this.birth_date = birth_date;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
     }
 
     public Boolean getIs_online() {

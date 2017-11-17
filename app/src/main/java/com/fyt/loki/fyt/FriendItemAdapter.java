@@ -35,7 +35,7 @@ public class FriendItemAdapter extends RecyclerView.Adapter<FriendItemAdapter.FV
     @Override
     public void onBindViewHolder(final FVHolder holder,final int position){
         final FriendItemType currentFitem = mData.get(position);
-        BASE_URL= "http://192.168.1.104:8000";
+        BASE_URL= "http://192.168.1.106:8000";
         Glide.with(mContext).load(BASE_URL+currentFitem.getImg()).into(holder.imgv);
         holder.bindTo(currentFitem);
     }

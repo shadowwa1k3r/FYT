@@ -12,7 +12,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -31,7 +30,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class ProfilePage extends Fragment implements AppBarLayout.OnOffsetChangedListener {
+public class ProfilePage extends Fragment  {
 
     private static final float PERCENTAGE_TO_SHOW_TITLE_AT_TOOLBAR  = 0.9f;
     private static final float PERCENTAGE_TO_HIDE_TITLE_DETAILS     = 0.3f;
@@ -47,10 +46,11 @@ public class ProfilePage extends Fragment implements AppBarLayout.OnOffsetChange
 
     private String username,first_name,last_name,full_name,email,birth_date,country,city,avatar,gender,phone,address;
 
-    private CircleImageView iAvatar,iAvatar2;
+    private CircleImageView iAvatar2,iAvatar;
     private TextView tFull_name,tBirth_date,tGender,tCountry,tCity,tEmail,tPhone;
     private Button edit,status,list_friends;
     private myCustomPane friendsPanel;
+    private Button hidepanel;
 
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -65,21 +65,23 @@ public class ProfilePage extends Fragment implements AppBarLayout.OnOffsetChange
 
 
 
-    String BASE_URL = "http://192.168.1.104:8000";
+    String BASE_URL = "http://192.168.1.106:8000";
     String BASE_URL_API =BASE_URL+"/api/";
 
      public ProfileInterface profileInterface;
 
     private static String mParam1,ARG_PARAM1="param1";
+    private static String mParam2,ARG_PARAM2="param2";
     public ProfilePage() {
         // Required empty public constructor
     }
 
     // TODO: Rename and change types and number of parameters
-    public static ProfilePage newInstance(String token) {
+    public static ProfilePage newInstance(String token,String user_name) {
         ProfilePage fragment = new ProfilePage();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1,token);
+        args.putString(ARG_PARAM2,user_name);
         fragment.setArguments(args);
 
         return fragment;
@@ -90,6 +92,7 @@ public class ProfilePage extends Fragment implements AppBarLayout.OnOffsetChange
         super.onCreate(savedInstanceState);
         if(getArguments()!=null){
             mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
     }
@@ -98,26 +101,29 @@ public class ProfilePage extends Fragment implements AppBarLayout.OnOffsetChange
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View Ppage=inflater.inflate(R.layout.fragment_profile_page, container, false);
+        final View Ppage=inflater.inflate(R.layout.another_profile_page, container, false);
 
         ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
 
 
-        tFull_name = (TextView)Ppage.findViewById(R.id.full_name);
-        tBirth_date = (TextView)Ppage.findViewById(R.id.birth_date);
-        tGender = (TextView)Ppage.findViewById(R.id.gender);
-        tCountry = (TextView)Ppage.findViewById(R.id.country);
-        tCity = (TextView)Ppage.findViewById(R.id.city);
-        tEmail = (TextView)Ppage.findViewById(R.id.email);
-        tPhone = (TextView)Ppage.findViewById(R.id.phone);
-        iAvatar =(CircleImageView)Ppage.findViewById(R.id.avatar);
-        iAvatar2 =(CircleImageView)Ppage.findViewById(R.id.myava);
-
-        edit = (Button)Ppage.findViewById(R.id.edit);
-        list_friends=(Button)Ppage.findViewById(R.id.see_all_friends);
+        tFull_name = (TextView)Ppage.findViewById(R.id.user_profile_name);
+        tBirth_date = (TextView)Ppage.findViewById(R.id.birth_date2);
+        tGender = (TextView)Ppage.findViewById(R.id.gender2);
+        tCountry = (TextView)Ppage.findViewById(R.id.country2);
+        tCity = (TextView)Ppage.findViewById(R.id.city2);
+        tEmail = (TextView)Ppage.findViewById(R.id.email2);
+        tPhone = (TextView)Ppage.findViewById(R.id.phone2);
+        iAvatar =(CircleImageView) Ppage.findViewById(R.id.user_profile_photo);
+        iAvatar2 =(CircleImageView)Ppage.findViewById(R.id.myava2);
+        hidepanel = (Button)Ppage.findViewById(R.id.hide_panel);
 
 
-        friendsPanel = (myCustomPane)Ppage.findViewById(R.id.pane);
+
+        edit = (Button)Ppage.findViewById(R.id.edit2);
+        list_friends=(Button)Ppage.findViewById(R.id.see_all_friends2);
+
+
+        friendsPanel = (myCustomPane)Ppage.findViewById(R.id.pane2);
 
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -128,18 +134,18 @@ public class ProfilePage extends Fragment implements AppBarLayout.OnOffsetChange
 
 
 
-        bindActivity(Ppage);
+        //bindActivity(Ppage);
 
-        mAppBarLayout.addOnOffsetChangedListener(this);
+        //mAppBarLayout.addOnOffsetChangedListener(this);
 
-        mToolbar.inflateMenu(R.menu.menu_main);
-        startAlphaAnimation(mTitle, 0, View.INVISIBLE);
+       // mToolbar.inflateMenu(R.menu.menu_main);
+      //  startAlphaAnimation(mTitle, 0, View.INVISIBLE);
        // tPhone.setText("Token "+mParam1);
 
-        mRecyclerView = (RecyclerView)Ppage.findViewById(R.id.friends_rv);
+        mRecyclerView = (RecyclerView)Ppage.findViewById(R.id.friends_rv2);
         mRecyclerView.setHasFixedSize(true);
 
-        mRecyclerView_panel=(RecyclerView)Ppage.findViewById(R.id.rv_panel);
+        mRecyclerView_panel=(RecyclerView)Ppage.findViewById(R.id.rv_panel2);
         mRecyclerView_panel.setHasFixedSize(true);
 
         mLayoutManager = new GridLayoutManager(getActivity(),3);
@@ -164,6 +170,12 @@ public class ProfilePage extends Fragment implements AppBarLayout.OnOffsetChange
                 else friendsPanel.openPane();
             }
         });
+        hidepanel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                friendsPanel.closePane();
+            }
+        });
 
 
 
@@ -172,13 +184,13 @@ public class ProfilePage extends Fragment implements AppBarLayout.OnOffsetChange
                 final AlertDialog dialog = new SpotsDialog(getContext());
                 dialog.show();
 
-                Call<ProfileModel> mprofileInfo = profileInterface.profileInfo(" Token "+mParam1);
+                Call<ProfileModel> mprofileInfo = profileInterface.profileInfo(" Token "+mParam1,mParam2);
                 mprofileInfo.enqueue(new Callback<ProfileModel>() {
                     @Override
                     public void onResponse(Call<ProfileModel> call, Response<ProfileModel> response) {
                         if(response.isSuccessful()){
-                            Glide.with(getActivity()).load(response.body().getAvatar()).asBitmap().into(iAvatar);
-                            Glide.with(getActivity()).load(response.body().getAvatar()).asBitmap().into(iAvatar2);
+                            Glide.with(getActivity()).load(BASE_URL+response.body().getAvatar()).asBitmap().into(iAvatar);
+                            Glide.with(getActivity()).load(BASE_URL+response.body().getAvatar()).asBitmap().into(iAvatar2);
                             tFull_name.setText(response.body().getFull_name());
                             tBirth_date.setText(response.body().getBith_date());
                             tGender.setText(response.body().getGender());
@@ -206,7 +218,7 @@ public class ProfilePage extends Fragment implements AppBarLayout.OnOffsetChange
 
                                         }
                                         mAdapter = new FriendItemAdapter(getActivity(),mDataset);
-                                        mAdapter_panel = new FriendItemAdapterPanel(getActivity(),mDataset_panel);
+                                        mAdapter_panel = new FriendItemAdapterPanel(getActivity(),mDataset_panel,mParam1);
 
                                         mRecyclerView.setAdapter(mAdapter);
                                         mRecyclerView_panel.setAdapter(mAdapter_panel);
@@ -248,14 +260,14 @@ public class ProfilePage extends Fragment implements AppBarLayout.OnOffsetChange
 
 
 
-    private void bindActivity(View v) {
+   /* private void bindActivity(View v) {
         mToolbar        = (Toolbar) v.findViewById(R.id.main_toolbar);
         mTitle          = (TextView) v.findViewById(R.id.main_textview_title);
         mTitleContainer = (LinearLayout) v.findViewById(R.id.main_linearlayout_title);
         mAppBarLayout   = (AppBarLayout) v.findViewById(R.id.main_appbar);
     }
 
-    @Override
+   /* @Override
     public void onOffsetChanged(AppBarLayout appBarLayout, int offset) {
         int maxScroll = appBarLayout.getTotalScrollRange();
         float percentage = (float) Math.abs(offset) / (float) maxScroll;
@@ -304,7 +316,7 @@ public class ProfilePage extends Fragment implements AppBarLayout.OnOffsetChange
         alphaAnimation.setFillAfter(true);
         v.startAnimation(alphaAnimation);
     }
-
+*/
 
 
 

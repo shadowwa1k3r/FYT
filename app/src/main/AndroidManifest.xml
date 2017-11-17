@@ -22,6 +22,8 @@
         </activity>
         <activity android:name=".MainApp">
         </activity>
+        <activity android:name=".MainPage">
+        </activity>
     </application>
 
 </manifest>

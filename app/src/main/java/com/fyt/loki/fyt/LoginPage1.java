@@ -49,7 +49,7 @@ public class LoginPage1 extends AnimListener {
         View loginPage1 = inflater.inflate(R.layout.login_page_1,container,false);
 
 
-        StateProgressBar stateProgressBar = (StateProgressBar)getActivity().findViewById(R.id.stateProgressBar);
+       StateProgressBar stateProgressBar = (StateProgressBar)getActivity().findViewById(R.id.stateProgressBar);
         stateProgressBar.setVisibility(View.GONE);
         loginBackground = (ImageView)getActivity().findViewById(R.id.loginBack);
         //Glide.with(getContext()).load(R.drawable.signup_background).asBitmap().centerCrop().into(loginBackground);

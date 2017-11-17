@@ -1,6 +1,7 @@
 package com.fyt.loki.fyt;
 
 import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,11 +22,14 @@ public class FriendItemAdapterPanel extends RecyclerView.Adapter<FriendItemAdapt
 
     private ArrayList<FriendItemType> mData;
     private Context mContext;
+    private String token;
+    private myCustomPane panel;
     String BASE_URL ;
 
-    FriendItemAdapterPanel(Context context, ArrayList<FriendItemType> data){
+    FriendItemAdapterPanel(Context context, ArrayList<FriendItemType> data,String token){
         this.mData=data;
         this.mContext=context;
+        this.token=token;
     }
     @Override
     public FriendItemAdapterPanel.FVHolder onCreateViewHolder(ViewGroup parent , int viewType){
@@ -35,9 +39,35 @@ public class FriendItemAdapterPanel extends RecyclerView.Adapter<FriendItemAdapt
     @Override
     public void onBindViewHolder(final FVHolder holder,final int position){
         final FriendItemType currentFitem = mData.get(position);
-        BASE_URL= "http://192.168.1.104:8000";
+        BASE_URL= "http://192.168.1.106:8000";
         Glide.with(mContext).load(BASE_URL+currentFitem.getImg()).into(holder.imgv);
         holder.bindTo(currentFitem);
+
+        final String item = mData.get(position).getName();
+        holder.txtv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                AppCompatActivity activity = (AppCompatActivity)v.getContext();
+                View inflatedView = activity.getLayoutInflater().inflate(R.layout.another_profile_page,null);
+                panel = (myCustomPane)inflatedView.findViewById(R.id.pane2);
+                panel.closePane();
+                activity.getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enterfromright,R.anim.exittoleft,R.anim.enterfromleft,R.anim.exittoright)
+                        .replace(R.id.loginPageContainer,FriendFullInfoPage.newInstance(token,item)).addToBackStack(null).commit();
+            }
+        });
+        holder.imgv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppCompatActivity activity = (AppCompatActivity)v.getContext();
+                View inflatedView = activity.getLayoutInflater().inflate(R.layout.another_profile_page,null);
+                panel = (myCustomPane)inflatedView.findViewById(R.id.pane2);
+                panel.closePane();
+                activity.getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enterfromright,R.anim.exittoleft,R.anim.enterfromleft,R.anim.exittoright)
+                        .replace(R.id.loginPageContainer,FriendFullInfoPage.newInstance(token,item)).addToBackStack(null).commit();
+
+            }
+        });
     }
     @Override
     public int getItemCount(){
@@ -47,6 +77,7 @@ public class FriendItemAdapterPanel extends RecyclerView.Adapter<FriendItemAdapt
 
 
     class FVHolder extends RecyclerView.ViewHolder{
+
         private ImageView imgv;
         private TextView txtv;
         private Button status;
