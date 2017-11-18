@@ -62,10 +62,15 @@ public class ProfilePage extends Fragment  {
     private FriendItemAdapterPanel mAdapter_panel;
     private ArrayList<FriendItemType> mDataset_panel;
 
+    private RecyclerView mRecyclerView_posts;
+    private RecyclerView.LayoutManager mLayoutManager_posts;
+    private ProfilePostsAdapter mAdapter_posts;
+    private ArrayList<PostItemType> mDataset_posts;
 
 
 
-    String BASE_URL = "http://192.168.1.106:8000";
+
+    String BASE_URL = "http://192.168.1.103:8000";
     String BASE_URL_API =BASE_URL+"/api/";
 
      public ProfileInterface profileInterface;
@@ -148,14 +153,21 @@ public class ProfilePage extends Fragment  {
         mRecyclerView_panel=(RecyclerView)Ppage.findViewById(R.id.rv_panel2);
         mRecyclerView_panel.setHasFixedSize(true);
 
+        mRecyclerView_posts = (RecyclerView)Ppage.findViewById(R.id.PostsRv);
+        mRecyclerView_posts.setHasFixedSize(true);
+
         mLayoutManager = new GridLayoutManager(getActivity(),3);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         mLayoutManager_panel = new LinearLayoutManager(getActivity());
         mRecyclerView_panel.setLayoutManager(mLayoutManager_panel);
 
+        mLayoutManager_posts = new LinearLayoutManager(getActivity());
+        mRecyclerView_posts.setLayoutManager(mLayoutManager_posts);
+
         mDataset = new ArrayList<FriendItemType>();
         mDataset_panel = new ArrayList<FriendItemType>();
+        mDataset_posts = new ArrayList<PostItemType>();
 
         View inflatedView = getActivity().getLayoutInflater().inflate(R.layout.friend_item, null);
          status = (Button) inflatedView.findViewById(R.id.button8);
@@ -191,6 +203,10 @@ public class ProfilePage extends Fragment  {
                         if(response.isSuccessful()){
                             Glide.with(getActivity()).load(BASE_URL+response.body().getAvatar()).asBitmap().into(iAvatar);
                             Glide.with(getActivity()).load(BASE_URL+response.body().getAvatar()).asBitmap().into(iAvatar2);
+
+                            final String ava =BASE_URL+ response.body().getAvatar();
+                            final String usnm = response.body().getUsername();
+
                             tFull_name.setText(response.body().getFull_name());
                             tBirth_date.setText(response.body().getBith_date());
                             tGender.setText(response.body().getGender());
@@ -227,6 +243,31 @@ public class ProfilePage extends Fragment  {
 
                                 @Override
                                 public void onFailure(Call<List<FriendInfoModel>> call, Throwable t) {
+
+                                }
+                            });
+
+                            final Call<List<PostItemModel>> getPosts = profileInterface.getPosts(" Token "+mParam1);
+                            getPosts.enqueue(new Callback<List<PostItemModel>>() {
+                                @Override
+                                public void onResponse(Call<List<PostItemModel>> call, Response<List<PostItemModel>> response) {
+                                    if(response.isSuccessful()){
+                                    mDataset_posts.clear();
+
+                                    for (int i = 0; i <response.body().size() ; i++) {
+                                        mDataset_posts.add(new PostItemType(ava,usnm,response.body().get(i).getCreated(),response.body().get(i).getContext(),
+                                                response.body().get(i).getLikes(),response.body().get(i).getComments(),response.body().get(i).getImages()));
+                                    }
+                                        mAdapter_posts=new ProfilePostsAdapter(getActivity(),mDataset_posts);
+                                        mRecyclerView_posts.setAdapter(mAdapter_posts);
+
+
+                                    }
+
+                                }
+
+                                @Override
+                                public void onFailure(Call<List<PostItemModel>> call, Throwable t) {
 
                                 }
                             });

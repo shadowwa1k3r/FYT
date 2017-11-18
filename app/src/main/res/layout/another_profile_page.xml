@@ -36,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/panel_right_arrow"/>
+                android:text=">>"/>
 
         </LinearLayout>
         <android.support.v7.widget.RecyclerView
@@ -228,10 +228,10 @@
                         android:layout_centerHorizontal="false"
                         android:layout_centerInParent="false"
                         android:layout_centerVertical="true"
-                        android:layout_marginBottom="5dp"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
                         android:layout_weight="50"
-                        android:background="#ffffff"/>
+                        android:background="#000000"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -265,10 +265,10 @@
                         android:layout_centerHorizontal="false"
                         android:layout_centerInParent="false"
                         android:layout_centerVertical="true"
-                        android:layout_marginBottom="5dp"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
                         android:layout_weight="50"
-                        android:background="#ffffff"/>
+                        android:background="#000000"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -310,10 +310,10 @@
                         android:layout_centerHorizontal="false"
                         android:layout_centerInParent="false"
                         android:layout_centerVertical="true"
-                        android:layout_marginBottom="5dp"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
                         android:layout_weight="50"
-                        android:background="#ffffff"/>
+                        android:background="#000000"/>
 
                     <TextView
                         android:id="@+id/textView11"
@@ -329,18 +329,6 @@
 
                     </android.support.v7.widget.RecyclerView>
 
-                    <View
-                        android:id="@+id/view6"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dip"
-                        android:layout_centerHorizontal="false"
-                        android:layout_centerInParent="false"
-                        android:layout_centerVertical="true"
-                        android:layout_marginBottom="5dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_weight="50"
-                        android:background="#ffffff"/>
-
                     <Button
                         android:id="@+id/see_all_friends2"
                         style="@style/Widget.AppCompat.Button.Borderless.Colored"
@@ -348,6 +336,18 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="See All Friends"/>
+
+                    <View
+                        android:id="@+id/view6"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dip"
+                        android:layout_centerHorizontal="false"
+                        android:layout_centerInParent="false"
+                        android:layout_centerVertical="true"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="50"
+                        android:background="#000000"/>
 
                     <TextView
                         android:id="@+id/textView12"
@@ -368,10 +368,10 @@
                         android:layout_centerHorizontal="false"
                         android:layout_centerInParent="false"
                         android:layout_centerVertical="true"
-                        android:layout_marginBottom="5dp"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
                         android:layout_weight="50"
-                        android:background="#ffffff"/>
+                        android:background="#000000"/>
 
                 </LinearLayout>
 

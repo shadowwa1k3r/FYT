@@ -87,7 +87,7 @@ public class LoginPage2 extends AnimListener {
         // Inflate the layout for this fragment
         View loginPage2 = inflater.inflate(R.layout.fragment_login_page2, container, false);
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.106:8000"+"/api/")
+                .baseUrl("http://192.168.1.103:8000"+"/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         Realm.init(this.getContext());

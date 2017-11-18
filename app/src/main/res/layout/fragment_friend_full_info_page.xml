@@ -179,7 +179,7 @@
                             android:layout_marginBottom="5dp"
                             android:layout_marginTop="5dp"
                             android:layout_weight="50"
-                            android:background="#ffffff"/>
+                            android:background="#000000"/>
 
                         <TextView
                             android:id="@+id/textView12"
@@ -203,7 +203,7 @@
                             android:layout_marginBottom="5dp"
                             android:layout_marginTop="5dp"
                             android:layout_weight="50"
-                            android:background="#ffffff"/>
+                            android:background="#000000"/>
 
                     </LinearLayout>
 
