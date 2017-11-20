@@ -20,24 +20,24 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by ergas on 11/18/2017.
  */
 
-public class ProfilePostsAdapter extends RecyclerView.Adapter<ProfilePostsAdapter.PPVHolder> {
+public class NewsPostsAdapter extends RecyclerView.Adapter<NewsPostsAdapter.NFVHolder> {
 
-    private ArrayList<PostItemType> mData;
+    private ArrayList<NewsFeedItemType> mData;
     private Context mContext;
     private String BASE_URL;
 
-    ProfilePostsAdapter(Context context,ArrayList data){
+    NewsPostsAdapter(Context context, ArrayList data){
         this.mData=data;
         this.mContext=context;
     }
 
     @Override
-    public ProfilePostsAdapter.PPVHolder onCreateViewHolder(ViewGroup parent, int viewType){
-        return new PPVHolder(LayoutInflater.from(mContext).inflate(R.layout.post_item,parent,false));
+    public NewsPostsAdapter.NFVHolder onCreateViewHolder(ViewGroup parent, int viewType){
+        return new NFVHolder(LayoutInflater.from(mContext).inflate(R.layout.news_feed_item,parent,false));
     }
     @Override
-    public void onBindViewHolder(final PPVHolder holder,final int position){
-        final  PostItemType currentItem = mData.get(position);
+    public void onBindViewHolder(final NFVHolder holder,final int position){
+        final  NewsFeedItemType currentItem = mData.get(position);
         Glide.with(mContext).load(currentItem.getAvatar()).asBitmap().into(holder.avatar);
         final String [] post_imgs = new String[currentItem.getImages().size()];
 
@@ -66,25 +66,25 @@ public class ProfilePostsAdapter extends RecyclerView.Adapter<ProfilePostsAdapte
         return mData.size();
     }
 
-    class PPVHolder extends RecyclerView.ViewHolder{
+    class NFVHolder extends RecyclerView.ViewHolder{
 
         private CircleImageView avatar;
         private TextView username,createdAt,postTXT,likeCount,commentCount;
         private CarouselView post_img;
 
 
-        PPVHolder(final View itemview){
+        NFVHolder(final View itemview){
             super(itemview);
-            avatar = (CircleImageView)itemview.findViewById(R.id.post_ava);
-            username = (TextView)itemview.findViewById(R.id.post_username);
-            createdAt = (TextView)itemview.findViewById(R.id.post_createdAt);
-            postTXT = (TextView)itemview.findViewById(R.id.post_txt);
-            likeCount = (TextView)itemview.findViewById(R.id.like_count);
-            commentCount = (TextView)itemview.findViewById(R.id.comment_count);
-            post_img = (CarouselView)itemview.findViewById(R.id.post_img);
+            avatar = (CircleImageView)itemview.findViewById(R.id.post_avaf);
+            username = (TextView)itemview.findViewById(R.id.post_usernamef);
+            createdAt = (TextView)itemview.findViewById(R.id.post_createdAtf);
+            postTXT = (TextView)itemview.findViewById(R.id.post_txtf);
+            likeCount = (TextView)itemview.findViewById(R.id.likef);
+            commentCount = (TextView)itemview.findViewById(R.id.commentf);
+            post_img = (CarouselView)itemview.findViewById(R.id.post_imgf);
         }
 
-        void bindTo(PostItemType current){
+        void bindTo(NewsFeedItemType current){
             post_img.setPageCount(current.getImages().size());
 
             username.setText(current.getUsername());

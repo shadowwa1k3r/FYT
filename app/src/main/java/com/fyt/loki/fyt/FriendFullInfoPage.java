@@ -33,7 +33,7 @@ public class FriendFullInfoPage extends Fragment {
     private ProfileInterface profileInterface;
     private String mToken;
     private String mUserName;
-    private String BASE_URL="http://192.168.1.103:8000";
+    private String BASE_URL="http://192.168.1.104:8000";
     String BASE_URL_API =BASE_URL+"/api/";
 
     private TextView tFull_name,tBirth_date,tGender,tCountry,tCity,tEmail,tPhone;

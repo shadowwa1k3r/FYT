@@ -39,7 +39,7 @@ public class FriendItemAdapterPanel extends RecyclerView.Adapter<FriendItemAdapt
     @Override
     public void onBindViewHolder(final FVHolder holder,final int position){
         final FriendItemType currentFitem = mData.get(position);
-        BASE_URL= "http://192.168.1.103:8000";
+        BASE_URL= "http://192.168.1.104:8000";
         Glide.with(mContext).load(BASE_URL+currentFitem.getImg()).into(holder.imgv);
         holder.bindTo(currentFitem);
 
@@ -53,7 +53,7 @@ public class FriendItemAdapterPanel extends RecyclerView.Adapter<FriendItemAdapt
                 panel = (myCustomPane)inflatedView.findViewById(R.id.pane2);
                 panel.closePane();
                 activity.getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enterfromright,R.anim.exittoleft,R.anim.enterfromleft,R.anim.exittoright)
-                        .replace(R.id.loginPageContainer,FriendFullInfoPage.newInstance(token,item)).addToBackStack(null).commit();
+                        .replace(R.id.contentContainer,FriendFullInfoPage.newInstance(token,item)).addToBackStack(null).commit();
             }
         });
         holder.imgv.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +64,7 @@ public class FriendItemAdapterPanel extends RecyclerView.Adapter<FriendItemAdapt
                 panel = (myCustomPane)inflatedView.findViewById(R.id.pane2);
                 panel.closePane();
                 activity.getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enterfromright,R.anim.exittoleft,R.anim.enterfromleft,R.anim.exittoright)
-                        .replace(R.id.loginPageContainer,FriendFullInfoPage.newInstance(token,item)).addToBackStack(null).commit();
+                        .replace(R.id.contentContainer,FriendFullInfoPage.newInstance(token,item)).addToBackStack(null).commit();
 
             }
         });

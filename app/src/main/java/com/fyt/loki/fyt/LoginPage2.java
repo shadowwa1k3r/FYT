@@ -1,6 +1,7 @@
 package com.fyt.loki.fyt;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -82,12 +83,12 @@ public class LoginPage2 extends AnimListener {
 
     }
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View loginPage2 = inflater.inflate(R.layout.fragment_login_page2, container, false);
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.103:8000"+"/api/")
+                .baseUrl("http://192.168.1.104:8000"+"/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         Realm.init(this.getContext());
@@ -148,8 +149,17 @@ public class LoginPage2 extends AnimListener {
 
                             TokenAuth = response.body().token;
                             username = response.body().username;
-                            getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enterfromright,R.anim.exittoleft,R.anim.enterfromleft,R.anim.exittoright).replace(R.id.loginPageContainer,new ProfilePage().newInstance(TokenAuth,username)).addToBackStack(null).commit();
+                            //getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enterfromright,R.anim.exittoleft,R.anim.enterfromleft,R.anim.exittoright).replace(R.id.loginPageContainer,new ProfilePage().newInstance(TokenAuth,username)).addToBackStack(null).commit();
+                            Intent intent = new Intent();
+                            intent.setClass(getContext(), MainPage.class);
+
+                            Bundle bundle = new Bundle();
+                            bundle.putString("Token",TokenAuth);
+                            bundle.putString("UName",username);
+                            intent.putExtras(bundle);
                             dialog.dismiss();
+                            startActivity(intent);
+
                         }
                         else {
                             Toast.makeText(getContext(),"fail",Toast.LENGTH_SHORT).show();

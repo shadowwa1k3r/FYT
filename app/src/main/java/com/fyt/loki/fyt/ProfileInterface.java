@@ -24,5 +24,7 @@ public interface ProfileInterface {
     Call<List<PostItemModel>> getPosts(@Header("Authorization")String token);
     @POST("list/post/")
     Call<List<PostItemModel>> getFriendPosts(@Header("Authorization")String token, @Body FriendPostBody friendPostBody);
+    @GET("list/feed/")
+    Call<List<NewsFeedModel>> getNews(@Header("Authorization")String token);
 
 }

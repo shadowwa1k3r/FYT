@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -70,7 +69,7 @@ public class ProfilePage extends Fragment  {
 
 
 
-    String BASE_URL = "http://192.168.1.103:8000";
+    String BASE_URL = "http://192.168.1.104:8000";
     String BASE_URL_API =BASE_URL+"/api/";
 
      public ProfileInterface profileInterface;
@@ -108,7 +107,7 @@ public class ProfilePage extends Fragment  {
                              Bundle savedInstanceState) {
         final View Ppage=inflater.inflate(R.layout.another_profile_page, container, false);
 
-        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+        //((AppCompatActivity)getActivity()).getSupportActionBar().hide();
 
 
         tFull_name = (TextView)Ppage.findViewById(R.id.user_profile_name);
@@ -247,8 +246,10 @@ public class ProfilePage extends Fragment  {
                                 }
                             });
 
-                            final Call<List<PostItemModel>> getPosts = profileInterface.getPosts(" Token "+mParam1);
-                            getPosts.enqueue(new Callback<List<PostItemModel>>() {
+                            FriendPostBody body = new FriendPostBody();
+                            body.username = response.body().getUsername();
+                            final Call<List<PostItemModel>> getFriendPosts = profileInterface.getFriendPosts(" Token "+mParam1,body);
+                            getFriendPosts.enqueue(new Callback<List<PostItemModel>>() {
                                 @Override
                                 public void onResponse(Call<List<PostItemModel>> call, Response<List<PostItemModel>> response) {
                                     if(response.isSuccessful()){
