@@ -15,9 +15,10 @@ public class NewsFeedItemType {
     private String likeCount;
     private String commentCount;
     private List<NewsFeedModel.Images> images;
+    private List<NewsFeedModel.Videos> videos;
 
 
-    public NewsFeedItemType(String avatar, String username, String createdAt, String postTXT, String likeCount, String commentCount, List<NewsFeedModel.Images> images) {
+    public NewsFeedItemType(String avatar, String username, String createdAt, String postTXT, String likeCount, String commentCount, List<NewsFeedModel.Images> images,List<NewsFeedModel.Videos> videos) {
         this.avatar = avatar;
         this.username = username;
         this.createdAt = createdAt;
@@ -25,6 +26,15 @@ public class NewsFeedItemType {
         this.likeCount = likeCount;
         this.commentCount = commentCount;
         this.images = images;
+        this.videos=videos;
+    }
+
+    public List<NewsFeedModel.Videos> getVideos() {
+        return videos;
+    }
+
+    public void setVideos(List<NewsFeedModel.Videos> videos) {
+        this.videos = videos;
     }
 
     public String getAvatar() {

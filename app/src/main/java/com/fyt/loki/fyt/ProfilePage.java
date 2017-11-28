@@ -69,8 +69,8 @@ public class ProfilePage extends Fragment  {
 
 
 
-    String BASE_URL = "http://192.168.1.104:8000";
-    String BASE_URL_API =BASE_URL+"/api/";
+    private  String BASE_URL ;
+    private  String BASE_URL_API ;
 
      public ProfileInterface profileInterface;
 
@@ -108,6 +108,8 @@ public class ProfilePage extends Fragment  {
         final View Ppage=inflater.inflate(R.layout.another_profile_page, container, false);
 
         //((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+        BASE_URL = getContext().getString(R.string.BASE_URL);
+        BASE_URL_API =BASE_URL+"/api/";
 
 
         tFull_name = (TextView)Ppage.findViewById(R.id.user_profile_name);
@@ -200,8 +202,8 @@ public class ProfilePage extends Fragment  {
                     @Override
                     public void onResponse(Call<ProfileModel> call, Response<ProfileModel> response) {
                         if(response.isSuccessful()){
-                            Glide.with(getActivity()).load(BASE_URL+response.body().getAvatar()).asBitmap().into(iAvatar);
-                            Glide.with(getActivity()).load(BASE_URL+response.body().getAvatar()).asBitmap().into(iAvatar2);
+                            Glide.with(getActivity()).load(BASE_URL+response.body().getAvatar()).asBitmap().animate(R.anim.zoom_in).into(iAvatar);
+                            Glide.with(getActivity()).load(BASE_URL+response.body().getAvatar()).asBitmap().animate(R.anim.zoom_in).into(iAvatar2);
 
                             final String ava =BASE_URL+ response.body().getAvatar();
                             final String usnm = response.body().getUsername();
@@ -257,7 +259,8 @@ public class ProfilePage extends Fragment  {
 
                                     for (int i = 0; i <response.body().size() ; i++) {
                                         mDataset_posts.add(new PostItemType(ava,usnm,response.body().get(i).getCreated(),response.body().get(i).getContext(),
-                                                response.body().get(i).getLikes(),response.body().get(i).getComments(),response.body().get(i).getImages()));
+                                                response.body().get(i).getLikes(),response.body().get(i).getComments(),response.body().get(i).getImages(),response.body().get(i).getVideos()));
+                                       // Toast.makeText(getContext(),i,Toast.LENGTH_SHORT).show();
                                     }
                                         mAdapter_posts=new ProfilePostsAdapter(getActivity(),mDataset_posts);
                                         mRecyclerView_posts.setAdapter(mAdapter_posts);

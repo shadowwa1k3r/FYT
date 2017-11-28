@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:background="#000000">
+
+
+    <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+        android:id="@+id/player_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusable="true"
+
+        />
+
+    <ProgressBar
+        android:id="@+id/loadingbar"
+        style="@android:style/Widget.Material.ProgressBar"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignWithParentIfMissing="false"
+        android:layout_gravity="center"
+
+        android:indeterminateTint="#e0e0e0"
+        android:indeterminateTintMode="src_in"
+        android:visibility="invisible"/>
+
+</FrameLayout>

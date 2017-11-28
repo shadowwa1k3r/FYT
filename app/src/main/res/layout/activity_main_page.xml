@@ -5,28 +5,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="#000000"
 
-   >
+    android:orientation="vertical">
 
 
     <FrameLayout
-        android:id="@+id/contentContainer"
+        android:id="@+id/mainFrame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bottom_navigationbar">
+        android:background="#ffffff">
 
+        <FrameLayout
+            android:id="@+id/contentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="false"
+            android:layout_marginBottom="60dp">
+
+        </FrameLayout>
+
+        <com.roughike.bottombar.BottomBar
+            android:id="@+id/bottom_navigationbar"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
+            android:background="@color/colorAccent"
+            app:bb_activeTabColor="#000000"
+            app:bb_inActiveTabColor="#ffffff"
+            app:bb_tabXmlResource="@xml/main_bottombar_menu"/>
     </FrameLayout>
 
-    <com.roughike.bottombar.BottomBar
-        android:id="@+id/bottom_navigationbar"
+    <FrameLayout
+        android:id="@+id/videocontainer"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/colorAccent"
-        app:bb_activeTabColor="#000000"
-        app:bb_inActiveTabColor="#ffffff"
-        app:bb_tabXmlResource="@xml/main_bottombar_menu"/>
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent">
+
+    </FrameLayout>
 
 
 </RelativeLayout>

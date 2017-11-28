@@ -23,7 +23,33 @@
     </style>
     <style name="buttonvk" parent="Widget.AppCompat.Button.Colored">
         <item name="android:colorButtonNormal">#1e88e5</item>
-        
+
+    </style>
+
+    <style name="TextLabel" parent="TextAppearance.AppCompat">
+        <!-- Hint color and label color in FALSE state -->
+        <item name="android:textColorHint">#ffffff</item>
+
+        <!-- Label color in TRUE state and bar color FALSE and TRUE State -->
+        <item name="colorAccent">#ffffff</item>
+        <item name="colorControlNormal">#ffffff</item>
+        <item name="colorControlActivated">#ffffff</item>
+    </style>
+
+    <style name="myErrorText" parent="TextAppearance.AppCompat.Small">
+
+        <item name="android:textColor">#f4511e</item>
+
+    </style>
+    <style name="myHintText">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">14sp</item>
+
+    </style>
+    <style name="myEditText" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">#ffffff</item>
+        <item name="colorControlActivated">#ffffff</item>
+
     </style>
 
 

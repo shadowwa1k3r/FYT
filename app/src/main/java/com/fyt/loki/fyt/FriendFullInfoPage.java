@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -33,8 +34,8 @@ public class FriendFullInfoPage extends Fragment {
     private ProfileInterface profileInterface;
     private String mToken;
     private String mUserName;
-    private String BASE_URL="http://192.168.1.104:8000";
-    String BASE_URL_API =BASE_URL+"/api/";
+    private String BASE_URL;
+    private String BASE_URL_API ;
 
     private TextView tFull_name,tBirth_date,tGender,tCountry,tCity,tEmail,tPhone;
     private CircleImageView iAvatar;
@@ -76,6 +77,9 @@ public class FriendFullInfoPage extends Fragment {
         View Fpage = inflater.inflate(R.layout.fragment_friend_full_info_page, container, false);
 
 
+        BASE_URL= getContext().getString(R.string.BASE_URL);
+        BASE_URL_API =BASE_URL+"/api/";
+        Toast.makeText(getContext(),BASE_URL,Toast.LENGTH_LONG).show();
 
         tFull_name = (TextView)Fpage.findViewById(R.id.friend_profile_name);
         tBirth_date = (TextView)Fpage.findViewById(R.id.birth_datef);
@@ -118,13 +122,14 @@ public class FriendFullInfoPage extends Fragment {
                     final String ava = BASE_URL+response.body().getAvatar();
 
 
-                    tFull_name.setText(response.body().getFull_name());
+                    tFull_name.setText(response.body().getUsername());
                     tBirth_date.setText(response.body().getBith_date());
                     tGender.setText(response.body().getGender());
                     tCountry.setText(response.body().getCountry());
                     tCity.setText(response.body().getCity());
                     tEmail.setText(response.body().getEmail());
                     tPhone.setText(response.body().getPhone());
+                    //Toast.makeText(getContext(),response.body().getUsername(),Toast.LENGTH_LONG).show();
 
                     FriendPostBody body = new FriendPostBody();
                     body.username = mUserName;
@@ -137,7 +142,8 @@ public class FriendFullInfoPage extends Fragment {
 
                                 for (int i = 0; i <response.body().size() ; i++) {
                                     mDataset_posts.add(new PostItemType(ava,mUserName,response.body().get(i).getCreated(),response.body().get(i).getContext(),
-                                            response.body().get(i).getLikes(),response.body().get(i).getComments(),response.body().get(i).getImages()));
+                                            response.body().get(i).getLikes(),response.body().get(i).getComments(),response.body().get(i).getImages(),response.body().get(i).getVideos()));
+                                   // Toast.makeText(getContext(),i,Toast.LENGTH_SHORT).show();
                                 }
                                 mAdapter_posts=new ProfilePostsAdapter(getActivity(),mDataset_posts);
                                 mRecyclerView_posts.setAdapter(mAdapter_posts);

@@ -143,7 +143,7 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_margin="5dp"
             app:cardElevation="8dp"
             app:contentPadding="16dp"
             >
@@ -339,8 +339,8 @@
                     android:text="Friends"/>
 
                 <android.support.v7.widget.RecyclerView
-                    android:layout_width="match_parent"
                     android:id="@+id/friends_rv"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
                 </android.support.v7.widget.RecyclerView>

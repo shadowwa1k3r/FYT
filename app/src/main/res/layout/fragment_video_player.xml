@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/player_frame_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <FrameLayout
+            android:id="@+id/player_aspect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <SurfaceView
+            android:id="@+id/sv_player"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"/>
+        </FrameLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="@android:style/Widget.Material.ProgressBar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:indeterminateTint="#e0e0e0"
+            android:indeterminateTintMode="src_in"
+
+            android:layout_gravity="center"
+            android:visibility="invisible"/>
+
+        <include
+            layout="@layout/player_media_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"/>
+
+    </FrameLayout>
+
+</LinearLayout>

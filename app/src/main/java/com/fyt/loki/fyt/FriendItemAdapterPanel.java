@@ -24,7 +24,7 @@ public class FriendItemAdapterPanel extends RecyclerView.Adapter<FriendItemAdapt
     private Context mContext;
     private String token;
     private myCustomPane panel;
-    String BASE_URL ;
+    private  String BASE_URL;
 
     FriendItemAdapterPanel(Context context, ArrayList<FriendItemType> data,String token){
         this.mData=data;
@@ -39,7 +39,9 @@ public class FriendItemAdapterPanel extends RecyclerView.Adapter<FriendItemAdapt
     @Override
     public void onBindViewHolder(final FVHolder holder,final int position){
         final FriendItemType currentFitem = mData.get(position);
-        BASE_URL= "http://192.168.1.104:8000";
+
+
+        BASE_URL=mContext.getString(R.string.BASE_URL);
         Glide.with(mContext).load(BASE_URL+currentFitem.getImg()).into(holder.imgv);
         holder.bindTo(currentFitem);
 

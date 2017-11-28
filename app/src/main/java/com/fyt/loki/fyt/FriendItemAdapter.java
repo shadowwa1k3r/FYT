@@ -21,7 +21,7 @@ public class FriendItemAdapter extends RecyclerView.Adapter<FriendItemAdapter.FV
 
     private ArrayList<FriendItemType> mData;
     private Context mContext;
-    String BASE_URL ;
+    private String BASE_URL;
 
     FriendItemAdapter(Context context,ArrayList<FriendItemType> data){
         this.mData=data;
@@ -35,7 +35,8 @@ public class FriendItemAdapter extends RecyclerView.Adapter<FriendItemAdapter.FV
     @Override
     public void onBindViewHolder(final FVHolder holder,final int position){
         final FriendItemType currentFitem = mData.get(position);
-        BASE_URL= "http://192.168.1.104:8000";
+
+        BASE_URL = mContext.getString(R.string.BASE_URL);
         Glide.with(mContext).load(BASE_URL+currentFitem.getImg()).into(holder.imgv);
         holder.bindTo(currentFitem);
     }

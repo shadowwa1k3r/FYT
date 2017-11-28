@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +27,8 @@ public class NewsPage extends Fragment {
     private ProfileInterface profileInterface;
     private String mToken;
     private String mUserName;
-    private String BASE_URL="http://192.168.1.104:8000";
-    private String BASE_URL_API =BASE_URL+"/api/";
+    private String BASE_URL;
+    private  String BASE_URL_API;
 
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -59,6 +60,11 @@ public class NewsPage extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
        final View NewsPage=inflater.inflate(R.layout.fragment_news_page, container, false);
+        BASE_URL= getContext().getString(R.string.BASE_URL);
+        BASE_URL_API =BASE_URL+"/api/";
+        FrameLayout fl=(FrameLayout)getActivity().findViewById(R.id.mainFrame);
+        fl.setVisibility(View.VISIBLE);
+
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL_API)
@@ -92,8 +98,8 @@ public class NewsPage extends Fragment {
 
                             for (int i = 0; i <response.body().size(); i++) {
 
-                                mDataset.add(new NewsFeedItemType(ava,usnm,response.body().get(i).target.getCreated(),response.body().get(i).target.getContext(),
-                                        response.body().get(i).target.getLikes(),response.body().get(i).target.getComments(),response.body().get(i).target.getImages()));
+                                mDataset.add(new NewsFeedItemType(response.body().get(i).getTarget().getAvatar(),response.body().get(i).getTarget().getOwner(),response.body().get(i).target.getCreated(),response.body().get(i).target.getContext(),
+                                        response.body().get(i).target.getLikes(),response.body().get(i).target.getComments(),response.body().get(i).target.getImages(),response.body().get(i).target.getVideos()));
 
 
 

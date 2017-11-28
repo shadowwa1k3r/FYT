@@ -20,7 +20,7 @@ public class NewsFeedModel {
     @SerializedName("created")
     public String created;
     @SerializedName("user")
-    public int user;
+    public String user;
     @SerializedName("target")
     public Target target;
     @SerializedName("target_ct")
@@ -33,9 +33,73 @@ public class NewsFeedModel {
         public String photo;
         @SerializedName("created")
         public String created;
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getPhoto() {
+            return photo;
+        }
+
+        public void setPhoto(String photo) {
+            this.photo = photo;
+        }
+
+        public String getCreated() {
+            return created;
+        }
+
+        public void setCreated(String created) {
+            this.created = created;
+        }
     }
 
     public static class Videos {
+        @SerializedName("id")
+        public int id;
+        @SerializedName("video")
+        public String video;
+        @SerializedName("thumbnail")
+        public String thumbnail;
+        @SerializedName("created")
+        public String created;
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getVideo() {
+            return video;
+        }
+
+        public void setVideo(String video) {
+            this.video = video;
+        }
+
+        public String getThumbnail() {
+            return thumbnail;
+        }
+
+        public void setThumbnail(String thumbnail) {
+            this.thumbnail = thumbnail;
+        }
+
+        public String getCreated() {
+            return created;
+        }
+
+        public void setCreated(String created) {
+            this.created = created;
+        }
     }
 
     public static class Target {
@@ -44,7 +108,9 @@ public class NewsFeedModel {
         @SerializedName("context")
         public String context;
         @SerializedName("owner")
-        public int owner;
+        public String owner;
+        @SerializedName("avatar")
+        public String avatar;
         @SerializedName("images")
         public List<Images> images;
         @SerializedName("videos")
@@ -72,12 +138,20 @@ public class NewsFeedModel {
             this.context = context;
         }
 
-        public int getOwner() {
+        public String getOwner() {
             return owner;
         }
 
-        public void setOwner(int owner) {
+        public void setOwner(String owner) {
             this.owner = owner;
+        }
+
+        public String getAvatar() {
+            return avatar;
+        }
+
+        public void setAvatar(String avatar) {
+            this.avatar = avatar;
         }
 
         public List<Images> getImages() {
@@ -121,7 +195,6 @@ public class NewsFeedModel {
         }
     }
 
-
     public int getId() {
         return id;
     }
@@ -154,11 +227,11 @@ public class NewsFeedModel {
         this.created = created;
     }
 
-    public int getUser() {
+    public String getUser() {
         return user;
     }
 
-    public void setUser(int user) {
+    public void setUser(String user) {
         this.user = user;
     }
 

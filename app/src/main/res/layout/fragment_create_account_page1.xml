@@ -9,10 +9,10 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="158dp"
         android:gravity="bottom"
         android:orientation="vertical"
         android:weightSum="1">
@@ -20,7 +20,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="25dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_weight="0.02"
@@ -30,6 +29,7 @@
                 android:id="@+id/tw"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/twt"
@@ -122,14 +122,14 @@
             android:layout_height="wrap_content"
             android:background="@drawable/loginbtns"
             android:duplicateParentState="false"
-            android:text="sign up with email/phone"
+            android:text="sign up with email"
             android:textColor="@android:color/background_light"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginBottom="1dp"
+            android:layout_marginTop="5dp"
             android:gravity="bottom|center"
             android:orientation="horizontal">
 

@@ -161,7 +161,7 @@
             android:id="@+id/logInto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="5dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:background="@drawable/loginbtns"
@@ -171,7 +171,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="1dp"
             android:baselineAligned="false"
             android:gravity="center"
             android:orientation="horizontal">

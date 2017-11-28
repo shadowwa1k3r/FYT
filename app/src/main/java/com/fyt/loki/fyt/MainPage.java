@@ -3,15 +3,19 @@ package com.fyt.loki.fyt;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.BottomBarTab;
 import com.roughike.bottombar.OnTabSelectListener;
 
 public class MainPage extends AppCompatActivity {
 
     private String Token,UserName;
-
+    BottomBarTab messages;
 
 
 
@@ -30,6 +34,9 @@ public class MainPage extends AppCompatActivity {
             Token = bundle.getString("Token");
             UserName = bundle.getString("UName");
         }
+
+        FrameLayout fl=(FrameLayout)findViewById(R.id.contentContainer);
+
 
         BottomBar bottomBar = (BottomBar)findViewById(R.id.bottom_navigationbar);
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
@@ -56,6 +63,8 @@ public class MainPage extends AppCompatActivity {
 
             }
         });
+        messages= bottomBar.getTabWithId(R.id.item2);
+        messages.setBadgeCount(5);
 
 
 
@@ -64,17 +73,23 @@ public class MainPage extends AppCompatActivity {
     private void ChangeFragment(String value){
         Fragment fragment = null;
         switch (value) {
-            case "item1":    fragment = NewsPage.newInstance(Token,UserName);break;
-            case "item2": fragment = new MessagePage();break;
+            case "item1":  try {
+                fragment = NewsPage.newInstance(Token,UserName);
+            }
+            catch (Exception e){
+                Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_LONG).show();
+            }
+            break;
+            case "item2": fragment = new ChatPage();messages.removeBadge();break;
             case "item3": fragment= new SchedulerPage();break;
             case "item4": fragment= new MapPage();break;
-            case "item5": fragment= ProfilePage.newInstance(Token,UserName);break;
+            case "item5": fragment= MenuPage.newInstance(Token,UserName);break;
         }
 
         if(fragment!=null)
             getSupportFragmentManager()
                     .beginTransaction()
-                    .setCustomAnimations(R.anim.grow_from_middle,R.anim.shrink_to_middle)
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                     .replace(R.id.contentContainer, fragment)
                     .commit();
 

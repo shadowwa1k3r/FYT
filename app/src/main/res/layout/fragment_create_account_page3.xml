@@ -9,43 +9,48 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="262dp"
         android:gravity="bottom"
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/editText5"
+            android:id="@+id/pass_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/et_baorder2"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/et_baorder"
             android:ems="10"
-            android:hint="First name"
-            android:inputType="textPersonName"
+            android:hint="Enter password"
+            android:inputType="textPassword"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            android:textColorHint="#ffffff"/>
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"/>
 
         <EditText
-            android:id="@+id/editText6"
+            android:id="@+id/repass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/et_baorder2"
+            android:layout_weight="1"
+            android:background="@drawable/et_baorder"
             android:ems="10"
-            android:hint="Family name"
-            android:inputType="textPersonName"
+            android:hint="Re-enter password"
+            android:inputType="textPassword"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            android:textColorHint="#ffffff"/>
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"/>
 
         <Button
-            android:id="@+id/tocap4"
+            android:id="@+id/finish"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="100dp"
             android:layout_weight="1"
-            android:background="@drawable/loginbuttons"
+            android:background="@drawable/loginbtns"
             android:duplicateParentState="false"
             android:text="Done"
             android:textColor="@android:color/background_light"/>
@@ -53,8 +58,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginBottom="1dp"
+            android:layout_marginTop="5dp"
             android:layout_weight="1"
             android:gravity="bottom|center"
             android:orientation="horizontal">

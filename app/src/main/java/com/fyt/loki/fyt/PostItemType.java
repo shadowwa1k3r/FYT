@@ -15,9 +15,10 @@ public class PostItemType {
     private String likeCount;
     private String commentCount;
     private List<PostItemModel.Images> images;
+    private List<PostItemModel.Videos> videos;
 
 
-    public PostItemType(String avatar,String username,String createdAt,String postTXT,String likeCount,String commentCount,List<PostItemModel.Images> images){
+    public PostItemType(String avatar,String username,String createdAt,String postTXT,String likeCount,String commentCount,List<PostItemModel.Images> images,List<PostItemModel.Videos> videos){
         this.avatar=avatar;
         this.username=username;
         this.createdAt=createdAt;
@@ -25,6 +26,7 @@ public class PostItemType {
         this.likeCount=likeCount;
         this.commentCount=commentCount;
         this.images=images;
+        this.videos=videos;
     }
 
     public String getPostTXT() {
@@ -81,5 +83,13 @@ public class PostItemType {
 
     public void setImages(List<PostItemModel.Images> images) {
         this.images = images;
+    }
+
+    public List<PostItemModel.Videos> getVideos() {
+        return videos;
+    }
+
+    public void setVideos(List<PostItemModel.Videos> videos) {
+        this.videos = videos;
     }
 }
