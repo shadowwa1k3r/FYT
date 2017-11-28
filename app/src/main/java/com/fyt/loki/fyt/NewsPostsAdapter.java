@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -29,10 +30,12 @@ public class NewsPostsAdapter extends RecyclerView.Adapter<NewsPostsAdapter.NFVH
     private ArrayList<NewsFeedItemType> mData;
     private Context mContext;
     private String BASE_URL;
+    private String token;
 
 
-    NewsPostsAdapter(Context context, ArrayList data){
+    NewsPostsAdapter(Context context, ArrayList data,String token){
         this.mData=data;
+        this.token=token;
         this.mContext=context;
     }
 
@@ -146,6 +149,13 @@ public class NewsPostsAdapter extends RecyclerView.Adapter<NewsPostsAdapter.NFVH
 
             }
         });
+        holder.comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppCompatActivity activity =(AppCompatActivity)mContext;
+                activity.getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enterfromright,R.anim.exittoleft,R.anim.enterfromleft,R.anim.exittoright).replace(R.id.contentContainer,CommentPage.newInstance(currentItem.getTarget_id(),token)).addToBackStack(null).commit();
+            }
+        });
 
 
         holder.bindTo(currentItem);
@@ -161,10 +171,14 @@ public class NewsPostsAdapter extends RecyclerView.Adapter<NewsPostsAdapter.NFVH
         private CircleImageView avatar;
         private TextView username,createdAt,postTXT,likeCount,commentCount;
         private CarouselView post_img;
+        private Button comment,share,like;
 
 
         NFVHolder(final View itemview){
             super(itemview);
+            comment=(Button)itemview.findViewById(R.id.commentBTN);
+            share=(Button)itemview.findViewById(R.id.shareBTN);
+            like=(Button)itemview.findViewById(R.id.likeBTN);
             avatar = (CircleImageView)itemview.findViewById(R.id.post_avaf);
             username = (TextView)itemview.findViewById(R.id.post_usernamef);
             createdAt = (TextView)itemview.findViewById(R.id.post_createdAtf);
@@ -177,6 +191,11 @@ public class NewsPostsAdapter extends RecyclerView.Adapter<NewsPostsAdapter.NFVH
         void bindTo(NewsFeedItemType current){
             post_img.setPageCount(current.getImages().size()+current.getVideos().size());
             post_img.setSlideInterval(1000000);
+
+
+
+
+
 
 
             username.setText(current.getUsername());

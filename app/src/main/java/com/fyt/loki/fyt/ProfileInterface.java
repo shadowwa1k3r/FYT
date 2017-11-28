@@ -8,6 +8,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * Created by ergas on 11/13/2017.
@@ -26,5 +27,7 @@ public interface ProfileInterface {
     Call<List<PostItemModel>> getFriendPosts(@Header("Authorization")String token, @Body FriendPostBody friendPostBody);
     @GET("list/feed/")
     Call<List<NewsFeedModel>> getNews(@Header("Authorization")String token);
+    @GET("list/comment/")
+    Call<List<CommentModel>> getComment(@Header("Authorization")String token,@Query("post_id") int post_id);
 
 }

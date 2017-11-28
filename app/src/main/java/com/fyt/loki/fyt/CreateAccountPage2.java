@@ -46,6 +46,8 @@ public class CreateAccountPage2 extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View cap2=inflater.inflate(R.layout.fragment_create_account_page2, container, false);
+       //getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN|WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(getString(R.string.BASE_URL)+"/api/")
                 .addConverterFactory(GsonConverterFactory.create())

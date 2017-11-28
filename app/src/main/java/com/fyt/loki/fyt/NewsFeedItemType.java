@@ -9,6 +9,7 @@ import java.util.List;
 public class NewsFeedItemType {
 
     private String avatar;
+    private int target_id;
     private String username;
     private String createdAt;
     private String postTXT;
@@ -18,7 +19,7 @@ public class NewsFeedItemType {
     private List<NewsFeedModel.Videos> videos;
 
 
-    public NewsFeedItemType(String avatar, String username, String createdAt, String postTXT, String likeCount, String commentCount, List<NewsFeedModel.Images> images,List<NewsFeedModel.Videos> videos) {
+    public NewsFeedItemType(String avatar, String username, String createdAt, String postTXT, String likeCount, String commentCount, List<NewsFeedModel.Images> images,List<NewsFeedModel.Videos> videos,int tID) {
         this.avatar = avatar;
         this.username = username;
         this.createdAt = createdAt;
@@ -27,6 +28,7 @@ public class NewsFeedItemType {
         this.commentCount = commentCount;
         this.images = images;
         this.videos=videos;
+        this.target_id=tID;
     }
 
     public List<NewsFeedModel.Videos> getVideos() {
@@ -91,5 +93,13 @@ public class NewsFeedItemType {
 
     public void setImages(List<NewsFeedModel.Images> images) {
         this.images = images;
+    }
+
+    public int getTarget_id() {
+        return target_id;
+    }
+
+    public void setTarget_id(int target_id) {
+        this.target_id = target_id;
     }
 }

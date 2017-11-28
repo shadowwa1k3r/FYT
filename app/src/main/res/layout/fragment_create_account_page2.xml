@@ -1,18 +1,18 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:app="http://schemas.android.com/apk/res-auto"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:isScrollContainer="true"
-             tools:context="com.fyt.loki.fyt.CreateAccountPage2">
 
-    <!-- TODO: Update blank fragment layout -->
 
-    <ScrollView
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+
+    tools:context="com.fyt.loki.fyt.CreateAccountPage2"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
-
         android:layout_gravity="bottom">
 
 
@@ -98,108 +98,111 @@
         </RelativeLayout>
         -->
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/elay"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
 
-                android:textColorHint="#ffffff"
-
-                app:errorEnabled="true"
-                app:errorTextAppearance="@style/myErrorText"
-                app:hintTextAppearance="@style/myHintText">
-
-
-                <EditText
-                    android:id="@+id/emailedit"
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/elay"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/et_baorder"
-                    android:ems="10"
-                    android:hint="Your E-mail"
-                    android:inputType="textEmailAddress"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
 
-                    android:textColor="#ffffff"
                     android:textColorHint="#ffffff"
-                    android:theme="@style/myEditText"/>
-            </android.support.design.widget.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/ulay"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                    app:errorEnabled="true"
+                    app:errorTextAppearance="@style/myErrorText"
+                    app:hintTextAppearance="@style/myHintText">
 
-                android:textColorHint="#ffffff"
 
-                app:errorEnabled="true"
-                app:errorTextAppearance="@style/myErrorText"
-                app:hintTextAppearance="@style/myHintText">
+                    <EditText
+                        android:id="@+id/emailedit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/et_baorder"
+                        android:ems="10"
+                        android:hint="Your E-mail"
+                        android:inputType="textEmailAddress"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
 
-                <EditText
-                    android:id="@+id/usernameedit"
+                        android:textColor="#ffffff"
+                        android:textColorHint="#ffffff"
+                        android:theme="@style/myEditText"/>
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/ulay"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/et_baorder"
-                    android:ems="10"
-                    android:hint="User name"
-                    android:inputType="textPersonName"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
-                    android:textColor="@color/white"
-                    android:textColorHint="#ffffff"/>
-            </android.support.design.widget.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/flay"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                    android:textColorHint="#ffffff"
 
-                android:textColorHint="#ffffff"
+                    app:errorEnabled="true"
+                    app:errorTextAppearance="@style/myErrorText"
+                    app:hintTextAppearance="@style/myHintText">
 
-                app:errorEnabled="true"
-                app:errorTextAppearance="@style/myErrorText"
-                app:hintTextAppearance="@style/myHintText">
+                    <EditText
+                        android:id="@+id/usernameedit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/et_baorder"
+                        android:ems="10"
+                        android:hint="User name"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:textColor="@color/white"
+                        android:textColorHint="#ffffff"/>
+                </android.support.design.widget.TextInputLayout>
 
-                <EditText
-                    android:id="@+id/fnameedit"
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/flay"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/et_baorder"
-                    android:ems="10"
-                    android:hint="First name"
-                    android:inputType="textPersonName"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
-                    android:textColor="@color/white"
-                    android:textColorHint="#ffffff"/>
-            </android.support.design.widget.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/llay"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                    android:textColorHint="#ffffff"
 
-                android:textColorHint="#ffffff"
+                    app:errorEnabled="true"
+                    app:errorTextAppearance="@style/myErrorText"
+                    app:hintTextAppearance="@style/myHintText">
 
-                app:errorEnabled="true"
-                app:errorTextAppearance="@style/myErrorText"
-                app:hintTextAppearance="@style/myHintText">
+                    <EditText
+                        android:id="@+id/fnameedit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/et_baorder"
+                        android:ems="10"
+                        android:hint="First name"
+                        android:inputType="textPersonName"
 
-                <EditText
-                    android:id="@+id/lnameedit"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:textColor="@color/white"
+                        android:textColorHint="#ffffff"/>
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/llay"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/et_baorder"
-                    android:ems="10"
-                    android:hint="Last name"
-                    android:inputType="textPersonName"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
-                    android:textColor="@color/white"
-                    android:textColorHint="#ffffff"/>
-            </android.support.design.widget.TextInputLayout>
+
+                    android:textColorHint="#ffffff"
+
+                    app:errorEnabled="true"
+                    app:errorTextAppearance="@style/myErrorText"
+                    app:hintTextAppearance="@style/myHintText">
+
+                    <EditText
+                        android:id="@+id/lnameedit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/et_baorder"
+                        android:ems="10"
+                        android:hint="Last name"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:textColor="@color/white"
+                        android:textColorHint="#ffffff"/>
+                </android.support.design.widget.TextInputLayout>
+
 
             <Button
                 android:id="@+id/topage3"
@@ -238,5 +241,7 @@
             </LinearLayout>
 
         </LinearLayout>
-    </ScrollView>
+
+    </android.support.v4.widget.NestedScrollView>
 </FrameLayout>
+
