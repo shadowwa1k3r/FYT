@@ -8,10 +8,30 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="BASE_URL">http://192.168.1.129:8000</string>
+    <string name="site">https://findyourtraining.com</string>
 
     <string name="facebook_app_id">1963632580549769</string>
     <string name="fb_login_protocol_scheme">fb405601763191434</string>
 
+    <string-array name="CountryList">
+        <item>Country</item>
+        <item>Uzbekistan</item>
+        <item>USA</item>
+        <item>Russia</item>
+        <item>China</item>
+    </string-array>
+    <string-array name="CityList">
+        <item>City</item>
+        <item>Tashkent</item>
+        <item>Beijing</item>
+        <item>New-York</item>
+        <item>Moscow</item>
+    </string-array>
+    <string-array name="Language">
+        <item>English</item>
+        <item>Russian</item>
+        <item>Chinese</item>
+    </string-array>
     <string-array name="CountryCodes">
         <item>93,AF</item>
         <item>355,AL</item>

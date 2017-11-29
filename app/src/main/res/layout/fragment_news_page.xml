@@ -38,6 +38,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="#ededed"
             android:orientation="vertical">
 
 
@@ -72,29 +73,44 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center"
                     android:orientation="horizontal">
 
                     <Button
                         android:id="@+id/button17"
+                        style="@style/Widget.AppCompat.Button.Borderless"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Pohoto/Viedo"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@android:color/transparent"
+                        android:drawableLeft="@drawable/pvico"
+                        android:gravity="center_vertical"
+                        android:text="   Photo/Viedo"
                         android:textSize="10sp"/>
 
                     <Button
                         android:id="@+id/button16"
+                        style="@style/Widget.AppCompat.Button.Borderless"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="10dp"
+                        android:background="@android:color/transparent"
+                        android:drawableLeft="@drawable/chekinico"
+                        android:gravity="center_vertical"
                         android:text="Chek in"
                         android:textSize="10sp"/>
 
                     <Button
                         android:id="@+id/button15"
+                        style="@style/Widget.AppCompat.Button.Borderless"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@android:color/transparent"
+                        android:drawableLeft="@drawable/tagfico"
+                        android:gravity="center_vertical"
                         android:text="Tag friends"
                         android:textSize="10sp"/>
                 </LinearLayout>
@@ -123,23 +139,11 @@
                 android:textColor="@color/colorAccent"
                 android:textSize="14sp"/>
 
-            <View
-                android:id="@+id/view18"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_centerHorizontal="false"
-                android:layout_centerInParent="false"
-                android:layout_centerVertical="true"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
-                android:background="#000000"
-                android:visibility="visible"/>
-
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/newsRV"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                >
+                android:background="#ededed">
 
             </android.support.v7.widget.RecyclerView>
 

@@ -1,10 +1,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:background="#e0e0e0"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#e0e0e0"
               android:orientation="vertical"
-             tools:context="com.fyt.loki.fyt.MenuPage">
+              tools:context="com.fyt.loki.fyt.MenuPage">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
@@ -13,7 +13,7 @@
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
         android:gravity="center"
-        android:text="Menu"
+        android:text="My Profile"
         android:textAllCaps="true"/>
 
     <LinearLayout
@@ -30,9 +30,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:drawableLeft="@drawable/friends"
+            android:drawableLeft="@drawable/generalico"
             android:gravity="center_vertical|start"
-            android:text="Friends"/>
+            android:text="General"/>
 
 
         <View
@@ -57,9 +57,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:drawableLeft="@drawable/teams"
+            android:drawableLeft="@drawable/privacyico"
             android:gravity="center_vertical|start"
-            android:text="Teams"/>
+            android:text="Privacy"/>
 
 
         <View
@@ -84,9 +84,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:drawableLeft="@drawable/compet"
+            android:drawableLeft="@drawable/notifyico"
             android:gravity="center_vertical|start"
-            android:text="Competition"/>
+            android:text="Notification"/>
 
 
         <View
@@ -111,50 +111,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:drawableLeft="@drawable/gallery"
+            android:drawableLeft="@drawable/blockico"
             android:gravity="center_vertical|start"
-            android:text="Gallery"/>
-
-
-        <View
-            android:id="@+id/view14"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_centerHorizontal="false"
-            android:layout_centerInParent="false"
-            android:layout_centerVertical="true"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="5dp"
-            android:background="#000000"
-            android:visibility="visible"/>
-
-
-        <Button
-            android:id="@+id/myprofile_btn"
-            style="@android:style/Widget.Material.Light.Button.Borderless"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:drawableLeft="@drawable/myprofile"
-            android:gravity="center_vertical|start"
-            android:text="My Profile"/>
-
-        <View
-            android:id="@+id/view10"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_centerHorizontal="false"
-            android:layout_centerInParent="false"
-            android:layout_centerVertical="true"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="5dp"
-            android:background="#000000"
-            android:visibility="visible"/>
+            android:text=" Blacklist and complain"/>
 
 
     </LinearLayout>
