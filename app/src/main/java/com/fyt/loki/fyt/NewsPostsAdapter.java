@@ -17,6 +17,9 @@ import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageClickListener;
 import com.synnapps.carouselview.ViewListener;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.ISODateTimeFormat;
+
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -25,6 +28,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
 
 /**
  * Created by ergas on 11/18/2017.
@@ -303,7 +307,22 @@ public class NewsPostsAdapter extends RecyclerView.Adapter<NewsPostsAdapter.NFVH
             }
 
             username.setText(current.getUsername());
-           createdAt.setText(current.getCreatedAt());
+
+
+            DateTime dtIn = getDateTimeObject(current.getCreatedAt());
+
+
+
+
+                createdAt.setText(dtIn.getHourOfDay()+":"+dtIn.getMinuteOfHour());
+
+
+
+
+
+
+
+
 
             postTXT.setText(current.getPostTXT());
             likeCount.setText(current.getLikeCount());
@@ -314,7 +333,25 @@ public class NewsPostsAdapter extends RecyclerView.Adapter<NewsPostsAdapter.NFVH
 
 
 
+
+
     }
+    public static DateTime getDateTimeObject(String dateTime) {
+        //DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern(PATTERN);
+        //DateTime dateTimeObj = dateTimeFormatter.parseDateTime(dateTime);
+        //Logger.d(dateTime);
+        DateTime dateTimeObj = null;
+
+        dateTimeObj = ISODateTimeFormat.dateTime().parseDateTime(dateTime);
+
+
+
+
+
+        return dateTimeObj;
+
+    }
+
 
 
 

@@ -9,6 +9,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.ISODateTimeFormat;
+
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -65,7 +68,22 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CHolder>
            // Toast.makeText(mContext,current.getComment(),Toast.LENGTH_LONG).show();
             username.setText(current.getUsername());
             comment.setText(current.getComment());
-            date.setText(current.getTime());
+            DateTime dtIn = getDateTimeObject(current.getTime());
+
+            date.setText(dtIn.getHourOfDay()+":"+dtIn.getMinuteOfHour());
         }
+    }
+    public static DateTime getDateTimeObject(String dateTime) {
+        //DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern(PATTERN);
+        //DateTime dateTimeObj = dateTimeFormatter.parseDateTime(dateTime);
+        //Logger.d(dateTime);
+        DateTime dateTimeObj = null;
+
+        dateTimeObj = ISODateTimeFormat.dateTime().parseDateTime(dateTime);
+
+
+
+        return dateTimeObj;
+
     }
 }

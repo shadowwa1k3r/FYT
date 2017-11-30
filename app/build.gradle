@@ -51,5 +51,6 @@ dependencies {
     compile 'com.google.android.exoplayer:exoplayer:r2.4.4'
     compile 'com.facebook.android:facebook-login:[4,5)'
     compile 'net.cachapa.expandablelayout:expandablelayout:[2.9.2]'
+    compile 'joda-time:joda-time:2.9.4'
     testCompile 'junit:junit:4.12'
 }

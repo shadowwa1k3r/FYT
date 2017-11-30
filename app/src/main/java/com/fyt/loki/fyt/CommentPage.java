@@ -10,8 +10,12 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.ISODateTimeFormat;
+
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import retrofit2.Call;
@@ -40,6 +44,7 @@ public class CommentPage extends Fragment {
 
     private ImageButton sendComment;
     private EditText commentText;
+    private static final DateTimeFormatter ISO_DATE_TIME_FORMATTER = ISODateTimeFormat.dateTime().withZoneUTC();
 
     public CommentPage() {
         // Required empty public constructor
@@ -140,7 +145,8 @@ public class CommentPage extends Fragment {
                     public void onResponse(Call<commentResponse> call, Response<commentResponse> response) {
                         if(response.isSuccessful())
                         {
-                            mDataset.add(new CommentType(avatar,username,body.text, Calendar.getInstance().getTime().toString()));
+                            DateTime dt=new DateTime(DateTimeZone.UTC);
+                            mDataset.add(new CommentType(avatar,username,body.text,jodaDateTimeToIsoString(dt)));
                             mCommentAdapter.notifyDataSetChanged();
                             commentText.setText("");
 
@@ -166,5 +172,10 @@ public class CommentPage extends Fragment {
 
         return  Cview;
     }
+    public static String jodaDateTimeToIsoString(DateTime dateTime) {
+        String dateTimeString = ISO_DATE_TIME_FORMATTER.print(dateTime);
+        return dateTimeString;
+    }
+
 
 }
