@@ -99,7 +99,8 @@ public class NewsPage extends Fragment {
                             for (int i = 0; i <response.body().size(); i++) {
 
                                 mDataset.add(new NewsFeedItemType(response.body().get(i).getTarget().getAvatar(),response.body().get(i).getTarget().getOwner(),response.body().get(i).target.getCreated(),response.body().get(i).target.getContext(),
-                                        response.body().get(i).target.getLikes(),response.body().get(i).target.getComments(),response.body().get(i).target.getImages(),response.body().get(i).target.getVideos(),response.body().get(i).getTarget_id()));
+                                        response.body().get(i).target.getLikes_count(),response.body().get(i).target.getComments(),response.body().get(i).target.getImages(),response.body().get(i).target.getVideos(),response.body().get(i).getTarget_id(),response.body().get(i).target.getLikes()));
+
 
 
 

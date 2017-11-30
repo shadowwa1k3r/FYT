@@ -17,9 +17,12 @@ public class NewsFeedItemType {
     private String commentCount;
     private List<NewsFeedModel.Images> images;
     private List<NewsFeedModel.Videos> videos;
+    private List<String> likes;
+    private boolean liked=false;
 
 
-    public NewsFeedItemType(String avatar, String username, String createdAt, String postTXT, String likeCount, String commentCount, List<NewsFeedModel.Images> images,List<NewsFeedModel.Videos> videos,int tID) {
+    public NewsFeedItemType(String avatar, String username, String createdAt, String postTXT, String likeCount, String commentCount, List<NewsFeedModel.Images> images,List<NewsFeedModel.Videos> videos,int tID,List<String> likes) {
+        this.likes=likes;
         this.avatar = avatar;
         this.username = username;
         this.createdAt = createdAt;
@@ -101,5 +104,21 @@ public class NewsFeedItemType {
 
     public void setTarget_id(int target_id) {
         this.target_id = target_id;
+    }
+
+    public List getLikes() {
+        return likes;
+    }
+
+    public void setLikes(List<String> likes) {
+        this.likes = likes;
+    }
+
+    public boolean isLiked() {
+        return liked;
+    }
+
+    public void setLiked(boolean liked) {
+        this.liked = liked;
     }
 }

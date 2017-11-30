@@ -29,5 +29,7 @@ public interface ProfileInterface {
     Call<List<NewsFeedModel>> getNews(@Header("Authorization")String token);
     @GET("list/comment/")
     Call<List<CommentModel>> getComment(@Header("Authorization")String token,@Query("post_id") int post_id);
+    @POST("add-like/")
+    Call<likeresponse> like(@Header("Authorization")String token,@Body likebody likebody);
 
 }

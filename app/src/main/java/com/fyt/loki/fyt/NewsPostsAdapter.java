@@ -20,6 +20,11 @@ import com.synnapps.carouselview.ViewListener;
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by ergas on 11/18/2017.
@@ -31,6 +36,7 @@ public class NewsPostsAdapter extends RecyclerView.Adapter<NewsPostsAdapter.NFVH
     private Context mContext;
     private String BASE_URL;
     private String token;
+
 
 
     NewsPostsAdapter(Context context, ArrayList data,String token){
@@ -156,6 +162,83 @@ public class NewsPostsAdapter extends RecyclerView.Adapter<NewsPostsAdapter.NFVH
                 activity.getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enterfromright,R.anim.exittoleft,R.anim.enterfromleft,R.anim.exittoright).replace(R.id.contentContainer,CommentPage.newInstance(currentItem.getTarget_id(),token)).addToBackStack(null).commit();
             }
         });
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(mContext.getString(R.string.BASE_URL)+"/api/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        final ProfileInterface profileInt= retrofit.create(ProfileInterface.class);
+        likebody body=new likebody();
+        body.post_id=currentItem.getTarget_id();
+
+        final Call<likeresponse> call=profileInt.like(" Token "+token,body);
+
+        holder.like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (!currentItem.isLiked()) {
+                    holder.like.setClickable(false);
+                    holder.like.setCompoundDrawablesWithIntrinsicBounds(R.drawable.like_icon_full, 0, 0, 0);
+
+
+                    call.enqueue(new Callback<likeresponse>() {
+                        @Override
+                        public void onResponse(Call<likeresponse> call, Response<likeresponse> response) {
+                            if (response.isSuccessful()) {
+                                currentItem.setLiked(!currentItem.isLiked());
+                                holder.like.setClickable(true);
+                            } else {
+                                holder.like.setClickable(true);
+                                holder.like.setCompoundDrawablesWithIntrinsicBounds(R.drawable.like_icon, 0, 0, 0);
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<likeresponse> call, Throwable t) {
+                            holder.like.setClickable(true);
+                            holder.like.setCompoundDrawablesWithIntrinsicBounds(R.drawable.like_icon, 0, 0, 0);
+                        }
+                    });
+                }
+
+
+
+
+
+                else {
+                    holder.like.setClickable(false);
+                    holder.like.setCompoundDrawablesWithIntrinsicBounds(R.drawable.like_icon, 0, 0, 0);
+
+                    call.enqueue(new Callback<likeresponse>() {
+                        @Override
+                        public void onResponse(Call<likeresponse> call, Response<likeresponse> response) {
+                            if(response.isSuccessful()){
+                                currentItem.setLiked(!currentItem.isLiked());
+                                holder.like.setClickable(true);
+                            }
+                            else {
+                                holder.like.setCompoundDrawablesWithIntrinsicBounds(R.drawable.like_icon_full, 0, 0, 0);
+                                holder.like.setClickable(true);
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<likeresponse> call, Throwable t) {
+                            holder.like.setCompoundDrawablesWithIntrinsicBounds(R.drawable.like_icon_full, 0, 0, 0);
+                            holder.like.setClickable(true);
+                        }
+                    });
+
+
+
+
+                }
+
+
+            }
+        });
+
 
 
         holder.bindTo(currentItem);
@@ -192,14 +275,35 @@ public class NewsPostsAdapter extends RecyclerView.Adapter<NewsPostsAdapter.NFVH
             post_img.setPageCount(current.getImages().size()+current.getVideos().size());
             post_img.setSlideInterval(1000000);
 
+            if(current.getLikes().size()!=0){
+                current.setLiked(false);
+            for (int i = 0; i <current.getLikes().size() ; i++) {
+
+                if (current.getLikes().get(i).equals( current.getUsername())) {
+                    like.setCompoundDrawablesWithIntrinsicBounds(R.drawable.like_icon_full, 0, 0, 0);
+                    current.setLiked(true);
+
+
+                }
+            }
+                if(!current.isLiked()) {
+                    like.setCompoundDrawablesWithIntrinsicBounds(R.drawable.like_icon, 0, 0, 0);
+
+
+                }
+
+            }
+            else {
+                like.setCompoundDrawablesWithIntrinsicBounds(R.drawable.like_icon, 0, 0, 0);
+                current.setLiked(false);
 
 
 
-
-
+            }
 
             username.setText(current.getUsername());
-            createdAt.setText(current.getCreatedAt());
+           createdAt.setText(current.getCreatedAt());
+
             postTXT.setText(current.getPostTXT());
             likeCount.setText(current.getLikeCount());
             commentCount.setText(current.getCommentCount());
