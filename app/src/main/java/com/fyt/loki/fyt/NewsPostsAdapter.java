@@ -18,6 +18,8 @@ import com.synnapps.carouselview.ImageClickListener;
 import com.synnapps.carouselview.ViewListener;
 
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
 
 import java.util.ArrayList;
@@ -314,7 +316,7 @@ public class NewsPostsAdapter extends RecyclerView.Adapter<NewsPostsAdapter.NFVH
 
 
 
-                createdAt.setText(dtIn.getHourOfDay()+":"+dtIn.getMinuteOfHour());
+                createdAt.setText(jodaDateTimeToCustomString(dtIn,"HH:mm"));
 
 
 
@@ -350,7 +352,12 @@ public class NewsPostsAdapter extends RecyclerView.Adapter<NewsPostsAdapter.NFVH
 
         return dateTimeObj;
 
+    }public static String jodaDateTimeToCustomString(DateTime dateTime, String dateTimePattern) {
+        DateTimeFormatter fmt = DateTimeFormat.forPattern(dateTimePattern);
+        String dateTimeString = dateTime.toString(fmt);
+        return dateTimeString;
     }
+
 
 
 

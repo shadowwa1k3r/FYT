@@ -1,5 +1,6 @@
 package com.fyt.loki.fyt;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -149,6 +151,10 @@ public class CommentPage extends Fragment {
                             mDataset.add(new CommentType(avatar,username,body.text,jodaDateTimeToIsoString(dt)));
                             mCommentAdapter.notifyDataSetChanged();
                             commentText.setText("");
+                            mLayoutManager.scrollToPosition(mDataset.size()-1);
+                            InputMethodManager inputManager = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+
+                            inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
 
                         }
                         else commentText.setText("responseerror");

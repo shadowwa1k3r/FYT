@@ -10,6 +10,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
 
 import java.util.ArrayList;
@@ -70,7 +72,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CHolder>
             comment.setText(current.getComment());
             DateTime dtIn = getDateTimeObject(current.getTime());
 
-            date.setText(dtIn.getHourOfDay()+":"+dtIn.getMinuteOfHour());
+            date.setText(jodaDateTimeToCustomString(dtIn,"HH:mm"));
         }
     }
     public static DateTime getDateTimeObject(String dateTime) {
@@ -85,5 +87,10 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CHolder>
 
         return dateTimeObj;
 
+    }
+    public static String jodaDateTimeToCustomString(DateTime dateTime, String dateTimePattern) {
+        DateTimeFormatter fmt = DateTimeFormat.forPattern(dateTimePattern);
+        String dateTimeString = dateTime.toString(fmt);
+        return dateTimeString;
     }
 }
