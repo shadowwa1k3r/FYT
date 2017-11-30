@@ -24,7 +24,8 @@
         <activity android:name=".MainActivity"
             >
         </activity>
-        <activity android:name=".MainPage">
+        <activity android:name=".MainPage"
+            android:windowSoftInputMode="adjustPan">
         </activity>
     </application>
 

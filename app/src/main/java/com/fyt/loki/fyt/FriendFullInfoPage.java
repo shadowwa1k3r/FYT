@@ -25,12 +25,11 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class FriendFullInfoPage extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
+
     private ProfileInterface profileInterface;
     private String mToken;
     private String mUserName;
@@ -52,7 +51,7 @@ public class FriendFullInfoPage extends Fragment {
         // Required empty public constructor
     }
 
-    // TODO: Rename and change types and number of parameters
+
     public static FriendFullInfoPage newInstance(String token, String userName) {
         FriendFullInfoPage fragment = new FriendFullInfoPage();
         Bundle args = new Bundle();

@@ -5,6 +5,6 @@ package com.fyt.loki.fyt;
  */
 
 public class commentBody {
-    int post_id;
+    int post;
     String text;
 }

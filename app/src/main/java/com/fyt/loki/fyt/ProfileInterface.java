@@ -31,5 +31,7 @@ public interface ProfileInterface {
     Call<List<CommentModel>> getComment(@Header("Authorization")String token,@Query("post_id") int post_id);
     @POST("add-like/")
     Call<likeresponse> like(@Header("Authorization")String token,@Body likebody likebody);
+    @POST("create/comment/")
+    Call<commentResponse> comment(@Header("Authorization")String token, @Body commentBody commentBody);
 
 }

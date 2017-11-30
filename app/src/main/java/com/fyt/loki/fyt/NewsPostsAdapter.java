@@ -35,12 +35,13 @@ public class NewsPostsAdapter extends RecyclerView.Adapter<NewsPostsAdapter.NFVH
     private ArrayList<NewsFeedItemType> mData;
     private Context mContext;
     private String BASE_URL;
-    private String token;
+    private String token,username;
 
 
 
-    NewsPostsAdapter(Context context, ArrayList data,String token){
+    NewsPostsAdapter(Context context, ArrayList data,String token,String username){
         this.mData=data;
+        this.username=username;
         this.token=token;
         this.mContext=context;
     }
@@ -159,7 +160,7 @@ public class NewsPostsAdapter extends RecyclerView.Adapter<NewsPostsAdapter.NFVH
             @Override
             public void onClick(View v) {
                 AppCompatActivity activity =(AppCompatActivity)mContext;
-                activity.getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enterfromright,R.anim.exittoleft,R.anim.enterfromleft,R.anim.exittoright).replace(R.id.contentContainer,CommentPage.newInstance(currentItem.getTarget_id(),token)).addToBackStack(null).commit();
+                activity.getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enterfromright,R.anim.exittoleft,R.anim.enterfromleft,R.anim.exittoright).replace(R.id.contentContainer,CommentPage.newInstance(currentItem.getTarget_id(),token,username)).addToBackStack(null).commit();
             }
         });
         Retrofit retrofit = new Retrofit.Builder()

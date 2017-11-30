@@ -3,28 +3,68 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
+             android:fitsSystemWindows="true"
              tools:context="com.fyt.loki.fyt.CommentPage">
 
     <!-- TODO: Update blank fragment layout -->
 
-    <LinearLayout
+    <RelativeLayout
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/rl"
         android:orientation="vertical">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
             android:background="?attr/colorPrimary"
+
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
             app:title="Comments"/>
+
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/commentsRV"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
-    </LinearLayout>
+            android:layout_above="@+id/form"
+            android:layout_below="@+id/toolbar3"/>
+
+
+        <LinearLayout
+            android:id="@+id/form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:background="#91f1f1f1"
+            android:orientation="horizontal">
+
+
+            <EditText
+                android:id="@+id/CommentEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignTop="@+id/button1"
+                android:layout_toLeftOf="@+id/sendMessageButton"
+                android:layout_weight="0.72"
+                android:ems="10"
+                android:maxHeight="80dp"/>
+
+            <ImageButton
+                android:id="@+id/sendComment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/send_button"
+                android:text="d"/>
+        </LinearLayout>
+    </RelativeLayout>
 </FrameLayout>

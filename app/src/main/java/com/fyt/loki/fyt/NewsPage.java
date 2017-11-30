@@ -110,7 +110,7 @@ public class NewsPage extends Fragment {
 
 
 
-                            mNewsPostsAdapter = new NewsPostsAdapter(getActivity(),mDataset,mToken);
+                            mNewsPostsAdapter = new NewsPostsAdapter(getActivity(),mDataset,mToken,mUserName);
 
                             mNewsPostsAdapter.notifyDataSetChanged();
 
