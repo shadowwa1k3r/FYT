@@ -19,6 +19,7 @@ import org.joda.time.format.ISODateTimeFormat;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -107,11 +108,11 @@ public class CommentPage extends Fragment {
                     mDataset.clear();
                     for (int i = 0; i <response.body().size() ; i++) {
 
-                        mDataset.add(new CommentType(response.body().get(i).author.avatar,response.body().get(i).author.username,response.body().get(i).text,response.body().get(i).created));
+                        mDataset.add(new CommentType(response.body().get(i).author.avatar,response.body().get(i).author.username,response.body().get(i).text,response.body().get(i).created,response.body().get(i).id));
 
                     }
                     //Toast.makeText(getContext(),response.body().get(0).text,Toast.LENGTH_LONG).show();
-                    mCommentAdapter = new CommentAdapter(getActivity(),mDataset);
+                    mCommentAdapter = new CommentAdapter(getActivity(),mDataset,token);
                     mCommentAdapter.notifyDataSetChanged();
                     mRecyclerView.setAdapter(mCommentAdapter);
                 }
@@ -147,8 +148,9 @@ public class CommentPage extends Fragment {
                     public void onResponse(Call<commentResponse> call, Response<commentResponse> response) {
                         if(response.isSuccessful())
                         {
+                            Random random=new Random();
                             DateTime dt=new DateTime(DateTimeZone.UTC);
-                            mDataset.add(new CommentType(avatar,username,body.text,jodaDateTimeToIsoString(dt)));
+                            mDataset.add(new CommentType(avatar,username,body.text,jodaDateTimeToIsoString(dt), random.nextInt(10000000)));
                             mCommentAdapter.notifyDataSetChanged();
                             commentText.setText("");
                             mLayoutManager.scrollToPosition(mDataset.size()-1);

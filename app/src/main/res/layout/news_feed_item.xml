@@ -133,6 +133,7 @@
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
             android:layout_weight="1"
+            android:autoLink="web|email"
             android:text="TextView"
             android:textSize="18sp"/>
 

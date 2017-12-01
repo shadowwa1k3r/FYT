@@ -46,6 +46,8 @@
                     <TextView
                         android:id="@+id/commentTXT"
 
+                        android:autoLink="web|email"
+
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="comment"
@@ -88,16 +90,57 @@
                     </LinearLayout>
 
                     <net.cachapa.expandablelayout.ExpandableLayout
+                        android:id="@+id/repliesLay"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         app:el_duration="1000"
                         app:el_expanded="false"
                         app:el_parallax="0.5">
 
-                        <android.support.v7.widget.RecyclerView
-                            android:id="@+id/CommentReplyRV"
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"/>
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <android.support.v7.widget.RecyclerView
+                                android:id="@+id/CommentReplyRV"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"/>
+
+                            <LinearLayout
+                                android:id="@+id/form"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_alignParentBottom="true"
+                                android:layout_alignParentLeft="true"
+                                android:background="#91f1f1f1"
+                                android:orientation="horizontal">
+
+
+                                <EditText
+                                    android:id="@+id/replyEditText"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_alignTop="@+id/button1"
+                                    android:layout_toLeftOf="@+id/sendMessageButton"
+                                    android:layout_weight="0.72"
+                                    android:ems="10"
+                                    android:maxHeight="80dp"/>
+
+                                <ImageButton
+                                    android:id="@+id/sendReply"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_alignParentRight="true"
+                                    android:background="@drawable/send_button"
+                                    android:text="d"/>
+                            </LinearLayout>
+
+                        </LinearLayout>
+
                     </net.cachapa.expandablelayout.ExpandableLayout>
                 </LinearLayout>
             </LinearLayout>

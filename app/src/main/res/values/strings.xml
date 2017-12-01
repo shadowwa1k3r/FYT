@@ -7,7 +7,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="BASE_URL">http://192.168.1.129:8000</string>
+    <string name="BASE_URL">http://192.168.1.107:8000</string>
     <string name="BASE_URL2">https://findyourtraining.com</string>
 
     <string name="facebook_app_id">1963632580549769</string>
