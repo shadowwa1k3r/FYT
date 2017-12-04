@@ -24,7 +24,6 @@ import org.joda.time.format.ISODateTimeFormat;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
@@ -97,6 +96,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CHolder>
                         public void onResponse(Call<List<CommentModel>> call, Response<List<CommentModel>> response) {
                             if(response.isSuccessful())
                             {
+                                mDataset.clear();
                                 for (int i = 0; i <response.body().size() ; i++) {
 
                                     mDataset.add(new CommentType(response.body().get(i).author.avatar,response.body().get(i).author.username,response.body().get(i).text,response.body().get(i).created,response.body().get(i).id));
@@ -124,15 +124,15 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CHolder>
                         public void onClick(View v) {
                             body.text=holder.repEdit.getText().toString();
                             body.comment=currentItem.getCm_id();
-                            Call<commentResponse> reply=profileInterface.reply(" Token "+token,body);
+                            final Call<commentResponse> reply=profileInterface.reply(" Token "+token,body);
                             reply.enqueue(new Callback<commentResponse>() {
                                 @Override
                                 public void onResponse(Call<commentResponse> call, Response<commentResponse> response) {
                                     if(response.isSuccessful())
                                     {
-                                        Random random=new Random();
+
                                         DateTime dt=new DateTime(DateTimeZone.UTC);
-                                        mDataset.add(new CommentType(currentItem.getAva(),currentItem.getUsername(),body.text,jodaDateTimeToIsoString(dt),random.nextInt(1000000)));
+                                        mDataset.add(new CommentType(currentItem.getAva(),currentItem.getUsername(),body.text,jodaDateTimeToIsoString(dt),response.body().id));
                                         holder.mCommentAdapter.notifyDataSetChanged();
                                         holder.repEdit.setText("");
                                         holder.mLayoutManager.scrollToPosition(mDataset.size()-1);

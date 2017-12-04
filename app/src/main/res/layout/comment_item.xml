@@ -93,7 +93,7 @@
                         android:id="@+id/repliesLay"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        app:el_duration="1000"
+                        app:el_duration="100"
                         app:el_expanded="false"
                         app:el_parallax="0.5">
 
@@ -113,6 +113,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_alignParentBottom="true"
                                 android:layout_alignParentLeft="true"
+                                android:layout_margin="5dp"
                                 android:background="#91f1f1f1"
                                 android:orientation="horizontal">
 

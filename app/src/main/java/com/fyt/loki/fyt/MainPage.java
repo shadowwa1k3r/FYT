@@ -1,5 +1,6 @@
 package com.fyt.loki.fyt;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
@@ -92,6 +93,16 @@ public class MainPage extends AppCompatActivity {
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                     .replace(R.id.contentContainer, fragment)
                     .commit();
+
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+      /*  for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+            fragment.onActivityResult(requestCode, resultCode, data);
+        }*/
+        Toast.makeText(getApplicationContext(),"activity",Toast.LENGTH_LONG).show();
+
 
     }
 }

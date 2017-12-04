@@ -16,7 +16,7 @@ public class PostItemModel {
     @SerializedName("context")
     public String context;
     @SerializedName("owner")
-    public String owner;
+    public Owner owner;
     @SerializedName("avatar")
     public String avatar;
     @SerializedName("images")
@@ -24,11 +24,38 @@ public class PostItemModel {
     @SerializedName("videos")
     public List<Videos> videos;
     @SerializedName("likes")
-    public String likes;
+    public List<String> likes;
+    @SerializedName("likes_count")
+    public String likes_count;
     @SerializedName("comments")
     public String comments;
     @SerializedName("created")
     public String created;
+
+    public static class Owner {
+        @SerializedName("id")
+        public int id;
+        @SerializedName("username")
+        public String username;
+        @SerializedName("first_name")
+        public String first_name;
+        @SerializedName("last_name")
+        public String last_name;
+        @SerializedName("full_name")
+        public String full_name;
+        @SerializedName("email")
+        public String email;
+        @SerializedName("country")
+        public String country;
+        @SerializedName("city")
+        public String city;
+        @SerializedName("phone")
+        public String phone;
+        @SerializedName("address")
+        public String address;
+        @SerializedName("avatar")
+        public String avatar;
+    }
 
     public static class Images {
         @SerializedName("id")
@@ -37,30 +64,6 @@ public class PostItemModel {
         public String photo;
         @SerializedName("created")
         public String created;
-
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
-
-        public String getPhoto() {
-            return photo;
-        }
-
-        public void setPhoto(String photo) {
-            this.photo = photo;
-        }
-
-        public String getCreated() {
-            return created;
-        }
-
-        public void setCreated(String created) {
-            this.created = created;
-        }
     }
 
     public static class Videos {
@@ -72,109 +75,5 @@ public class PostItemModel {
         public String thumbnail;
         @SerializedName("created")
         public String created;
-
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
-
-        public String getVideo() {
-            return video;
-        }
-
-        public void setVideo(String video) {
-            this.video = video;
-        }
-
-        public String getThumbnail() {
-            return thumbnail;
-        }
-
-        public void setThumbnail(String thumbnail) {
-            this.thumbnail = thumbnail;
-        }
-
-        public String getCreated() {
-            return created;
-        }
-
-        public void setCreated(String created) {
-            this.created = created;
-        }
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getContext() {
-        return context;
-    }
-
-    public void setContext(String context) {
-        this.context = context;
-    }
-
-    public String getOwner() {
-        return owner;
-    }
-
-    public void setOwner(String owner) {
-        this.owner = owner;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    public List<Images> getImages() {
-        return images;
-    }
-
-    public void setImages(List<Images> images) {
-        this.images = images;
-    }
-
-    public List<Videos> getVideos() {
-        return videos;
-    }
-
-    public void setVideos(List<Videos> videos) {
-        this.videos = videos;
-    }
-
-    public String getLikes() {
-        return likes;
-    }
-
-    public void setLikes(String likes) {
-        this.likes = likes;
-    }
-
-    public String getComments() {
-        return comments;
-    }
-
-    public void setComments(String comments) {
-        this.comments = comments;
-    }
-
-    public String getCreated() {
-        return created;
-    }
-
-    public void setCreated(String created) {
-        this.created = created;
     }
 }

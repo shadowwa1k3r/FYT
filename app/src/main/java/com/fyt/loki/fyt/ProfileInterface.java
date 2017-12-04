@@ -2,11 +2,15 @@ package com.fyt.loki.fyt;
 
 import java.util.List;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -37,5 +41,11 @@ public interface ProfileInterface {
     Call<List<CommentModel>> getreply(@Header("Authorization")String token,@Query("comment_id") int comment_id);
     @POST("create/reply/")
     Call<commentResponse> reply(@Header("Authorization")String token, @Body CommentReplyBody commentBody);
+    @POST("create/post/")
+    Call<createPostResponse> post(@Header("Authorization")String token,@Body createPostBody createPostBody);
+
+    @Multipart
+    @POST("create/post/")
+    Call<createPostResponse> postimage(@Header("Authorization")String token,@Part List<MultipartBody.Part> image, @Part("name")RequestBody name,@Part ("context")RequestBody body2);
 
 }

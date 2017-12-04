@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 
 import org.joda.time.DateTime;
@@ -79,6 +80,7 @@ public class CommentPage extends Fragment {
                              Bundle savedInstanceState) {
         View Cview=inflater.inflate(R.layout.fragment_comment_page, container, false);
 
+
         BASE_URL= getContext().getString(R.string.BASE_URL);
         BASE_URL_API =BASE_URL+"/api/";
 
@@ -115,6 +117,8 @@ public class CommentPage extends Fragment {
                     mCommentAdapter = new CommentAdapter(getActivity(),mDataset,token);
                     mCommentAdapter.notifyDataSetChanged();
                     mRecyclerView.setAdapter(mCommentAdapter);
+                    FrameLayout fl=(FrameLayout)getActivity().findViewById(R.id.mainFrame);
+                    fl.setVisibility(View.INVISIBLE);
                 }
             }
 
@@ -150,7 +154,7 @@ public class CommentPage extends Fragment {
                         {
                             Random random=new Random();
                             DateTime dt=new DateTime(DateTimeZone.UTC);
-                            mDataset.add(new CommentType(avatar,username,body.text,jodaDateTimeToIsoString(dt), random.nextInt(10000000)));
+                            mDataset.add(new CommentType(avatar,username,body.text,jodaDateTimeToIsoString(dt), response.body().id));
                             mCommentAdapter.notifyDataSetChanged();
                             commentText.setText("");
                             mLayoutManager.scrollToPosition(mDataset.size()-1);
@@ -183,6 +187,13 @@ public class CommentPage extends Fragment {
     public static String jodaDateTimeToIsoString(DateTime dateTime) {
         String dateTimeString = ISO_DATE_TIME_FORMATTER.print(dateTime);
         return dateTimeString;
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        FrameLayout fl=(FrameLayout)getActivity().findViewById(R.id.mainFrame);
+        fl.setVisibility(View.VISIBLE);
     }
 
 

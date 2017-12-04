@@ -1,39 +1,85 @@
 package com.fyt.loki.fyt;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.DocumentsContract;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 
+import com.kbeanie.multipicker.api.ImagePicker;
+import com.kbeanie.multipicker.api.Picker;
+import com.kbeanie.multipicker.api.callbacks.ImagePickerCallback;
+import com.kbeanie.multipicker.api.entity.ChosenImage;
+
+import net.cachapa.expandablelayout.ExpandableLayout;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import dmax.dialog.SpotsDialog;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+
 public class NewsPage extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    List<MultipartBody.Part> parts=new ArrayList<MultipartBody.Part>();
+    File file;
+    RequestBody reqFile;
+    RequestBody name,context;
+
+
+    ImagePicker imagePicker;
+    ImagePickerCallback imgpickcallback;
 
     private ProfileInterface profileInterface;
     private String mToken;
     private String mUserName;
     private String BASE_URL;
-    private  String BASE_URL_API;
+    private String BASE_URL_API;
+    private ImageButton sendpost;
+    private ImageView add;
+    private EditText posttext;
+    private Button include;
+    private ExpandableLayout media;
 
-    private RecyclerView mRecyclerView;
-    private RecyclerView.LayoutManager mLayoutManager;
+    private RecyclerView mRecyclerView,mediaRV;
+    private RecyclerView.LayoutManager mLayoutManager,mediaLM;
     private NewsPostsAdapter mNewsPostsAdapter;
+    private MediaAdapter mMediaAdapter;
+    private String[] extension={"jpg","jpeg","png","gif","mp4","avi","3gp","mkv"};
     private ArrayList<NewsFeedItemType> mDataset;
+    private ArrayList<String> mediaset;
+
+    private static final int PICK=1;
+   // DialogProperties properties;
+    //FilePickerDialog dialog;
+
 
 
 
@@ -55,6 +101,23 @@ public class NewsPage extends Fragment {
             mUserName = getArguments().getString(ARG_PARAM2);
         }
     }
+  /*  @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case FilePickerDialog.EXTERNAL_READ_PERMISSION_GRANT: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if(dialog!=null)
+                    {   //Show dialog if the read permission has been granted.
+                        dialog.show();
+                    }
+                }
+                else {
+                    //Permission has not been granted. Notify the user.
+                    Toast.makeText(getContext(),"Permission is Required for getting list of files",Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    }*/
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -66,6 +129,25 @@ public class NewsPage extends Fragment {
         fl.setVisibility(View.VISIBLE);
 
 
+
+        sendpost=(ImageButton)NewsPage.findViewById(R.id.sendpost);
+        posttext=(EditText)NewsPage.findViewById(R.id.posttxt);
+        include=(Button)NewsPage.findViewById(R.id.photo_video);
+        media=(ExpandableLayout)NewsPage.findViewById(R.id.mediaexpand);
+        add=(ImageView)NewsPage.findViewById(R.id.media_add);
+/*
+        properties = new DialogProperties();
+
+        properties.selection_mode= DialogConfigs.MULTI_MODE;
+        properties.selection_type=DialogConfigs.FILE_SELECT;
+        properties.root=new File(DialogConfigs.DEFAULT_DIR);
+        properties.error_dir = new File(DialogConfigs.DEFAULT_DIR);
+        properties.offset = new File(DialogConfigs.DEFAULT_DIR);
+        properties.extensions=extension;
+        dialog = new FilePickerDialog(getContext(),properties);
+        dialog.setTitle("Select Photo");
+*/
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL_API)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -73,12 +155,17 @@ public class NewsPage extends Fragment {
         profileInterface = retrofit.create(ProfileInterface.class);
 
         mRecyclerView = (RecyclerView)NewsPage.findViewById(R.id.newsRV);
+        mediaRV = (RecyclerView)NewsPage.findViewById(R.id.mediacontainer);
+        mediaRV.setHasFixedSize(true);
         mRecyclerView.setHasFixedSize(true);
 
         mLayoutManager = new LinearLayoutManager(getActivity());
+        mediaLM = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,true);
+        mediaRV.setLayoutManager(mediaLM);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         mDataset = new ArrayList<NewsFeedItemType>();
+        mediaset = new ArrayList<String>();
 
         Call<ProfileModel> mprofileInfo = profileInterface.profileInfo(" Token "+mToken,mUserName);
         mprofileInfo.enqueue(new Callback<ProfileModel>() {
@@ -98,17 +185,10 @@ public class NewsPage extends Fragment {
 
                             for (int i = 0; i <response.body().size(); i++) {
 
-                                mDataset.add(new NewsFeedItemType(response.body().get(i).getTarget().getAvatar(),response.body().get(i).getTarget().getOwner(),response.body().get(i).target.getCreated(),response.body().get(i).target.getContext(),
-                                        response.body().get(i).target.getLikes_count(),response.body().get(i).target.getComments(),response.body().get(i).target.getImages(),response.body().get(i).target.getVideos(),response.body().get(i).getTarget_id(),response.body().get(i).target.getLikes()));
-
-
-
-
+                                mDataset.add(new NewsFeedItemType(response.body().get(i).target.avatar,response.body().get(i).target.owner.username,response.body().get(i).target.created,response.body().get(i).target.context,
+                                        response.body().get(i).target.likes_count,response.body().get(i).target.comments,response.body().get(i).target.images,response.body().get(i).target.videos,response.body().get(i).target_id,response.body().get(i).target.likes));
 
                             }
-
-
-
 
                             mNewsPostsAdapter = new NewsPostsAdapter(getActivity(),mDataset,mToken,mUserName);
 
@@ -131,7 +211,152 @@ public class NewsPage extends Fragment {
             }
         });
 
+        sendpost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final AlertDialog dial=new SpotsDialog(getContext());
+                dial.setTitle("Uploading Media");
+                dial.show();
+                context = RequestBody.create(MediaType.parse("text/plain"),posttext.getText().toString());
+                final retrofit2.Call<createPostResponse> req = profileInterface.postimage(" Token "+mToken,parts,name,context);
+                req.enqueue(new Callback<createPostResponse>() {
+                    @Override
+                    public void onResponse(Call<createPostResponse> call, Response<createPostResponse> response) {
+
+                        if (response.isSuccessful()){
+
+                            mDataset.add(0,new NewsFeedItemType(response.body().owner.avatar,response.body().owner.username,response.body().created,response.body().context,response.body().likes_count,response.body().comments,
+                                    response.body().images,response.body().videos,response.body().id,response.body().likes));
+                            mNewsPostsAdapter.notifyItemInserted(0);
+                            mRecyclerView.smoothScrollToPosition(0);
+
+                            dial.dismiss();
+                        }
+                        else{ dial.dismiss();
+                        include.setText("resperror");}
+                    }
+
+
+                    @Override
+                    public void onFailure(Call<createPostResponse> call, Throwable t) {
+                        t.printStackTrace();
+                        include.setText(t.toString());
+                        dial.dismiss();
+
+                    }
+                });
+            }
+        });
+        include.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (media.isExpanded()){
+                    media.collapse();
+                }
+                else {
+                    media.expand();
+                }
+            }
+        });
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //dialog.show();
+                imagePicker= new ImagePicker(com.fyt.loki.fyt.NewsPage.this);
+              imgpickcallback = new ImagePickerCallback() {
+                    @Override
+                    public void onImagesChosen(List<ChosenImage> list) {
+                       // include.setText(list.get(0).getOriginalPath());
+                        for (int i = 0; i <list.size() ; i++) {
+
+                            file = new File(list.get(i).getOriginalPath());
+                            Log.e("FilePick", "onImagesChosen: "+list.get(i).getOriginalPath() );
+                            Log.e("FilePick", "onImagesChosen: "+list.get(i).getDisplayName() );
+                            Log.e("FilePick", "onImagesChosen: "+file );
+                            Log.e("FilePick", "onImagesChosen: "+file.getName() );
+
+                            String wholeID = DocumentsContract.getDocumentId(Uri.parse(list.get(i).getOriginalPath()));
+
+                            String id = wholeID.split(":")[1];
+
+                            String[] column = {MediaStore.Images.Media.DATA};
+
+                            String sel=MediaStore.Images.Media._ID + "=?";
+
+                            Cursor cursor = getActivity().getContentResolver()
+                                    .query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,column,sel,new String[]{id},null);
+
+                            String filepathh="";
+                            int columnIndex = cursor.getColumnIndex(column[0]);
+
+                            if(cursor.moveToFirst()){
+                                filepathh=cursor.getString(columnIndex);
+                            }
+                            cursor.close();
+                            Log.e("FilePick", "onImagesChosen: "+filepathh );
+                            file=new File(filepathh);
+
+
+                            reqFile= RequestBody.create(MediaType.parse("file/*"),file);
+                            parts.add(MultipartBody.Part.createFormData("file",file.getName(),reqFile));
+                            mediaset.add(list.get(i).getOriginalPath());include.setText(list.get(i).getOriginalPath());
+
+                        }
+
+                        name=RequestBody.create(MediaType.parse("text/plain"),"text");
+                        mMediaAdapter = new MediaAdapter(getActivity(),mediaset);
+                        mMediaAdapter.notifyDataSetChanged();
+
+                        mediaRV.setAdapter(mMediaAdapter);
+                        mediaRV.smoothScrollToPosition(0);
+                    }
+
+                    @Override
+                    public void onError(String s) {
+
+
+                    }
+                };
+                imagePicker.setImagePickerCallback(imgpickcallback);
+
+                imagePicker.pickImage();
+
+
+            }
+        });
+
+        requestPermissions(new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},10);
+
+
+
+
+
+
         return NewsPage;
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode,int resultCode,Intent data){
+
+        if(requestCode == Picker.PICK_IMAGE_DEVICE){
+            if(resultCode==Activity.RESULT_OK){
+                if(imagePicker==null){
+                    imagePicker=new ImagePicker(NewsPage.this);
+                    imagePicker.setImagePickerCallback(imgpickcallback);
+                }
+                imagePicker.submit(data);
+
+
+            }
+           /* for (int i = 0; i <medialist.size() ; i++) {
+
+            }
+            */
+
+
+
+        }
     }
 
 }

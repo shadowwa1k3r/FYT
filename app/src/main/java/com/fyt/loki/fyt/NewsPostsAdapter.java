@@ -86,7 +86,7 @@ public class NewsPostsAdapter extends RecyclerView.Adapter<NewsPostsAdapter.NFVH
 
         }
         for (int i = 0; i <currentItem.getVideos().size() ; i++) {
-            post_tmb[i] = BASE_URL+currentItem.getVideos().get(i).getThumbnail();
+            post_tmb[i] = BASE_URL+currentItem.getVideos().get(i).thumbnail;
 
         }
 
@@ -166,7 +166,8 @@ public class NewsPostsAdapter extends RecyclerView.Adapter<NewsPostsAdapter.NFVH
             @Override
             public void onClick(View v) {
                 AppCompatActivity activity =(AppCompatActivity)mContext;
-                activity.getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enterfromright,R.anim.exittoleft,R.anim.enterfromleft,R.anim.exittoright).replace(R.id.contentContainer,CommentPage.newInstance(currentItem.getTarget_id(),token,username)).addToBackStack(null).commit();
+
+                activity.getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enterfromright,R.anim.exittoleft,R.anim.enterfromleft,R.anim.exittoright).replace(R.id.videocontainer,CommentPage.newInstance(currentItem.getTarget_id(),token,username)).addToBackStack(null).commit();
             }
         });
         Retrofit retrofit = new Retrofit.Builder()
@@ -187,13 +188,15 @@ public class NewsPostsAdapter extends RecyclerView.Adapter<NewsPostsAdapter.NFVH
                 if (!currentItem.isLiked()) {
                     holder.like.setClickable(false);
                     holder.like.setCompoundDrawablesWithIntrinsicBounds(R.drawable.like_icon_full, 0, 0, 0);
+                    holder.likeCount.setText(String.valueOf(Integer.parseInt(holder.likeCount.getText().toString())+1));
 
 
-                    call.enqueue(new Callback<likeresponse>() {
+                    call.clone().enqueue(new Callback<likeresponse>() {
                         @Override
                         public void onResponse(Call<likeresponse> call, Response<likeresponse> response) {
                             if (response.isSuccessful()) {
                                 currentItem.setLiked(!currentItem.isLiked());
+
                                 holder.like.setClickable(true);
                             } else {
                                 holder.like.setClickable(true);
@@ -216,12 +219,14 @@ public class NewsPostsAdapter extends RecyclerView.Adapter<NewsPostsAdapter.NFVH
                 else {
                     holder.like.setClickable(false);
                     holder.like.setCompoundDrawablesWithIntrinsicBounds(R.drawable.like_icon, 0, 0, 0);
+                    holder.likeCount.setText(String.valueOf(Integer.parseInt(holder.likeCount.getText().toString())-1));
 
-                    call.enqueue(new Callback<likeresponse>() {
+                    call.clone().enqueue(new Callback<likeresponse>() {
                         @Override
                         public void onResponse(Call<likeresponse> call, Response<likeresponse> response) {
                             if(response.isSuccessful()){
                                 currentItem.setLiked(!currentItem.isLiked());
+
                                 holder.like.setClickable(true);
                             }
                             else {

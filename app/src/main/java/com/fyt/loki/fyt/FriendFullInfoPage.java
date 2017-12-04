@@ -140,8 +140,8 @@ public class FriendFullInfoPage extends Fragment {
                                 mDataset_posts.clear();
 
                                 for (int i = 0; i <response.body().size() ; i++) {
-                                    mDataset_posts.add(new PostItemType(ava,mUserName,response.body().get(i).getCreated(),response.body().get(i).getContext(),
-                                            response.body().get(i).getLikes(),response.body().get(i).getComments(),response.body().get(i).getImages(),response.body().get(i).getVideos()));
+                                    mDataset_posts.add(new PostItemType(ava,mUserName,response.body().get(i).created,response.body().get(i).context,
+                                            response.body().get(i).likes_count,response.body().get(i).comments,response.body().get(i).images,response.body().get(i).videos));
                                    // Toast.makeText(getContext(),i,Toast.LENGTH_SHORT).show();
                                 }
                                 mAdapter_posts=new ProfilePostsAdapter(getActivity(),mDataset_posts);

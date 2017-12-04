@@ -6,4 +6,5 @@ package com.fyt.loki.fyt;
 
 public class commentResponse {
     String status;
+    int id;
 }

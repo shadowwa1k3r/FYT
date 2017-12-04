@@ -68,7 +68,7 @@ public class ProfilePostsAdapter extends RecyclerView.Adapter<ProfilePostsAdapte
 
         }
         for (int i = 0; i <currentItem.getVideos().size() ; i++) {
-            post_tmb[i] = BASE_URL+currentItem.getVideos().get(i).getThumbnail();
+            post_tmb[i] = BASE_URL+currentItem.getVideos().get(i).thumbnail;
 
         }
         if (currentItem.getVideos().size()==0&&currentItem.getImages().size()==0)
