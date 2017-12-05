@@ -18,9 +18,13 @@
         <!-- Support library compatibility -->
         <item name="windowActionBarOverlay">true</item>
 
-
-
     </style>
+
+    <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <item name="android:editTextColor">#000000</item>
+        <item name="android:textColorHint">#707070</item>
+    </style>
+
     <style name="buttonvk" parent="Widget.AppCompat.Button.Colored">
         <item name="android:colorButtonNormal">#1e88e5</item>
 

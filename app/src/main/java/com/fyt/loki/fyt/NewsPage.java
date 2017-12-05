@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.DocumentsContract;
@@ -11,6 +12,7 @@ import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,18 +22,24 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.kbeanie.multipicker.api.ImagePicker;
+import com.bumptech.glide.Glide;
+import com.kbeanie.multipicker.api.FilePicker;
 import com.kbeanie.multipicker.api.Picker;
-import com.kbeanie.multipicker.api.callbacks.ImagePickerCallback;
-import com.kbeanie.multipicker.api.entity.ChosenImage;
+import com.kbeanie.multipicker.api.callbacks.FilePickerCallback;
+import com.kbeanie.multipicker.api.entity.ChosenFile;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import dmax.dialog.SpotsDialog;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -54,8 +62,10 @@ public class NewsPage extends Fragment {
     RequestBody name,context;
 
 
-    ImagePicker imagePicker;
-    ImagePickerCallback imgpickcallback;
+
+
+    private FilePicker mFilePicker;
+    private FilePickerCallback mFilePickerCallback;
 
     private ProfileInterface profileInterface;
     private String mToken;
@@ -70,13 +80,40 @@ public class NewsPage extends Fragment {
 
     private RecyclerView mRecyclerView,mediaRV;
     private RecyclerView.LayoutManager mLayoutManager,mediaLM;
-    private NewsPostsAdapter mNewsPostsAdapter;
+     NewsPostsAdapter mNewsPostsAdapter;
     private MediaAdapter mMediaAdapter;
     private String[] extension={"jpg","jpeg","png","gif","mp4","avi","3gp","mkv"};
     private ArrayList<NewsFeedItemType> mDataset;
     private ArrayList<String> mediaset;
 
-    private static final int PICK=1;
+    private TextView searchtext;
+    SearchView searchview;
+    private CircleImageView searchava;
+
+    static String[] IMAGE_EXTENSIONS = {
+            "jpg",
+            "jpeg",
+            "bmp",
+            "png",
+            "gif",
+            "tiff",
+            "webp",
+            "ico"
+    };
+
+    static String[] VIDEO_EXTENSIONS = {
+            "avi",
+            "asf",
+            "mov",
+            "flv",
+            "swf",
+            "mpg",
+            "mpeg",
+            "mp4",
+            "wmv",
+    };
+    private static Set<String> SET_IMAGE_EXTENSIONS = new HashSet<String>(Arrays.asList(IMAGE_EXTENSIONS));
+    private static Set<String> SET_VIDEO_EXTENSIONS = new HashSet<String>(Arrays.asList(VIDEO_EXTENSIONS));
    // DialogProperties properties;
     //FilePickerDialog dialog;
 
@@ -127,6 +164,14 @@ public class NewsPage extends Fragment {
         BASE_URL_API =BASE_URL+"/api/";
         FrameLayout fl=(FrameLayout)getActivity().findViewById(R.id.mainFrame);
         fl.setVisibility(View.VISIBLE);
+        searchview=(SearchView)NewsPage.findViewById(R.id.search);
+
+        searchtext=(TextView)searchview.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+        searchtext.setTextColor(Color.BLACK);
+        searchtext.setHintTextColor(Color.GRAY);
+        searchtext.setTextSize(14);
+        searchava=(CircleImageView)NewsPage.findViewById(R.id.searchava);
+
 
 
 
@@ -166,12 +211,14 @@ public class NewsPage extends Fragment {
 
         mDataset = new ArrayList<NewsFeedItemType>();
         mediaset = new ArrayList<String>();
+        mMediaAdapter = new MediaAdapter(getActivity(),mediaset);
 
         Call<ProfileModel> mprofileInfo = profileInterface.profileInfo(" Token "+mToken,mUserName);
         mprofileInfo.enqueue(new Callback<ProfileModel>() {
             @Override
             public void onResponse(Call<ProfileModel> call, Response<ProfileModel> response) {
                 final String ava = BASE_URL + response.body().getAvatar();
+                Glide.with(getContext()).load(ava).asBitmap().into(searchava);
                 final String usnm = response.body().getUsername();
                 final Call<List<NewsFeedModel>> getnews = profileInterface.getNews(" Token "+mToken);
                 getnews.enqueue(new Callback<List<NewsFeedModel>>() {
@@ -230,17 +277,22 @@ public class NewsPage extends Fragment {
                             mNewsPostsAdapter.notifyItemInserted(0);
                             mRecyclerView.smoothScrollToPosition(0);
 
+                            mediaset.clear();
+
+                            mMediaAdapter.notifyDataSetChanged();
+                            media.collapse();
+                            posttext.setText("");
                             dial.dismiss();
                         }
                         else{ dial.dismiss();
-                        include.setText("resperror");}
+                       /* include.setText("resperror");*/}
                     }
 
 
                     @Override
                     public void onFailure(Call<createPostResponse> call, Throwable t) {
                         t.printStackTrace();
-                        include.setText(t.toString());
+                        //include.setText(t.toString());
                         dial.dismiss();
 
                     }
@@ -261,19 +313,21 @@ public class NewsPage extends Fragment {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //dialog.show();
-                imagePicker= new ImagePicker(com.fyt.loki.fyt.NewsPage.this);
-              imgpickcallback = new ImagePickerCallback() {
+
+
+                mFilePicker = new FilePicker(com.fyt.loki.fyt.NewsPage.this);
+                Log.e("FilePick", "onClick: "+mFilePicker.toString() );
+                mFilePickerCallback = new FilePickerCallback() {
                     @Override
-                    public void onImagesChosen(List<ChosenImage> list) {
-                       // include.setText(list.get(0).getOriginalPath());
+                    public void onFilesChosen(List<ChosenFile> list) {
                         for (int i = 0; i <list.size() ; i++) {
 
                             file = new File(list.get(i).getOriginalPath());
-                            Log.e("FilePick", "onImagesChosen: "+list.get(i).getOriginalPath() );
-                            Log.e("FilePick", "onImagesChosen: "+list.get(i).getDisplayName() );
-                            Log.e("FilePick", "onImagesChosen: "+file );
-                            Log.e("FilePick", "onImagesChosen: "+file.getName() );
+
+                                Log.e("FilePick", "onImagesChosen: " + list.get(i).getOriginalPath());
+                                Log.e("FilePick", "onImagesChosen: " + list.get(i).getDisplayName());
+                                Log.e("FilePick", "onImagesChosenext: " + list.get(i).getOriginalPath().substring(list.get(i).getOriginalPath().length() - (list.get(i).getOriginalPath().length() - list.get(i).getOriginalPath().lastIndexOf(".") - 1)));
+                                Log.e("FilePick", "onImagesChosen: " + file.getName());
 
                             String wholeID = DocumentsContract.getDocumentId(Uri.parse(list.get(i).getOriginalPath()));
 
@@ -296,30 +350,36 @@ public class NewsPage extends Fragment {
                             Log.e("FilePick", "onImagesChosen: "+filepathh );
                             file=new File(filepathh);
 
+                            if (SET_IMAGE_EXTENSIONS.contains((filepathh.substring(filepathh.length() - (filepathh.length() - filepathh.lastIndexOf(".") - 1))).toLowerCase()) || SET_VIDEO_EXTENSIONS.contains((filepathh.substring(filepathh.length() - (filepathh.length() - filepathh.lastIndexOf(".") - 1))).toLowerCase())) {
 
-                            reqFile= RequestBody.create(MediaType.parse("file/*"),file);
-                            parts.add(MultipartBody.Part.createFormData("file",file.getName(),reqFile));
-                            mediaset.add(list.get(i).getOriginalPath());include.setText(list.get(i).getOriginalPath());
 
+                                reqFile = RequestBody.create(MediaType.parse("file/*"), file);
+                                parts.add(MultipartBody.Part.createFormData("file", file.getName(), reqFile));
+                                mediaset.add(list.get(i).getOriginalPath());
+                                //include.setText(list.get(i).getOriginalPath());
+
+
+                                name = RequestBody.create(MediaType.parse("text/plain"), "text");
+                                mMediaAdapter = new MediaAdapter(getActivity(), mediaset);
+                                mMediaAdapter.notifyDataSetChanged();
+
+                                mediaRV.setAdapter(mMediaAdapter);
+                                mediaRV.smoothScrollToPosition(mediaset.size() - 1);
+                            }
                         }
-
-                        name=RequestBody.create(MediaType.parse("text/plain"),"text");
-                        mMediaAdapter = new MediaAdapter(getActivity(),mediaset);
-                        mMediaAdapter.notifyDataSetChanged();
-
-                        mediaRV.setAdapter(mMediaAdapter);
-                        mediaRV.smoothScrollToPosition(0);
                     }
 
                     @Override
                     public void onError(String s) {
-
+                        Log.e("FilePick", "onError: "+s );
 
                     }
                 };
-                imagePicker.setImagePickerCallback(imgpickcallback);
+                mFilePicker.setFilePickerCallback(mFilePickerCallback);
+                mFilePicker.allowMultiple();
 
-                imagePicker.pickImage();
+
+                mFilePicker.pickFile();
 
 
             }
@@ -339,13 +399,13 @@ public class NewsPage extends Fragment {
     @Override
     public void onActivityResult(int requestCode,int resultCode,Intent data){
 
-        if(requestCode == Picker.PICK_IMAGE_DEVICE){
+        if(requestCode == Picker.PICK_FILE){
             if(resultCode==Activity.RESULT_OK){
-                if(imagePicker==null){
-                    imagePicker=new ImagePicker(NewsPage.this);
-                    imagePicker.setImagePickerCallback(imgpickcallback);
+                if(mFilePicker==null){
+                    mFilePicker=new FilePicker(NewsPage.this);
+                    mFilePicker.setFilePickerCallback(mFilePickerCallback);
                 }
-                imagePicker.submit(data);
+                mFilePicker.submit(data);
 
 
             }

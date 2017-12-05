@@ -114,7 +114,6 @@
                                 android:layout_alignParentBottom="true"
                                 android:layout_alignParentLeft="true"
                                 android:layout_margin="5dp"
-                                android:background="#91f1f1f1"
                                 android:orientation="horizontal">
 
 
