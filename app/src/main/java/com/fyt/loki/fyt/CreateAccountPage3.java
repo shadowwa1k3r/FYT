@@ -1,7 +1,11 @@
 package com.fyt.loki.fyt;
 
 import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -102,7 +106,7 @@ public class CreateAccountPage3 extends Fragment {
                             if(response.isSuccessful())
                             {
                                 if (response.code()==200){
-                               Toast.makeText(getContext(),"DOne",Toast.LENGTH_LONG).show();
+                             //  Toast.makeText(getContext(),"DOne",Toast.LENGTH_LONG).show();
 
                                     RegistrationBody body = new RegistrationBody();
                                     body.username=username;
@@ -138,8 +142,39 @@ public class CreateAccountPage3 extends Fragment {
 
                                         @Override
                                         public void onFailure(Call<RegistrationResponse> call, Throwable t) {
-                                            Toast.makeText(getContext(),"Connection Error",Toast.LENGTH_LONG).show();
+                                           // Toast.makeText(getContext(),"Connection Error",Toast.LENGTH_LONG).show();
                                             dialog.dismiss();
+                                            if(isOnline())
+                                            {
+                                                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                                                builder.setTitle("Error")
+                                                        .setMessage("Server is not reachable at this moment, please try again later.")
+                                                        .setIcon(R.drawable.warning)
+                                                        .setCancelable(false)
+                                                        .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                                            }
+                                                        });
+                                                AlertDialog alert = builder.create();
+                                                alert.show();
+                                            }
+                                            else {
+                                                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                                                builder.setTitle("Error")
+                                                        .setMessage("Network is not available, check your connection.")
+                                                        .setIcon(R.drawable.warning)
+                                                        .setCancelable(false)
+                                                        .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                                            }
+                                                        });
+                                                AlertDialog alert = builder.create();
+                                                alert.show();
+                                            }
 
                                         }
                                     });
@@ -150,14 +185,76 @@ public class CreateAccountPage3 extends Fragment {
 
                                 else
                                 {
-                                    Toast.makeText(getContext(), "Error registering", Toast.LENGTH_LONG).show();
+                                   // Toast.makeText(getContext(), "Error registering", Toast.LENGTH_LONG).show();
                                     dialog.dismiss();
+                                    if(isOnline())
+                                    {
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                                        builder.setTitle("Error")
+                                                .setMessage("Server is not reachable at this moment, please try again later.")
+                                                .setIcon(R.drawable.warning)
+                                                .setCancelable(false)
+                                                .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                                    }
+                                                });
+                                        AlertDialog alert = builder.create();
+                                        alert.show();
+                                    }
+                                    else {
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                                        builder.setTitle("Error")
+                                                .setMessage("Network is not available, check your connection.")
+                                                .setIcon(R.drawable.warning)
+                                                .setCancelable(false)
+                                                .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                                    }
+                                                });
+                                        AlertDialog alert = builder.create();
+                                        alert.show();
+                                    }
                                 }
 
                             }
                             else {
-                                Toast.makeText(getContext(),"something wrong",Toast.LENGTH_LONG).show();
+                               // Toast.makeText(getContext(),"something wrong",Toast.LENGTH_LONG).show();
                                 dialog.dismiss();
+                                if(isOnline())
+                                {
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                                    builder.setTitle("Error")
+                                            .setMessage("Server is not reachable at this moment, please try again later.")
+                                            .setIcon(R.drawable.warning)
+                                            .setCancelable(false)
+                                            .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                                }
+                                            });
+                                    AlertDialog alert = builder.create();
+                                    alert.show();
+                                }
+                                else {
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                                    builder.setTitle("Error")
+                                            .setMessage("Network is not available, check your connection.")
+                                            .setIcon(R.drawable.warning)
+                                            .setCancelable(false)
+                                            .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                                }
+                                            });
+                                    AlertDialog alert = builder.create();
+                                    alert.show();
+                                }
                             }
 
 
@@ -165,8 +262,39 @@ public class CreateAccountPage3 extends Fragment {
 
                         @Override
                         public void onFailure(Call<SignUpResponse> call, Throwable t) {
-                            Toast.makeText(getContext(),"unexpected error",Toast.LENGTH_LONG).show();
+                           // Toast.makeText(getContext(),"unexpected error",Toast.LENGTH_LONG).show();
                             dialog.dismiss();
+                            if(isOnline())
+                            {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                                builder.setTitle("Error")
+                                        .setMessage("Server is not reachable at this moment, please try again later.")
+                                        .setIcon(R.drawable.warning)
+                                        .setCancelable(false)
+                                        .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                            }
+                                        });
+                                AlertDialog alert = builder.create();
+                                alert.show();
+                            }
+                            else {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                                builder.setTitle("Error")
+                                        .setMessage("Network is not available, check your connection.")
+                                        .setIcon(R.drawable.warning)
+                                        .setCancelable(false)
+                                        .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                            }
+                                        });
+                                AlertDialog alert = builder.create();
+                                alert.show();
+                            }
 
                         }
                     });
@@ -177,6 +305,15 @@ public class CreateAccountPage3 extends Fragment {
         });
 
         return cap3;
+    }
+    protected boolean isOnline() {
+        ConnectivityManager cm = (ConnectivityManager)getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

@@ -24,7 +24,7 @@
 
 
         <Button
-            android:id="@+id/button19"
+            android:id="@+id/general"
             style="@android:style/Widget.Material.Light.Button.Borderless"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
 
 
         <Button
-            android:id="@+id/button20"
+            android:id="@+id/privacy"
             style="@android:style/Widget.Material.Light.Button.Borderless"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -78,7 +78,7 @@
 
 
         <Button
-            android:id="@+id/button21"
+            android:id="@+id/notification"
             style="@android:style/Widget.Material.Light.Button.Borderless"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -105,7 +105,7 @@
 
 
         <Button
-            android:id="@+id/button22"
+            android:id="@+id/blacklist"
             style="@android:style/Widget.Material.Light.Button.Borderless"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

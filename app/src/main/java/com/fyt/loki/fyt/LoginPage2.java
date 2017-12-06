@@ -1,7 +1,11 @@
 package com.fyt.loki.fyt;
 
 import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -161,6 +165,7 @@ public class LoginPage2 extends AnimListener {
 
                             try {
                                 startActivity(intent);
+                                getActivity().finish();
                             }
                             catch (Exception e){
                                 Toast.makeText(getContext(),e.toString(),Toast.LENGTH_LONG).show();
@@ -169,22 +174,71 @@ public class LoginPage2 extends AnimListener {
 
                         }
                         else {
-                            Toast.makeText(getContext(),"fail",Toast.LENGTH_SHORT).show();
+                          //  Toast.makeText(getContext(),"fail",Toast.LENGTH_SHORT).show();
                             dialog.dismiss();
+                            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                            builder.setTitle("Error")
+                                    .setMessage("Wrong login or password, please check your data!")
+                                    .setIcon(R.drawable.warning)
+                                    .setCancelable(false)
+                                    .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                                        }
+                                    });
+                            AlertDialog alert = builder.create();
+                            alert.show();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<RegistrationResponse> call, Throwable t) {
 
-                        Toast.makeText(getContext(),t.toString(),Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getContext(),t.toString(),Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
 
-                    }
+                            if(isOnline())
+                            {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                                builder.setTitle("Error")
+                                        .setMessage("Server is not reachable at this moment, please try again later.")
+                                        .setIcon(R.drawable.warning)
+                                        .setCancelable(false)
+                                        .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                            }
+                                        });
+                                AlertDialog alert = builder.create();
+                                alert.show();
+                            }
+                            else {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                                builder.setTitle("Error")
+                                        .setMessage("Network is not available, check your connection.")
+                                        .setIcon(R.drawable.warning)
+                                        .setCancelable(false)
+                                        .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                            }
+                                        });
+                                AlertDialog alert = builder.create();
+                                alert.show();
+                            }
+                        }
+
+
+
+
                 });
 
             }
         });
+
 
 
 
@@ -209,6 +263,15 @@ public class LoginPage2 extends AnimListener {
 
 
         return loginPage2;
+    }
+    protected boolean isOnline() {
+        ConnectivityManager cm = (ConnectivityManager)getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

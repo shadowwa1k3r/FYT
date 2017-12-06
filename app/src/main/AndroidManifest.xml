@@ -3,35 +3,37 @@
           package="com.fyt.loki.fyt">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/fytico"
         android:label="@string/app_name"
-
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".LoginActivity"
-                  android:screenOrientation="portrait"
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan">
-            <intent-filter>
 
+        </activity>
+        <activity android:name=".MainActivity">
+        </activity>
+        <activity
+            android:name=".MainPage"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
+        <activity android:name=".SplashScreenActivity"
+                  android:theme="@style/SplashTheme">
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"
-            >
-        </activity>
-        <activity android:name=".MainPage"
-                  android:screenOrientation="portrait"
-                  android:windowSoftInputMode="adjustPan"
-            >
-        </activity>
-
     </application>
 
 </manifest>

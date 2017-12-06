@@ -51,7 +51,7 @@ public class MenuPage extends Fragment {
         my_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.contentContainer,ProfilePage.newInstance(mParam1,mParam2)).addToBackStack(null).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.contentContainer,new MyProfileSettings()).addToBackStack(null).commit();
             }
         });
 
