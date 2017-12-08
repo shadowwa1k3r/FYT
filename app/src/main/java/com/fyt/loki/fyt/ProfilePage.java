@@ -31,9 +31,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ProfilePage extends Fragment  {
 
-    private static final float PERCENTAGE_TO_SHOW_TITLE_AT_TOOLBAR  = 0.9f;
-    private static final float PERCENTAGE_TO_HIDE_TITLE_DETAILS     = 0.3f;
-    private static final int ALPHA_ANIMATIONS_DURATION              = 200;
+
 
     private boolean mIsTheTitleVisible          = false;
     private boolean mIsTheTitleContainerVisible = true;
@@ -55,6 +53,7 @@ public class ProfilePage extends Fragment  {
     private RecyclerView.LayoutManager mLayoutManager;
     private FriendItemAdapter mAdapter;
     private ArrayList<FriendItemType> mDataset;
+    private TextView friends;
 
     private RecyclerView mRecyclerView_panel;
     private RecyclerView.LayoutManager mLayoutManager_panel;
@@ -63,7 +62,7 @@ public class ProfilePage extends Fragment  {
 
     private RecyclerView mRecyclerView_posts;
     private RecyclerView.LayoutManager mLayoutManager_posts;
-    private ProfilePostsAdapter mAdapter_posts;
+    private ProfPostsAdapter mAdapter_posts;
     private ArrayList<PostItemType> mDataset_posts;
 
 
@@ -122,11 +121,12 @@ public class ProfilePage extends Fragment  {
         iAvatar =(CircleImageView) Ppage.findViewById(R.id.user_profile_photo);
         iAvatar2 =(CircleImageView)Ppage.findViewById(R.id.myava2);
         hidepanel = (Button)Ppage.findViewById(R.id.hide_panel);
+        friends = (TextView)Ppage.findViewById(R.id.friend_count);
 
 
 
-        edit = (Button)Ppage.findViewById(R.id.edit2);
-        list_friends=(Button)Ppage.findViewById(R.id.see_all_friends2);
+        edit = (Button)Ppage.findViewById(R.id.profile_edit);
+        list_friends=(Button)Ppage.findViewById(R.id.see_all_friends);
 
 
         friendsPanel = (myCustomPane)Ppage.findViewById(R.id.pane2);
@@ -234,6 +234,7 @@ public class ProfilePage extends Fragment  {
 
 
                                         }
+                                        friends.setText("Friends("+response.body().size()+")");
                                         mAdapter = new FriendItemAdapter(getActivity(),mDataset);
                                         mAdapter_panel = new FriendItemAdapterPanel(getActivity(),mDataset_panel,mParam1);
 
@@ -258,11 +259,11 @@ public class ProfilePage extends Fragment  {
                                     mDataset_posts.clear();
 
                                     for (int i = 0; i <response.body().size() ; i++) {
-                                        mDataset_posts.add(new PostItemType(ava,usnm,response.body().get(i).created,response.body().get(i).context,
-                                                response.body().get(i).likes_count,response.body().get(i).comments,response.body().get(i).images,response.body().get(i).videos));
+                                        mDataset_posts.add(new PostItemType(response.body().get(i).id,ava,usnm,response.body().get(i).created,response.body().get(i).context,
+                                                response.body().get(i).likes_count,response.body().get(i).comments,response.body().get(i).images,response.body().get(i).videos,response.body().get(i).likes));
                                        // Toast.makeText(getContext(),i,Toast.LENGTH_SHORT).show();
                                     }
-                                        mAdapter_posts=new ProfilePostsAdapter(getActivity(),mDataset_posts);
+                                        mAdapter_posts=new ProfPostsAdapter(getActivity(),mDataset_posts,mParam1,mParam2);
                                         mRecyclerView_posts.setAdapter(mAdapter_posts);
 
 

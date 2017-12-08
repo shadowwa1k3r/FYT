@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -76,7 +77,7 @@ public class NewsPage extends Fragment {
     private ImageView add;
     private EditText posttext;
     private Button include;
-    private ExpandableLayout media;
+    private ExpandableLayout media,newstop;
 
     private RecyclerView mRecyclerView,mediaRV;
     private RecyclerView.LayoutManager mLayoutManager,mediaLM;
@@ -116,6 +117,7 @@ public class NewsPage extends Fragment {
     private static Set<String> SET_VIDEO_EXTENSIONS = new HashSet<String>(Arrays.asList(VIDEO_EXTENSIONS));
    // DialogProperties properties;
     //FilePickerDialog dialog;
+    static int y;
 
 
 
@@ -179,6 +181,7 @@ public class NewsPage extends Fragment {
         posttext=(EditText)NewsPage.findViewById(R.id.posttxt);
         include=(Button)NewsPage.findViewById(R.id.photo_video);
         media=(ExpandableLayout)NewsPage.findViewById(R.id.mediaexpand);
+        newstop=(ExpandableLayout)NewsPage.findViewById(R.id.newstop);
         add=(ImageView)NewsPage.findViewById(R.id.media_add);
 /*
         properties = new DialogProperties();
@@ -257,6 +260,12 @@ public class NewsPage extends Fragment {
 
             }
         });
+        searchava.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).replace(R.id.contentContainer,ProfilePage.newInstance(mToken,mUserName)).addToBackStack(null).commit();
+            }
+        });
 
         sendpost.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -310,6 +319,40 @@ public class NewsPage extends Fragment {
                 }
             }
         });
+
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+               // super.onScrolled(recyclerView, dx, dy);
+              /*  if(dy >0){
+                    newstop.collapse();
+                }
+                else {
+                    newstop.expand();
+
+                }*/
+              y=dy;
+            }
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView,int newState){
+                super.onScrollStateChanged(recyclerView,newState);
+                if(mRecyclerView.SCROLL_STATE_DRAGGING==newState)
+                {
+
+                }
+                if(mRecyclerView.SCROLL_STATE_IDLE==newState){
+
+                    if (y<=0)newstop.expand();
+                    else {
+                        y=0;
+                        newstop.collapse();
+                    }
+                }
+
+            }
+        });
+
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

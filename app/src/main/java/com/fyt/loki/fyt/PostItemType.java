@@ -8,17 +8,21 @@ import java.util.List;
 
 public class PostItemType {
 
+    private int id;
     private String avatar;
     private String username;
     private String createdAt;
     private String postTXT;
     private String likeCount;
     private String commentCount;
+    private List<String> likes;
     private List<PostItemModel.Images> images;
     private List<PostItemModel.Videos> videos;
+    private boolean liked=false;
 
 
-    public PostItemType(String avatar,String username,String createdAt,String postTXT,String likeCount,String commentCount,List<PostItemModel.Images> images,List<PostItemModel.Videos> videos){
+    public PostItemType(int id,String avatar,String username,String createdAt,String postTXT,String likeCount,String commentCount,List<PostItemModel.Images> images,List<PostItemModel.Videos> videos,List<String> likes){
+        this.id=id;
         this.avatar=avatar;
         this.username=username;
         this.createdAt=createdAt;
@@ -27,6 +31,7 @@ public class PostItemType {
         this.commentCount=commentCount;
         this.images=images;
         this.videos=videos;
+        this.likes=likes;
     }
 
     public String getPostTXT() {
@@ -91,5 +96,29 @@ public class PostItemType {
 
     public void setVideos(List<PostItemModel.Videos> videos) {
         this.videos = videos;
+    }
+
+    public boolean isLiked() {
+        return liked;
+    }
+
+    public void setLiked(boolean liked) {
+        this.liked = liked;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public List<String> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(List<String> likes) {
+        this.likes = likes;
     }
 }

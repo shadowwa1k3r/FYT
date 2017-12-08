@@ -87,108 +87,134 @@ public class CreateAccountPage3 extends Fragment {
         tcap4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (pass.getText().toString().equals(repass.getText().toString())) {
 
-                if(pass.getText().length()!=0&&repass.getText().length()!=0){
-                    SignUpBody signUpBody = new SignUpBody();
-                    signUpBody.email=email;
-                    signUpBody.username=username;
-                    signUpBody.first_name=fname;
-                    signUpBody.last_name=lname;
-                    signUpBody.gender=gender;
-                    signUpBody.birth_date=bdate;
-                    signUpBody.password=pass.getText().toString();
-                    final AlertDialog dialog = new SpotsDialog(getContext());
-                    dialog.show();
-                    Call<SignUpResponse> call = loginterface.signUpUser(signUpBody);
-                    call.enqueue(new Callback<SignUpResponse>() {
-                        @Override
-                        public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
-                            if(response.isSuccessful())
-                            {
-                                if (response.code()==200){
-                             //  Toast.makeText(getContext(),"DOne",Toast.LENGTH_LONG).show();
 
-                                    RegistrationBody body = new RegistrationBody();
-                                    body.username=username;
-                                    body.password=pass.getText().toString();
+                    if (pass.getText().length() != 0 && repass.getText().length() != 0) {
+                        SignUpBody signUpBody = new SignUpBody();
+                        signUpBody.email = email;
+                        signUpBody.username = username;
+                        signUpBody.first_name = fname;
+                        signUpBody.last_name = lname;
+                        signUpBody.gender = gender;
+                        signUpBody.birth_date = bdate;
+                        signUpBody.password = pass.getText().toString();
+                        final AlertDialog dialog = new SpotsDialog(getContext());
+                        dialog.show();
+                        Call<SignUpResponse> call = loginterface.signUpUser(signUpBody);
+                        call.enqueue(new Callback<SignUpResponse>() {
+                            @Override
+                            public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
+                                if (response.isSuccessful()) {
+                                    if (response.code() == 200) {
+                                        //  Toast.makeText(getContext(),"DOne",Toast.LENGTH_LONG).show();
 
-                                    Call<RegistrationResponse>call2=loginterface.registerUser(body);
-                                    call2.enqueue(new Callback<RegistrationResponse>() {
-                                        @Override
-                                        public void onResponse(Call<RegistrationResponse> call, Response<RegistrationResponse> response) {
-                                            if(response.isSuccessful()){
-                                                Intent intent = new Intent();
-                                                intent.setClass(getContext(),MainPage.class);
+                                        RegistrationBody body = new RegistrationBody();
+                                        body.username = username;
+                                        body.password = pass.getText().toString();
 
-                                                Bundle bundle = new Bundle();
-                                                bundle.putString("Token",response.body().token);
-                                                bundle.putString("UName",response.body().username);
-                                                intent.putExtras(bundle);
-                                                dialog.dismiss();
-                                                try{
-                                                    startActivity(intent);
+                                        Call<RegistrationResponse> call2 = loginterface.registerUser(body);
+                                        call2.enqueue(new Callback<RegistrationResponse>() {
+                                            @Override
+                                            public void onResponse(Call<RegistrationResponse> call, Response<RegistrationResponse> response) {
+                                                if (response.isSuccessful()) {
+                                                    Intent intent = new Intent();
+                                                    intent.setClass(getContext(), MainPage.class);
+
+                                                    Bundle bundle = new Bundle();
+                                                    bundle.putString("Token", response.body().token);
+                                                    bundle.putString("UName", response.body().username);
+                                                    intent.putExtras(bundle);
+                                                    dialog.dismiss();
+                                                    try {
+                                                        startActivity(intent);
+                                                    } catch (Exception e) {
+                                                        Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
+                                                    }
+
+                                                } else {
+                                                    Toast.makeText(getContext(), "LoginFail", Toast.LENGTH_LONG).show();
+                                                    dialog.dismiss();
+
                                                 }
-                                                catch (Exception e){
-                                                    Toast.makeText(getContext(),e.toString(),Toast.LENGTH_LONG).show();
+                                            }
+
+                                            @Override
+                                            public void onFailure(Call<RegistrationResponse> call, Throwable t) {
+                                                // Toast.makeText(getContext(),"Connection Error",Toast.LENGTH_LONG).show();
+                                                dialog.dismiss();
+                                                if (isOnline()) {
+                                                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                                                    builder.setTitle("Error")
+                                                            .setMessage("Server is not reachable at this moment, please try again later.")
+                                                            .setIcon(R.drawable.warning)
+                                                            .setCancelable(false)
+                                                            .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                                                @Override
+                                                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                                                }
+                                                            });
+                                                    AlertDialog alert = builder.create();
+                                                    alert.show();
+                                                } else {
+                                                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                                                    builder.setTitle("Error")
+                                                            .setMessage("Network is not available, check your connection.")
+                                                            .setIcon(R.drawable.warning)
+                                                            .setCancelable(false)
+                                                            .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                                                @Override
+                                                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                                                }
+                                                            });
+                                                    AlertDialog alert = builder.create();
+                                                    alert.show();
                                                 }
 
                                             }
-                                            else {
-                                                Toast.makeText(getContext(),"LoginFail",Toast.LENGTH_LONG).show();
-                                                dialog.dismiss();
+                                        });
 
-                                            }
+
+                                    } else {
+                                        // Toast.makeText(getContext(), "Error registering", Toast.LENGTH_LONG).show();
+                                        dialog.dismiss();
+                                        if (isOnline()) {
+                                            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                                            builder.setTitle("Error")
+                                                    .setMessage("Server is not reachable at this moment, please try again later.")
+                                                    .setIcon(R.drawable.warning)
+                                                    .setCancelable(false)
+                                                    .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                                                        }
+                                                    });
+                                            AlertDialog alert = builder.create();
+                                            alert.show();
+                                        } else {
+                                            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                                            builder.setTitle("Error")
+                                                    .setMessage("Network is not available, check your connection.")
+                                                    .setIcon(R.drawable.warning)
+                                                    .setCancelable(false)
+                                                    .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                                                        }
+                                                    });
+                                            AlertDialog alert = builder.create();
+                                            alert.show();
                                         }
+                                    }
 
-                                        @Override
-                                        public void onFailure(Call<RegistrationResponse> call, Throwable t) {
-                                           // Toast.makeText(getContext(),"Connection Error",Toast.LENGTH_LONG).show();
-                                            dialog.dismiss();
-                                            if(isOnline())
-                                            {
-                                                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                                                builder.setTitle("Error")
-                                                        .setMessage("Server is not reachable at this moment, please try again later.")
-                                                        .setIcon(R.drawable.warning)
-                                                        .setCancelable(false)
-                                                        .setNegativeButton("OK", new DialogInterface.OnClickListener() {
-                                                            @Override
-                                                            public void onClick(DialogInterface dialogInterface, int i) {
-
-                                                            }
-                                                        });
-                                                AlertDialog alert = builder.create();
-                                                alert.show();
-                                            }
-                                            else {
-                                                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                                                builder.setTitle("Error")
-                                                        .setMessage("Network is not available, check your connection.")
-                                                        .setIcon(R.drawable.warning)
-                                                        .setCancelable(false)
-                                                        .setNegativeButton("OK", new DialogInterface.OnClickListener() {
-                                                            @Override
-                                                            public void onClick(DialogInterface dialogInterface, int i) {
-
-                                                            }
-                                                        });
-                                                AlertDialog alert = builder.create();
-                                                alert.show();
-                                            }
-
-                                        }
-                                    });
-
-
-
-                                }
-
-                                else
-                                {
-                                   // Toast.makeText(getContext(), "Error registering", Toast.LENGTH_LONG).show();
+                                } else {
+                                    // Toast.makeText(getContext(),"something wrong",Toast.LENGTH_LONG).show();
                                     dialog.dismiss();
-                                    if(isOnline())
-                                    {
+                                    if (isOnline()) {
                                         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                                         builder.setTitle("Error")
                                                 .setMessage("Server is not reachable at this moment, please try again later.")
@@ -202,8 +228,7 @@ public class CreateAccountPage3 extends Fragment {
                                                 });
                                         AlertDialog alert = builder.create();
                                         alert.show();
-                                    }
-                                    else {
+                                    } else {
                                         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                                         builder.setTitle("Error")
                                                 .setMessage("Network is not available, check your connection.")
@@ -220,12 +245,14 @@ public class CreateAccountPage3 extends Fragment {
                                     }
                                 }
 
+
                             }
-                            else {
-                               // Toast.makeText(getContext(),"something wrong",Toast.LENGTH_LONG).show();
+
+                            @Override
+                            public void onFailure(Call<SignUpResponse> call, Throwable t) {
+                                // Toast.makeText(getContext(),"unexpected error",Toast.LENGTH_LONG).show();
                                 dialog.dismiss();
-                                if(isOnline())
-                                {
+                                if (isOnline()) {
                                     AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                                     builder.setTitle("Error")
                                             .setMessage("Server is not reachable at this moment, please try again later.")
@@ -239,8 +266,7 @@ public class CreateAccountPage3 extends Fragment {
                                             });
                                     AlertDialog alert = builder.create();
                                     alert.show();
-                                }
-                                else {
+                                } else {
                                     AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                                     builder.setTitle("Error")
                                             .setMessage("Network is not available, check your connection.")
@@ -255,49 +281,16 @@ public class CreateAccountPage3 extends Fragment {
                                     AlertDialog alert = builder.create();
                                     alert.show();
                                 }
+
                             }
-
-
-                        }
-
-                        @Override
-                        public void onFailure(Call<SignUpResponse> call, Throwable t) {
-                           // Toast.makeText(getContext(),"unexpected error",Toast.LENGTH_LONG).show();
-                            dialog.dismiss();
-                            if(isOnline())
-                            {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                                builder.setTitle("Error")
-                                        .setMessage("Server is not reachable at this moment, please try again later.")
-                                        .setIcon(R.drawable.warning)
-                                        .setCancelable(false)
-                                        .setNegativeButton("OK", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialogInterface, int i) {
-
-                                            }
-                                        });
-                                AlertDialog alert = builder.create();
-                                alert.show();
-                            }
-                            else {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                                builder.setTitle("Error")
-                                        .setMessage("Network is not available, check your connection.")
-                                        .setIcon(R.drawable.warning)
-                                        .setCancelable(false)
-                                        .setNegativeButton("OK", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialogInterface, int i) {
-
-                                            }
-                                        });
-                                AlertDialog alert = builder.create();
-                                alert.show();
-                            }
-
-                        }
-                    });
+                        });
+                    }
+                    else {
+                        repass.setError("Re-enter new password");
+                    }
+                }
+                else {
+                    repass.setError("Password is not match");
                 }
 
 

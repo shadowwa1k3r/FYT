@@ -99,7 +99,7 @@ public class CreateAccountPage4 extends Fragment {
 
         final LoiginInterface loginterface = retrofit.create(LoiginInterface.class);
         final StateProgressBar stateProgressBar = (StateProgressBar)getActivity().findViewById(R.id.stateProgressBar);
-        stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.THREE);
+        stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FOUR);
         RadioGroup rg = (RadioGroup)cap4.findViewById(R.id.gr);
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override

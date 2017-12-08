@@ -37,16 +37,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by ergas on 11/18/2017.
  */
 
-public class NewsPostsAdapter extends RecyclerView.Adapter<NewsPostsAdapter.NFVHolder> {
+public class ProfPostsAdapter extends RecyclerView.Adapter<ProfPostsAdapter.NFVHolder> {
 
-    private ArrayList<NewsFeedItemType> mData;
+    private ArrayList<PostItemType> mData;
     private Context mContext;
     private String BASE_URL;
     private String token,username;
 
 
 
-    NewsPostsAdapter(Context context, ArrayList data,String token,String username){
+    ProfPostsAdapter(Context context, ArrayList data, String token, String username){
         this.mData=data;
         this.username=username;
         this.token=token;
@@ -54,12 +54,12 @@ public class NewsPostsAdapter extends RecyclerView.Adapter<NewsPostsAdapter.NFVH
     }
 
     @Override
-    public NewsPostsAdapter.NFVHolder onCreateViewHolder(ViewGroup parent, int viewType){
+    public ProfPostsAdapter.NFVHolder onCreateViewHolder(ViewGroup parent, int viewType){
         return new NFVHolder(LayoutInflater.from(mContext).inflate(R.layout.news_feed_item,parent,false));
     }
     @Override
     public void onBindViewHolder(final NFVHolder holder,final int position){
-        final  NewsFeedItemType currentItem = mData.get(position);
+        final  PostItemType currentItem = mData.get(position);
 
         final LayoutInflater inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -168,7 +168,7 @@ public class NewsPostsAdapter extends RecyclerView.Adapter<NewsPostsAdapter.NFVH
             public void onClick(View v) {
                 AppCompatActivity activity =(AppCompatActivity)mContext;
 
-                activity.getSupportFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).replace(R.id.videocontainer,CommentPage.newInstance(currentItem.getTarget_id(),token,username)).addToBackStack(null).commit();
+                activity.getSupportFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).replace(R.id.videocontainer,CommentPage.newInstance(currentItem.getId(),token,username)).addToBackStack(null).commit();
             }
         });
         Retrofit retrofit = new Retrofit.Builder()
@@ -178,7 +178,7 @@ public class NewsPostsAdapter extends RecyclerView.Adapter<NewsPostsAdapter.NFVH
 
         final ProfileInterface profileInt= retrofit.create(ProfileInterface.class);
         likebody body=new likebody();
-        body.post_id=currentItem.getTarget_id();
+        body.post_id=currentItem.getId();
 
         final Call<likeresponse> call=profileInt.like(" Token "+token,body);
 
@@ -284,7 +284,7 @@ public class NewsPostsAdapter extends RecyclerView.Adapter<NewsPostsAdapter.NFVH
             post_img = (CarouselView)itemview.findViewById(R.id.post_imgf);
         }
 
-        void bindTo(NewsFeedItemType current){
+        void bindTo(PostItemType current){
             post_img.setPageCount(current.getImages().size()+current.getVideos().size());
             post_img.setSlideInterval(1000000);
 

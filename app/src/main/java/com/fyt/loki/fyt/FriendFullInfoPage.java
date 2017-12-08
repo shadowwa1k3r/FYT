@@ -42,7 +42,7 @@ public class FriendFullInfoPage extends Fragment {
 
     private RecyclerView mRecyclerView_posts;
     private RecyclerView.LayoutManager mLayoutManager_posts;
-    private ProfilePostsAdapter mAdapter_posts;
+    private ProfPostsAdapter mAdapter_posts;
     private ArrayList<PostItemType> mDataset_posts;
 
 
@@ -73,7 +73,7 @@ public class FriendFullInfoPage extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View Fpage = inflater.inflate(R.layout.fragment_friend_full_info_page, container, false);
+        View Fpage = inflater.inflate(R.layout.another_friend_info_page, container, false);
 
 
         BASE_URL= getContext().getString(R.string.BASE_URL);
@@ -140,11 +140,11 @@ public class FriendFullInfoPage extends Fragment {
                                 mDataset_posts.clear();
 
                                 for (int i = 0; i <response.body().size() ; i++) {
-                                    mDataset_posts.add(new PostItemType(ava,mUserName,response.body().get(i).created,response.body().get(i).context,
-                                            response.body().get(i).likes_count,response.body().get(i).comments,response.body().get(i).images,response.body().get(i).videos));
+                                    mDataset_posts.add(new PostItemType(response.body().get(i).id,ava,mUserName,response.body().get(i).created,response.body().get(i).context,
+                                            response.body().get(i).likes_count,response.body().get(i).comments,response.body().get(i).images,response.body().get(i).videos,response.body().get(i).likes));
                                    // Toast.makeText(getContext(),i,Toast.LENGTH_SHORT).show();
                                 }
-                                mAdapter_posts=new ProfilePostsAdapter(getActivity(),mDataset_posts);
+                                mAdapter_posts=new ProfPostsAdapter(getActivity(),mDataset_posts,mToken,mUserName);
                                 mRecyclerView_posts.setAdapter(mAdapter_posts);
 
 

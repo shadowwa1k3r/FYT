@@ -87,6 +87,12 @@ public class LoginPage2 extends AnimListener {
 
     }
     @Override
+    public void onResume(){
+        super.onResume();
+        StateProgressBar stateProgressBar = (StateProgressBar) getActivity().findViewById(R.id.stateProgressBar);
+        stateProgressBar.setVisibility(View.GONE);
+    }
+    @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -98,6 +104,7 @@ public class LoginPage2 extends AnimListener {
         Realm.init(this.getContext());
         mRealm = Realm.getDefaultInstance();
         ((AppCompatActivity)getActivity()).getSupportActionBar().show();
+
 
 
 

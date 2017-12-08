@@ -8,7 +8,7 @@
                                     android:paddingLeft="5dp"
                                     android:paddingRight="5dp"
                                     app:cardBackgroundColor="@color/white"
-                                    app:cardElevation="5dp">
+                                    app:cardElevation="2dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -174,7 +174,7 @@
                 android:id="@+id/commentBTN"
                 style="@android:style/Widget.Material.Button.Borderless"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
 
                 android:capitalize="none"
                 android:drawableLeft="@drawable/comment_icon"
@@ -185,7 +185,7 @@
                 android:id="@+id/shareBTN"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:drawableLeft="@drawable/share"
@@ -196,7 +196,7 @@
                 android:id="@+id/likeBTN"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
                 android:text="like"
                 android:textSize="12sp"/>
 
