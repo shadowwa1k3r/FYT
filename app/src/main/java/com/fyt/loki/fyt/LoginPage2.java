@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import android.view.animation.AlphaAnimation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kofigyan.stateprogressbar.StateProgressBar;
@@ -33,6 +35,7 @@ public class LoginPage2 extends AnimListener {
     private ImageView lp2backimg,mainbg;
     Toolbar tb;
     private EditText loginT,passwordT;
+    private TextView tbtext;
     private Button fb,vk,tw,gp,loginb,signup;
     private String login,password,TokenAuth,username;
 
@@ -56,6 +59,9 @@ public class LoginPage2 extends AnimListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StateProgressBar stateProgressBar = (StateProgressBar) getActivity().findViewById(R.id.stateProgressBar);
+        stateProgressBar.setVisibility(View.GONE);
+       // tbtext.setText("Login");
 
 
 
@@ -71,11 +77,9 @@ public class LoginPage2 extends AnimListener {
     @Override
     public void onAnimationEnded()
     {
-        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
-        mainbg = (ImageView)getActivity().findViewById(R.id.loginBack);
-        //Glide.with(getContext()).load(R.drawable.loginpage2).asBitmap().centerCrop().into(mainbg);
-        mainbg.setImageResource(R.drawable.loginpage2);
-        mainbg.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
+
+
 
 
     }
@@ -91,19 +95,31 @@ public class LoginPage2 extends AnimListener {
         super.onResume();
         StateProgressBar stateProgressBar = (StateProgressBar) getActivity().findViewById(R.id.stateProgressBar);
         stateProgressBar.setVisibility(View.GONE);
+        tbtext.setText("Login");
     }
+
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View loginPage2 = inflater.inflate(R.layout.fragment_login_page2, container, false);
+
+        tbtext = (TextView)getActivity().findViewById(R.id.tbtxt);
+        tbtext.setText("Login");
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(getString(R.string.BASE_URL)+"/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         Realm.init(this.getContext());
         mRealm = Realm.getDefaultInstance();
+
         ((AppCompatActivity)getActivity()).getSupportActionBar().show();
+        mainbg = (ImageView)getActivity().findViewById(R.id.loginBack);
+        //Glide.with(getContext()).load(R.drawable.loginpage2).asBitmap().centerCrop().into(mainbg);
+        mainbg.setImageResource(R.drawable.loginpage2);
+        mainbg.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
 
 
 
@@ -255,8 +271,9 @@ public class LoginPage2 extends AnimListener {
                lp2backimg.setImageDrawable(null);
                 signup.startAnimation(buttonClick);
 
+                tbtext.setText("SignUp");
+                getActivity().getSupportFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).replace(R.id.loginPageContainer,new LoginPage3()).addToBackStack(null).commit();
 
-                getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enterfromright,R.anim.exittoleft,R.anim.enterfromleft,R.anim.exittoright).replace(R.id.loginPageContainer,new LoginPage3()).addToBackStack(null).commit();
             }
         });
 

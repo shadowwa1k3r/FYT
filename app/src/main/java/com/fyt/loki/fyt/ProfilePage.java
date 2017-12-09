@@ -53,7 +53,7 @@ public class ProfilePage extends Fragment  {
     private RecyclerView.LayoutManager mLayoutManager;
     private FriendItemAdapter mAdapter;
     private ArrayList<FriendItemType> mDataset;
-    private TextView friends;
+    private TextView friends,frcount;
 
     private RecyclerView mRecyclerView_panel;
     private RecyclerView.LayoutManager mLayoutManager_panel;
@@ -122,6 +122,7 @@ public class ProfilePage extends Fragment  {
         iAvatar2 =(CircleImageView)Ppage.findViewById(R.id.myava2);
         hidepanel = (Button)Ppage.findViewById(R.id.hide_panel);
         friends = (TextView)Ppage.findViewById(R.id.friend_count);
+        frcount = (TextView)Ppage.findViewById(R.id.friends_count);
 
 
 
@@ -235,6 +236,7 @@ public class ProfilePage extends Fragment  {
 
                                         }
                                         friends.setText("Friends("+response.body().size()+")");
+                                        frcount.setText(String.valueOf(response.body().size()));
                                         mAdapter = new FriendItemAdapter(getActivity(),mDataset);
                                         mAdapter_panel = new FriendItemAdapterPanel(getActivity(),mDataset_panel,mParam1);
 

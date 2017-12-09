@@ -25,11 +25,39 @@
 
         </FrameLayout>
 
-        <include
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
 
-            layout="@layout/login_signup_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+
+            android:layout_height="wrap_content"
+
+
+            app:theme="@style/CustomActionBar">
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:id="@+id/tbtxt"
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="wrap_content"
+                    android:text="Login"
+                    android:textAllCaps="true"
+                    android:textColor="#ffffff"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+
+        </android.support.v7.widget.Toolbar>
 
         <com.kofigyan.stateprogressbar.StateProgressBar
             android:id="@+id/stateProgressBar"

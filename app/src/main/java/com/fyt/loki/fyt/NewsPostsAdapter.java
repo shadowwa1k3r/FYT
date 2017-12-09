@@ -64,6 +64,8 @@ public class NewsPostsAdapter extends RecyclerView.Adapter<NewsPostsAdapter.NFVH
         final LayoutInflater inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 
+        holder.setIsRecyclable(false);
+
         BASE_URL=mContext.getString(R.string.BASE_URL);
         Glide.with(mContext).load(BASE_URL+currentItem.getAvatar()).animate(R.anim.zoom_in).into(holder.avatar);
         final String [] post_tmb = new String[currentItem.getVideos().size()];
@@ -95,6 +97,10 @@ public class NewsPostsAdapter extends RecyclerView.Adapter<NewsPostsAdapter.NFVH
         if (currentItem.getVideos().size()==0&&currentItem.getImages().size()==0)
         {
             holder.post_img.setLayoutParams( new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        }
+        if(currentItem.getPostTXT().length()==0)
+        {
+            holder.postTXT.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         }
 
 
@@ -315,23 +321,8 @@ public class NewsPostsAdapter extends RecyclerView.Adapter<NewsPostsAdapter.NFVH
             }
 
             username.setText(current.getUsername());
-
-
             DateTime dtIn = getDateTimeObject(current.getCreatedAt());
-
-
-
-
-                createdAt.setText(jodaDateTimeToCustomString(dtIn,"HH:mm"));
-
-
-
-
-
-
-
-
-
+            createdAt.setText(jodaDateTimeToCustomString(dtIn,"HH:mm"));
             postTXT.setText(current.getPostTXT());
             likeCount.setText(current.getLikeCount());
             commentCount.setText(current.getCommentCount());

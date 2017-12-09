@@ -1,7 +1,7 @@
 package com.fyt.loki.fyt;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +10,7 @@ import android.widget.Button;
 import com.kofigyan.stateprogressbar.StateProgressBar;
 
 
-public class CreateAccountPage1 extends Fragment {
+public class CreateAccountPage1 extends AnimListener {
 
 
     public CreateAccountPage1() {
@@ -33,6 +33,11 @@ public class CreateAccountPage1 extends Fragment {
     }
 
     @Override
+    public void onAnimationEnded(){
+        /*StateProgressBar stateProgressBar = (StateProgressBar) getActivity().findViewById(R.id.stateProgressBar);
+        stateProgressBar.setVisibility(View.VISIBLE);*/
+    }
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -49,7 +54,7 @@ public class CreateAccountPage1 extends Fragment {
             @Override
             public void onClick(View v) {
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.THREE);
-                getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enterfromright,R.anim.exittoleft,R.anim.enterfromleft,R.anim.exittoright).replace(R.id.loginPageContainer,new CreateAccountPage2()).addToBackStack(null).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)/*.setCustomAnimations(R.anim.enterfromright,R.anim.exittoleft,R.anim.enterfromleft,R.anim.exittoright)*/.replace(R.id.loginPageContainer,new CreateAccountPage2()).addToBackStack(null).commit();
             }
         });
         // Inflate the layout for this fragment

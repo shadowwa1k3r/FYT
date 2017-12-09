@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -167,7 +168,7 @@ public class CreateAccountPage2 extends Fragment {
                                             {
                                                 if (response.body().status==0){
                                                     stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.THREE);
-                                                    getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enterfromright,R.anim.exittoleft,R.anim.enterfromleft,R.anim.exittoright).replace(R.id.loginPageContainer,CreateAccountPage4.newInstance(emailedit.getText().toString(),usernameedit.getText().toString(),lnameedit.getText().toString(),fnameedit.getText().toString())).addToBackStack(null).commit();
+                                                    getActivity().getSupportFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)/*.setCustomAnimations(R.anim.enterfromright,R.anim.exittoleft,R.anim.enterfromleft,R.anim.exittoright)*/.replace(R.id.loginPageContainer,CreateAccountPage4.newInstance(emailedit.getText().toString(),usernameedit.getText().toString(),lnameedit.getText().toString(),fnameedit.getText().toString())).addToBackStack(null).commit();
 
                                                     //Toast.makeText(getContext(),"Done",Toast.LENGTH_LONG).show();
                                                     dialog.dismiss();}
