@@ -14,6 +14,7 @@ public class MyProfileSettings extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    private SharedPreference mSharedPreference;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -61,6 +62,8 @@ public class MyProfileSettings extends Fragment {
         notification=(Button)ProfSet.findViewById(R.id.notification);
         blacklist=(Button)ProfSet.findViewById(R.id.blacklist);
 
+
+
         general.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,6 +88,8 @@ public class MyProfileSettings extends Fragment {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.contentContainer,new MyProfileSettingsBlockandComplain()).addToBackStack(null).commit();
             }
         });
+
+
 
 
         return ProfSet;

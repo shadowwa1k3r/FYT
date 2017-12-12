@@ -124,7 +124,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_alignParentEnd="false"
-                    android:layout_below="@+id/user_profile_name"
+                    android:layout_below="@+id/friend_profile_name"
                     android:layout_marginBottom="15dp"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
@@ -150,11 +150,11 @@
                         android:orientation="horizontal">
 
                         <ImageView
-                            app:srcCompat="@drawable/cake"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp"/>
+                            android:layout_marginRight="10dp"
+                            app:srcCompat="@drawable/cake"/>
 
                         <TextView
                             android:id="@+id/birth_datef"
@@ -186,11 +186,11 @@
                         android:orientation="horizontal">
 
                         <ImageView
-                            app:srcCompat="@drawable/placeholder"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp"/>
+                            android:layout_marginRight="10dp"
+                            app:srcCompat="@drawable/placeholder"/>
 
                         <TextView
                             android:id="@+id/countryf"
@@ -219,11 +219,11 @@
                         android:orientation="horizontal">
 
                         <ImageView
-                            app:srcCompat="@drawable/mail"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp"/>
+                            android:layout_marginRight="10dp"
+                            app:srcCompat="@drawable/mail"/>
 
                         <TextView
                             android:id="@+id/emailf"
@@ -241,11 +241,11 @@
                         android:orientation="horizontal">
 
                         <ImageView
-                            app:srcCompat="@drawable/smartphone"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp"/>
+                            android:layout_marginRight="10dp"
+                            app:srcCompat="@drawable/smartphone"/>
 
                         <TextView
 

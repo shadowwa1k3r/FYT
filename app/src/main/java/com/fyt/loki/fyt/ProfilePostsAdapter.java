@@ -46,7 +46,12 @@ public class ProfilePostsAdapter extends RecyclerView.Adapter<ProfilePostsAdapte
         final LayoutInflater inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         BASE_URL=mContext.getString(R.string.BASE_URL);
-        Glide.with(mContext).load(currentItem.getAvatar()).asBitmap().into(holder.avatar);
+        try {
+            Glide.with(mContext).load(currentItem.getAvatar()).asBitmap().into(holder.avatar);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
         final String [] post_tmb = new String[currentItem.getImages().size()];
         final String [] post_media = new String[currentItem.getVideos().size()+currentItem.getImages().size()];
 
@@ -105,7 +110,12 @@ public class ProfilePostsAdapter extends RecyclerView.Adapter<ProfilePostsAdapte
                 ImageView video_ico = (ImageView)customView.findViewById(R.id.video_sign);
 
                 if (position <currentItem.getImages().size()) {
-                    Glide.with(mContext).load(post_media[position]).thumbnail(Glide.with(mContext).load(R.drawable.loader_transparent)).fitCenter().into(feedimage);
+                   try {
+                       Glide.with(mContext).load(post_media[position]).thumbnail(Glide.with(mContext).load(R.drawable.loader_transparent)).fitCenter().into(feedimage);
+                   }
+                   catch (Exception e){
+                       e.printStackTrace();
+                   }
                     video_ico.setVisibility(View.INVISIBLE);
                     return customView;
 
@@ -113,7 +123,12 @@ public class ProfilePostsAdapter extends RecyclerView.Adapter<ProfilePostsAdapte
 
                 }
                 else {
-                    Glide.with(mContext).load(post_tmb[position-currentItem.getImages().size()]).thumbnail(Glide.with(mContext).load(R.drawable.loader_transparent)).fitCenter().into(feedimage);
+                    try {
+                        Glide.with(mContext).load(post_tmb[position-currentItem.getImages().size()]).thumbnail(Glide.with(mContext).load(R.drawable.loader_transparent)).fitCenter().into(feedimage);
+                    }
+                    catch (Exception e){
+                        e.printStackTrace();
+                    }
                     video_ico.setVisibility(View.VISIBLE);
                     return customView;
 

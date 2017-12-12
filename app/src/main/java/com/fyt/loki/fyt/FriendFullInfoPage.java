@@ -36,7 +36,7 @@ public class FriendFullInfoPage extends Fragment {
     private String BASE_URL;
     private String BASE_URL_API ;
 
-    private TextView tFull_name,tBirth_date,tGender,tCountry,tCity,tEmail,tPhone;
+    private TextView tFull_name,tBirth_date,tGender,tCountry,tCity,tEmail,tPhone,frcount;
     private CircleImageView iAvatar;
     private myCustomPane panel;
 
@@ -71,7 +71,7 @@ public class FriendFullInfoPage extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View Fpage = inflater.inflate(R.layout.another_friend_info_page, container, false);
 
@@ -88,6 +88,7 @@ public class FriendFullInfoPage extends Fragment {
         tEmail = (TextView)Fpage.findViewById(R.id.emailf);
         tPhone = (TextView)Fpage.findViewById(R.id.phonef);
         iAvatar =(CircleImageView) Fpage.findViewById(R.id.friend_profile_photo);
+        frcount=(TextView)Fpage.findViewById(R.id.friends_count);
 
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -117,17 +118,27 @@ public class FriendFullInfoPage extends Fragment {
 
                 if (response.isSuccessful())
                 {
-                    Glide.with(getActivity()).load(BASE_URL+response.body().getAvatar()).asBitmap().into(iAvatar);
-                    final String ava = BASE_URL+response.body().getAvatar();
+                    try {
+                        Glide.with(getActivity()).load(response.body().getProfile().getAvatar()).asBitmap().animate(R.anim.zoom_in).into(iAvatar);
+                    }
+                    catch (Exception e){
+                        e.printStackTrace();
+                    }
+                    final String ava = BASE_URL+response.body().getProfile().getAvatar();
 
 
                     tFull_name.setText(response.body().getUsername());
-                    tBirth_date.setText(response.body().getBith_date());
-                    tGender.setText(response.body().getGender());
-                    tCountry.setText(response.body().getCountry());
-                    tCity.setText(response.body().getCity());
+                    tBirth_date.setText(response.body().getProfile().getBirthDate());
+                    tCountry.setText(response.body().getProfile().getCountry());
+                    if (response.body().getProfile().getGender()==1){
+                        tGender.setText("Male");}
+                    else if(response.body().getProfile().getGender()==0){
+                        tGender.setText("Female");
+                    }
+                    tCity.setText(response.body().getProfile().getCity());
                     tEmail.setText(response.body().getEmail());
-                    tPhone.setText(response.body().getPhone());
+                    tPhone.setText(response.body().getProfile().getPhone());
+                    frcount.setText(response.body().getProfile().getFriendsCount().toString());
                     //Toast.makeText(getContext(),response.body().getUsername(),Toast.LENGTH_LONG).show();
 
                     FriendPostBody body = new FriendPostBody();
@@ -144,8 +155,9 @@ public class FriendFullInfoPage extends Fragment {
                                             response.body().get(i).likes_count,response.body().get(i).comments,response.body().get(i).images,response.body().get(i).videos,response.body().get(i).likes));
                                    // Toast.makeText(getContext(),i,Toast.LENGTH_SHORT).show();
                                 }
-                                mAdapter_posts=new ProfPostsAdapter(getActivity(),mDataset_posts,mToken,mUserName);
+                                mAdapter_posts=new ProfPostsAdapter(inflater.getContext(),mDataset_posts,mToken,mUserName);
                                 mRecyclerView_posts.setAdapter(mAdapter_posts);
+
 
 
                             }

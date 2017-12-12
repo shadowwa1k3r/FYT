@@ -65,7 +65,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CHolder>
         final AppCompatActivity activity =(AppCompatActivity)mContext;
 
         BASE_URL=mContext.getString(R.string.BASE_URL);
-        Glide.with(mContext).load(BASE_URL+currentItem.getAva()).animate(R.anim.zoom_in).into(holder.avatar);
+        Glide.with(mContext).load(currentItem.getAva()).animate(R.anim.zoom_in).into(holder.avatar);
 
         holder.reply.setOnClickListener(new View.OnClickListener() {
             @Override

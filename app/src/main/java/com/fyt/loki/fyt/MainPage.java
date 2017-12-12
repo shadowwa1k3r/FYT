@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.FrameLayout;
@@ -45,12 +46,18 @@ public class MainPage extends AppCompatActivity {
             public void onTabSelected(@IdRes int tabId) {
                 switch (tabId) {
                     case R.id.item1:
+
+
                         ChangeFragment("item1");
+
+
                         break;
                     case R.id.item2:
                         ChangeFragment("item2");
+
                         break;
                     case R.id.item3:
+
                         ChangeFragment("item3");
                         break;
                     case R.id.item4:
@@ -58,6 +65,8 @@ public class MainPage extends AppCompatActivity {
                         break;
                     case R.id.item5:
                         ChangeFragment("item5");
+
+
                         break;
 
                 }
@@ -65,12 +74,24 @@ public class MainPage extends AppCompatActivity {
             }
         });
         messages= bottomBar.getTabWithId(R.id.item2);
-        messages.setBadgeCount(5);
+        messages.setBadgeCount(1);
 
 
 
 
     }
+    private void clearBackStack() {
+        FragmentManager.BackStackEntry entry = getSupportFragmentManager().getBackStackEntryAt(
+                0);
+        getSupportFragmentManager().popBackStack(entry.getId(),FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        getSupportFragmentManager().executePendingTransactions();
+
+
+    }
+    public void clearBackStackInclusive(String tag) {
+        getSupportFragmentManager().popBackStack(tag, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+    }
+
     private void ChangeFragment(String value){
         Fragment fragment = null;
         switch (value) {
@@ -87,13 +108,17 @@ public class MainPage extends AppCompatActivity {
             case "item5": fragment= MenuPage.newInstance(Token,UserName);break;
         }
 
-        if(fragment!=null)
+        if(fragment!=null) {int a = getSupportFragmentManager().getBackStackEntryCount();
+        for(int i = 0;i<a;i++)
+            {getSupportFragmentManager().popBackStack();
+            Toast.makeText(this,getSupportFragmentManager().getBackStackEntryCount()+"s",Toast.LENGTH_LONG).show();}
+         getSupportFragmentManager().popBackStack();
             getSupportFragmentManager()
                     .beginTransaction()
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                     .replace(R.id.contentContainer, fragment)
                     .commit();
-
+        }
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -105,4 +130,31 @@ public class MainPage extends AppCompatActivity {
 
 
     }
+/*
+    @Override
+    public void onBackPressed(){
+        if(getSupportFragmentManager().getBackStackEntryCount()==0){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Error")
+                    .setMessage("Are you sure want to exit?")
+                    .setIcon(R.drawable.warning)
+                    .setCancelable(false)
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                        }
+                    })
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            finish();
+                        }
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
+        else onBackPressed();
+    }*/
+
 }

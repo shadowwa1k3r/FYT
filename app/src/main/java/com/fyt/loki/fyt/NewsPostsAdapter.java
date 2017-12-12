@@ -67,7 +67,14 @@ public class NewsPostsAdapter extends RecyclerView.Adapter<NewsPostsAdapter.NFVH
         holder.setIsRecyclable(false);
 
         BASE_URL=mContext.getString(R.string.BASE_URL);
-        Glide.with(mContext).load(BASE_URL+currentItem.getAvatar()).animate(R.anim.zoom_in).into(holder.avatar);
+        try {
+            Glide.with(mContext).load(currentItem.getAvatar()).animate(R.anim.zoom_in).into(holder.avatar);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+
+        }
+
         final String [] post_tmb = new String[currentItem.getVideos().size()];
         final String [] post_media = new String[currentItem.getVideos().size()+currentItem.getImages().size()];
 
@@ -151,7 +158,15 @@ public class NewsPostsAdapter extends RecyclerView.Adapter<NewsPostsAdapter.NFVH
                 ImageView video_ico = (ImageView)customView.findViewById(R.id.video_sign);
 
                 if (position <currentItem.getImages().size()) {
-                    Glide.with(mContext).load(post_media[position]).thumbnail(Glide.with(mContext).load(R.drawable.loader_transparent)).fitCenter().into(feedimage);
+                    try {
+
+
+                        Glide.with(mContext).load(post_media[position]).thumbnail(Glide.with(mContext).load(R.drawable.loader_transparent)).fitCenter().into(feedimage);
+                    }
+                    catch (Exception e){
+
+                        e.printStackTrace();
+                    }
                     video_ico.setVisibility(View.INVISIBLE);
                     return customView;
 
@@ -159,7 +174,15 @@ public class NewsPostsAdapter extends RecyclerView.Adapter<NewsPostsAdapter.NFVH
 
                 }
                 else {
-                    Glide.with(mContext).load(post_tmb[position-currentItem.getImages().size()]).thumbnail(Glide.with(mContext).load(R.drawable.loader_transparent)).fitCenter().into(feedimage);
+                    try {
+
+
+                        Glide.with(mContext).load(post_tmb[position - currentItem.getImages().size()]).thumbnail(Glide.with(mContext).load(R.drawable.loader_transparent)).fitCenter().into(feedimage);
+                    }
+                    catch (Exception e){
+                        e.printStackTrace();
+
+                    }
                     video_ico.setVisibility(View.VISIBLE);
                     return customView;
 
@@ -288,6 +311,7 @@ public class NewsPostsAdapter extends RecyclerView.Adapter<NewsPostsAdapter.NFVH
             likeCount = (TextView)itemview.findViewById(R.id.likef);
             commentCount = (TextView)itemview.findViewById(R.id.commentf);
             post_img = (CarouselView)itemview.findViewById(R.id.post_imgf);
+
         }
 
         void bindTo(NewsFeedItemType current){

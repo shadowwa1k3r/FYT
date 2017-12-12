@@ -76,7 +76,7 @@ public class CommentPage extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View Cview=inflater.inflate(R.layout.fragment_comment_page, container, false);
 
@@ -114,7 +114,7 @@ public class CommentPage extends Fragment {
 
                     }
                     //Toast.makeText(getContext(),response.body().get(0).text,Toast.LENGTH_LONG).show();
-                    mCommentAdapter = new CommentAdapter(getActivity(),mDataset,token);
+                    mCommentAdapter = new CommentAdapter(inflater.getContext(),mDataset,token);
                     mCommentAdapter.notifyDataSetChanged();
                     mRecyclerView.setAdapter(mCommentAdapter);
                     FrameLayout fl=(FrameLayout)getActivity().findViewById(R.id.mainFrame);
@@ -132,7 +132,7 @@ public class CommentPage extends Fragment {
             @Override
             public void onResponse(Call<ProfileModel> call, Response<ProfileModel> response) {
                 if(response.isSuccessful()){
-                    avatar=response.body().getAvatar();
+                    avatar=response.body().getProfile().getAvatar();
                 }
             }
             @Override

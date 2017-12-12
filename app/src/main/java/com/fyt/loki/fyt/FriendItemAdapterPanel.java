@@ -1,12 +1,12 @@
 package com.fyt.loki.fyt;
 
 import android.content.Context;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,8 +23,7 @@ public class FriendItemAdapterPanel extends RecyclerView.Adapter<FriendItemAdapt
     private ArrayList<FriendItemType> mData;
     private Context mContext;
     private String token;
-    private myCustomPane panel;
-    private  String BASE_URL;
+    private String BASE_URL;
 
     FriendItemAdapterPanel(Context context, ArrayList<FriendItemType> data,String token){
         this.mData=data;
@@ -33,7 +32,7 @@ public class FriendItemAdapterPanel extends RecyclerView.Adapter<FriendItemAdapt
     }
     @Override
     public FriendItemAdapterPanel.FVHolder onCreateViewHolder(ViewGroup parent , int viewType){
-        return new FVHolder(LayoutInflater.from(mContext).inflate(R.layout.friend_item_panel,parent,false));
+        return new FVHolder(LayoutInflater.from(mContext).inflate(R.layout.friend_list_item_card,parent,false));
     }
 
     @Override
@@ -42,7 +41,11 @@ public class FriendItemAdapterPanel extends RecyclerView.Adapter<FriendItemAdapt
 
 
         BASE_URL=mContext.getString(R.string.BASE_URL);
-        Glide.with(mContext).load(BASE_URL+currentFitem.getImg()).into(holder.imgv);
+        try {
+            Glide.with(mContext).load(BASE_URL+currentFitem.getImg()).into(holder.imgv);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         holder.bindTo(currentFitem);
 
         final String item = mData.get(position).getName();
@@ -51,10 +54,7 @@ public class FriendItemAdapterPanel extends RecyclerView.Adapter<FriendItemAdapt
             public void onClick(View v) {
 
                 AppCompatActivity activity = (AppCompatActivity)v.getContext();
-                View inflatedView = activity.getLayoutInflater().inflate(R.layout.another_profile_page,null);
-                panel = (myCustomPane)inflatedView.findViewById(R.id.pane2);
-                panel.closePane();
-                activity.getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enterfromright,R.anim.exittoleft,R.anim.enterfromleft,R.anim.exittoright)
+                activity.getSupportFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                         .replace(R.id.contentContainer,FriendFullInfoPage.newInstance(token,item)).addToBackStack(null).commit();
             }
         });
@@ -62,10 +62,7 @@ public class FriendItemAdapterPanel extends RecyclerView.Adapter<FriendItemAdapt
             @Override
             public void onClick(View v) {
                 AppCompatActivity activity = (AppCompatActivity)v.getContext();
-                View inflatedView = activity.getLayoutInflater().inflate(R.layout.another_profile_page,null);
-                panel = (myCustomPane)inflatedView.findViewById(R.id.pane2);
-                panel.closePane();
-                activity.getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enterfromright,R.anim.exittoleft,R.anim.enterfromleft,R.anim.exittoright)
+                activity.getSupportFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                         .replace(R.id.contentContainer,FriendFullInfoPage.newInstance(token,item)).addToBackStack(null).commit();
 
             }
@@ -82,19 +79,19 @@ public class FriendItemAdapterPanel extends RecyclerView.Adapter<FriendItemAdapt
 
         private ImageView imgv;
         private TextView txtv;
-        private Button status;
+        private ImageView status;
 
         FVHolder(final View itemview)
         {
             super(itemview);
-            imgv =(ImageView)itemview.findViewById(R.id.friend_item_panel);
-            txtv = (TextView)itemview.findViewById(R.id.FriendFullName_panel);
-            status = (Button)itemview.findViewById(R.id.status_friend);
+            imgv =(ImageView)itemview.findViewById(R.id.profile_photo);
+            txtv = (TextView)itemview.findViewById(R.id.user_name);
+            status = (ImageView) itemview.findViewById(R.id.online);
         }
 
         void  bindTo(FriendItemType current){
             txtv.setText(current.getName());
-            if(current.getStatus()==true){
+            if(current.getStatus()){
                 status.setVisibility(View.VISIBLE);
             }
             else{

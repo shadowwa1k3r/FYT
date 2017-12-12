@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -37,7 +36,11 @@ public class FriendItemAdapter extends RecyclerView.Adapter<FriendItemAdapter.FV
         final FriendItemType currentFitem = mData.get(position);
 
         BASE_URL = mContext.getString(R.string.BASE_URL);
-        Glide.with(mContext).load(BASE_URL+currentFitem.getImg()).into(holder.imgv);
+        try {
+            Glide.with(mContext).load(BASE_URL+currentFitem.getImg()).into(holder.imgv);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         holder.bindTo(currentFitem);
     }
     @Override
@@ -50,14 +53,14 @@ public class FriendItemAdapter extends RecyclerView.Adapter<FriendItemAdapter.FV
     class FVHolder extends RecyclerView.ViewHolder{
         private ImageView imgv;
         private TextView txtv;
-        private Button status;
+        private ImageView status;
 
         FVHolder(final View itemview)
         {
             super(itemview);
             imgv =(ImageView)itemview.findViewById(R.id.friend_item);
             txtv = (TextView)itemview.findViewById(R.id.FriendFullName);
-            status = (Button)itemview.findViewById(R.id.button8);
+            status = (ImageView) itemview.findViewById(R.id.online);
         }
 
         void  bindTo(FriendItemType current){

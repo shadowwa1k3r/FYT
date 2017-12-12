@@ -41,6 +41,7 @@ public class LoginPage2 extends AnimListener {
 
     private AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.8F);
     private Realm mRealm;
+    private SharedPreference mSharedPreference;
 
 
     public LoginPage2() {
@@ -107,6 +108,7 @@ public class LoginPage2 extends AnimListener {
         tbtext = (TextView)getActivity().findViewById(R.id.tbtxt);
         tbtext.setText("Login");
 
+        mSharedPreference=new SharedPreference();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(getString(R.string.BASE_URL)+"/api/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -155,7 +157,7 @@ public class LoginPage2 extends AnimListener {
 
 
 
-                RegistrationBody body = new RegistrationBody();
+                final RegistrationBody body = new RegistrationBody();
                 body.username = login;
                 body.password = password;
                 final AlertDialog dialog = new SpotsDialog(getContext());
@@ -173,9 +175,12 @@ public class LoginPage2 extends AnimListener {
                             //Toast.makeText(getContext(), "success",Toast.LENGTH_SHORT).show();
                             //Toast.makeText(getContext(), response.body().token,Toast.LENGTH_SHORT).show();
 
+                            mSharedPreference.save(getContext(),body.username,body.password,response.body().token);
+
 
                             TokenAuth = response.body().token;
                             username = response.body().username;
+
                             //getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enterfromright,R.anim.exittoleft,R.anim.enterfromleft,R.anim.exittoright).replace(R.id.loginPageContainer,new ProfilePage().newInstance(TokenAuth,username)).addToBackStack(null).commit();
                             Intent intent = new Intent();
                             intent.setClass(getContext(), MainPage.class);

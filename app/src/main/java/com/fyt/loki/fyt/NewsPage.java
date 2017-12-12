@@ -159,7 +159,7 @@ public class NewsPage extends Fragment {
     }*/
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
        final View NewsPage=inflater.inflate(R.layout.fragment_news_page, container, false);
         BASE_URL= getContext().getString(R.string.BASE_URL);
@@ -220,27 +220,32 @@ public class NewsPage extends Fragment {
         mprofileInfo.enqueue(new Callback<ProfileModel>() {
             @Override
             public void onResponse(Call<ProfileModel> call, Response<ProfileModel> response) {
-                final String ava = BASE_URL + response.body().getAvatar();
-                Glide.with(getContext()).load(ava).asBitmap().into(searchava);
+                final String ava = response.body().getProfile().getAvatar();
+                try {
+                    Glide.with(getActivity()).load(ava).asBitmap().into(searchava);
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
                 final String usnm = response.body().getUsername();
-                final Call<List<NewsFeedModel>> getnews = profileInterface.getNews(" Token "+mToken);
+                final Call<List<NewsFeedModel>> getnews = profileInterface.getNews(" Token " + mToken);
                 getnews.enqueue(new Callback<List<NewsFeedModel>>() {
                     @Override
                     public void onResponse(Call<List<NewsFeedModel>> call, Response<List<NewsFeedModel>> response) {
-                        if (response.isSuccessful()){
+                        if (response.isSuccessful()) {
                             mDataset.clear();
 
 
                             //Button button = (Button)NewsPage.findViewById(R.id.button17);
 
-                            for (int i = 0; i <response.body().size(); i++) {
+                            for (int i = 0; i < response.body().size(); i++) {
 
-                                mDataset.add(new NewsFeedItemType(response.body().get(i).target.avatar,response.body().get(i).target.owner.username,response.body().get(i).target.created,response.body().get(i).target.context,
-                                        response.body().get(i).target.likes_count,response.body().get(i).target.comments,response.body().get(i).target.images,response.body().get(i).target.videos,response.body().get(i).target_id,response.body().get(i).target.likes));
+                                mDataset.add(new NewsFeedItemType(response.body().get(i).target.avatar, response.body().get(i).target.owner.username, response.body().get(i).target.created, response.body().get(i).target.context,
+                                        response.body().get(i).target.likes_count, response.body().get(i).target.comments, response.body().get(i).target.images, response.body().get(i).target.videos, response.body().get(i).target_id, response.body().get(i).target.likes));
 
                             }
 
-                            mNewsPostsAdapter = new NewsPostsAdapter(getActivity(),mDataset,mToken,mUserName);
+                            mNewsPostsAdapter = new NewsPostsAdapter(getActivity(), mDataset, mToken, mUserName);
 
                             mNewsPostsAdapter.notifyDataSetChanged();
 

@@ -31,6 +31,7 @@ public class CreateAccountPage3 extends Fragment {
     private int gender;
     private static String ekey="email",ukey="user",lkey="last",fkey="first",gkey="gender",bkey="birth";
 
+    private SharedPreference mSharedPreference;
     public CreateAccountPage3() {
         // Required empty public constructor
     }
@@ -70,6 +71,7 @@ public class CreateAccountPage3 extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View cap3=inflater.inflate(R.layout.fragment_create_account_page3, container, false);
+        mSharedPreference=new SharedPreference();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(getString(R.string.BASE_URL)+"/api/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -109,15 +111,17 @@ public class CreateAccountPage3 extends Fragment {
                                     if (response.code() == 200) {
                                         //  Toast.makeText(getContext(),"DOne",Toast.LENGTH_LONG).show();
 
-                                        RegistrationBody body = new RegistrationBody();
+                                        final RegistrationBody body = new RegistrationBody();
                                         body.username = username;
                                         body.password = pass.getText().toString();
+
 
                                         Call<RegistrationResponse> call2 = loginterface.registerUser(body);
                                         call2.enqueue(new Callback<RegistrationResponse>() {
                                             @Override
                                             public void onResponse(Call<RegistrationResponse> call, Response<RegistrationResponse> response) {
                                                 if (response.isSuccessful()) {
+                                                    mSharedPreference.save(getContext(),body.username,body.password,response.body().token);
                                                     Intent intent = new Intent();
                                                     intent.setClass(getContext(), MainPage.class);
 

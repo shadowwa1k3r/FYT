@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.fyt.loki.fyt.myCustomPane
+<!--<com.fyt.loki.fyt.myCustomPane
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -17,43 +17,18 @@
         android:orientation="vertical"
         >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+<include layout="@layout/friends_panel"/>
 
 
-            <android.support.v7.widget.AppCompatTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Friends"
-                android:textColor="@color/colorAccent"
-                android:textAllCaps="true"
-                android:textSize="20sp"/>
 
-            <Button
-                android:id="@+id/hide_panel"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/panel_right_arrow"/>
-
-        </LinearLayout>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_panel2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </android.support.v7.widget.RecyclerView>
     </LinearLayout>
-
+-->
     <ScrollView
-        android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layoutDirection="ltr">
 
@@ -630,4 +605,3 @@
             </LinearLayout>
         </RelativeLayout>
     </ScrollView>
-</com.fyt.loki.fyt.myCustomPane>
