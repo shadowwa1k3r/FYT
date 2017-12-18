@@ -5,8 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#303f9f"
     android:orientation="vertical"
-    tools:context="com.fyt.loki.fyt.LoginActivity">
+    tools:context="com.fyt.loki.fyt.Auth.LoginActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -21,7 +22,8 @@
         <FrameLayout
             android:id="@+id/loginPageContainer"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent">
 
         </FrameLayout>
 

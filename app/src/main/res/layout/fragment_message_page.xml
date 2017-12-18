@@ -2,13 +2,29 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context="com.fyt.loki.fyt.MessagePage">
+             tools:context="com.fyt.loki.fyt.MainAppPage.Messages.MessagePage">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Message"
-        />
+        android:text="Message"/>
+
+    <Button
+        android:id="@+id/sendbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Button"/>
+
+    <EditText
+        android:id="@+id/msgtxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"/>
 
 </FrameLayout>

@@ -7,7 +7,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
 
-    tools:context="com.fyt.loki.fyt.CreateAccountPage2"
+    tools:context="com.fyt.loki.fyt.Auth.CreateAccountPage2"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <android.support.v4.widget.NestedScrollView

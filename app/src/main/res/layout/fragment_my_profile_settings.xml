@@ -4,7 +4,7 @@
               android:layout_height="match_parent"
               android:background="#e0e0e0"
               android:orientation="vertical"
-              tools:context="com.fyt.loki.fyt.MenuPage">
+              tools:context="com.fyt.loki.fyt.MainAppPage.Menu.MenuPage">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

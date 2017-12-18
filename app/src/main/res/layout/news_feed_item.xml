@@ -13,7 +13,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
         android:background="@android:color/transparent"
         android:orientation="vertical">
 
@@ -81,7 +80,7 @@
                                 android:id="@+id/imageView3"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                app:srcCompat="@drawable/like_icon"/>
+                                app:srcCompat="@drawable/notlikedstar"/>
 
                             <TextView
                                 android:id="@+id/likef"
@@ -123,18 +122,46 @@
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/post_txtf"
+        <net.cachapa.expandablelayout.ExpandableLayout
+            android:id="@+id/textsource"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
-            android:autoLink="web|email"
-            android:text="TextView"
-            android:textSize="18sp"/>
+
+            app:el_duration="1"
+            app:el_expanded="true">
+
+
+            <com.ms.square.android.expandabletextview.ExpandableTextView
+                android:layout_width="match_parent"
+                android:id="@+id/expand_text_view"
+                app:maxCollapsedLines="5"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/expandable_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:maxLines="5"
+                    android:autoLink="web|email"
+                    android:text="TextView"
+                    android:textSize="16sp"/>
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:id="@+id/expand_collapse"
+                    android:padding="16dp"
+                    android:layout_gravity="right|bottom"
+                    android:background="@android:color/transparent"
+                    android:layout_height="wrap_content"/>
+            </com.ms.square.android.expandabletextview.ExpandableTextView>
+
+
+
+
+        </net.cachapa.expandablelayout.ExpandableLayout>
 
         <!--<ImageView
             android:id="@+id/imageView"
@@ -146,17 +173,25 @@
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/profilebg"/>
 -->
-        <com.synnapps.carouselview.CarouselView
-            android:id="@+id/post_imgf"
+        <net.cachapa.expandablelayout.ExpandableLayout
+            android:id="@+id/mediaview"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_marginBottom="10dp"
-            app:fillColor="#FFFFFFFF"
-            app:pageColor="#00000000"
-            app:radius="6dp"
-            app:slideInterval="3000"
-            app:strokeColor="#FF777777"
-            app:strokeWidth="1dp"/>
+            app:el_duration="1"
+            app:el_expanded="true">
+
+            <com.synnapps.carouselview.CarouselView
+                android:id="@+id/post_imgf"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginBottom="10dp"
+                app:fillColor="#FFFFFFFF"
+                app:pageColor="#00000000"
+                app:radius="6dp"
+                app:slideInterval="3000"
+                app:strokeColor="#FF777777"
+                app:strokeWidth="1dp"/>
+        </net.cachapa.expandablelayout.ExpandableLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -166,7 +201,6 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:background="@drawable/et_baorder3"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -174,7 +208,7 @@
                 android:id="@+id/commentBTN"
                 style="@android:style/Widget.Material.Button.Borderless"
                 android:layout_width="wrap_content"
-                android:layout_height="35dp"
+                android:layout_height="wrap_content"
 
                 android:capitalize="none"
                 android:drawableLeft="@drawable/comment_icon"
@@ -185,7 +219,7 @@
                 android:id="@+id/shareBTN"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"
-                android:layout_height="35dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:drawableLeft="@drawable/share"

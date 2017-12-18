@@ -3,7 +3,7 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent"
               android:orientation="vertical"
-             tools:context="com.fyt.loki.fyt.MyProfileSettingsGeneral">
+             tools:context="com.fyt.loki.fyt.MainAppPage.Menu.Settings.MyProfileSettingsGeneral">
 
 
     <android.support.v7.widget.Toolbar
@@ -76,7 +76,7 @@
             </LinearLayout>
 
             <EditText
-                android:id="@+id/editText4"
+                android:id="@+id/curr_pass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
@@ -88,7 +88,7 @@
                 android:paddingRight="10dp"/>
 
             <EditText
-                android:id="@+id/editText5"
+                android:id="@+id/new_pass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
@@ -100,7 +100,7 @@
                 android:paddingRight="10dp"/>
 
             <EditText
-                android:id="@+id/editText"
+                android:id="@+id/new_repass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
@@ -112,7 +112,7 @@
                 android:paddingRight="10dp"/>
 
             <Button
-                android:id="@+id/button7"
+                android:id="@+id/change_pass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
@@ -130,7 +130,7 @@
                 android:textColor="@color/colorAccent"/>
 
             <EditText
-                android:id="@+id/editText7"
+                android:id="@+id/first_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
@@ -142,7 +142,7 @@
                 android:paddingRight="10dp"/>
 
             <EditText
-                android:id="@+id/editText6"
+                android:id="@+id/last_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
@@ -154,7 +154,7 @@
                 android:paddingRight="10dp"/>
 
             <EditText
-                android:id="@+id/editText8"
+                android:id="@+id/bday"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
@@ -166,7 +166,7 @@
                 android:paddingRight="10dp"/>
 
             <Spinner
-                android:id="@+id/spinner2"
+                android:id="@+id/country"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
@@ -175,7 +175,7 @@
                 android:entries="@array/CountryList"/>
 
             <Spinner
-                android:id="@+id/spinner"
+                android:id="@+id/city"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
@@ -183,7 +183,7 @@
                 android:entries="@array/CityList"/>
 
             <EditText
-                android:id="@+id/editText9"
+                android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
@@ -199,10 +199,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="Mobile phone"/>
+                android:text="Mobile phone"
+                android:textColor="#000000"/>
 
             <EditText
-                android:id="@+id/editText10"
+                android:id="@+id/mobile_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/et_baorder4"
@@ -212,19 +213,31 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"/>
 
+            <Button
+                android:id="@+id/commitinfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="25dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/loginbtns"
+                android:text="Change personal information"
+                android:textColor="@color/white"/>
+
             <TextView
                 android:id="@+id/textView18"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:text="Profile link"/>
+                android:text="Profile link"
+                android:textColor="#000000"/>
 
             <TextView
                 android:id="@+id/textView23"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum erat urna, id laoreet felis mattis porta. Aliquam tincidunt, mauris feugiat posuere placerat, massa mauris suscipit tellus, at placerat lorem ipsum sit amet augue. Sed non justo quis diam ornare imperdiet vel nec augue. Cras elementum ullamcorper tristique. Etiam sit amet tellus nisi. Donec efficitur leo eget mollis euismod. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce ullamcorper id velit et aliquet. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam auctor ut velit nec hendrerit."/>
+                android:text="You can choose a profile link, that is easier to memorize and looks better on business cards. Please use latin letters, numbers or '_'. "
+                android:textColor="#000000"/>
 
             <EditText
                 android:id="@+id/editText11"
@@ -248,13 +261,15 @@
                     android:id="@+id/textView20"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Profile ID -"/>
+                    android:text="Profile ID -"
+                    android:textColor="#000000"/>
 
                 <TextView
                     android:id="@+id/textView19"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="14523263968"
+                    android:textColor="#000000"
                     android:textStyle="bold"/>
             </LinearLayout>
 
@@ -286,7 +301,8 @@
                     android:id="@+id/textView24"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="You can delete your profile"/>
+                    android:text="You can delete your profile "
+                    android:textColor="#000000"/>
 
                 <TextView
                     android:id="@+id/textView21"

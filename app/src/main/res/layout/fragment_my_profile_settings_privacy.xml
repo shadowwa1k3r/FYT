@@ -3,7 +3,7 @@
              android:layout_width="match_parent"
               android:orientation="vertical"
              android:layout_height="match_parent"
-             tools:context="com.fyt.loki.fyt.MyProfileSettingsPrivacy">
+             tools:context="com.fyt.loki.fyt.MainAppPage.Menu.Settings.MyProfileSettingsPrivacy">
 
     <Toolbar
         android:layout_width="match_parent"

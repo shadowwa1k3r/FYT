@@ -2,7 +2,7 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context="com.fyt.loki.fyt.CreateAccountPage4">
+             tools:context="com.fyt.loki.fyt.Auth.CreateAccountPage4">
 
     <!-- TODO: Update blank fragment layout -->
 
