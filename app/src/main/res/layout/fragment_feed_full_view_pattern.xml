@@ -121,63 +121,48 @@
             </LinearLayout>
 
         </LinearLayout>
-        <FrameLayout
+
+        <View
+            android:id="@+id/view3"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="0.5dp"
+            android:layout_centerHorizontal="false"
+            android:layout_centerInParent="false"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:background="#000000"/>
 
-            <RelativeLayout
+        <net.cachapa.expandablelayout.ExpandableLayout
+            android:id="@+id/textsource"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginBottom="5dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            app:el_duration="1"
+            app:el_expanded="true">
+
+
+            <TextView
+                android:id="@+id/expandable_text"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:autoLink="web|email"
+                android:text="TextView"
+                android:textSize="16sp"/>
 
 
-                <net.cachapa.expandablelayout.ExpandableLayout
-                    android:id="@+id/textsource"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+        </net.cachapa.expandablelayout.ExpandableLayout>
 
-                    app:el_duration="1"
-                    app:el_expanded="true">
-
-
-                    <TextView
-                        android:id="@+id/expandable_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_weight="1"
-                        android:autoLink="web|email"
-                        android:maxLines="5"
-                        android:text="TextView"
-                        android:textSize="16sp"/>
-
-
-                </net.cachapa.expandablelayout.ExpandableLayout>
-
-                <net.cachapa.expandablelayout.ExpandableLayout
-                    android:id="@+id/mediaview"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_below="@id/textsource"
-                    app:el_duration="1"
-                    app:el_expanded="true">
-
-                    <com.synnapps.carouselview.CarouselView
-                        android:id="@+id/post_imgf"
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:layout_marginBottom="10dp"
-                        app:fillColor="#FFFFFFFF"
-                        app:pageColor="#00000000"
-                        app:radius="6dp"
-                        app:slideInterval="5"
-                        app:strokeColor="#FF777777"
-                        app:strokeWidth="1dp"/>
-                </net.cachapa.expandablelayout.ExpandableLayout>
-
-                <!--<ImageView
+        <!--<ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -187,18 +172,25 @@
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/profilebg"/>
 -->
-            </RelativeLayout>
+        <net.cachapa.expandablelayout.ExpandableLayout
+            android:id="@+id/mediaview"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:el_duration="1"
+            app:el_expanded="false">
 
-            <FrameLayout
-                android:id="@+id/feed"
+            <com.synnapps.carouselview.CarouselView
+                android:id="@+id/post_imgf"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/transparent"
-                android:visibility="gone">
-
-            </FrameLayout>
-
-        </FrameLayout>
+                android:layout_height="200dp"
+                android:layout_marginBottom="10dp"
+                app:fillColor="#FFFFFFFF"
+                app:pageColor="#00000000"
+                app:radius="6dp"
+                app:slideInterval="3000"
+                app:strokeColor="#FF777777"
+                app:strokeWidth="1dp"/>
+        </net.cachapa.expandablelayout.ExpandableLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -247,5 +239,4 @@
         </LinearLayout>
 
     </LinearLayout>
-
 </android.support.v7.widget.CardView>

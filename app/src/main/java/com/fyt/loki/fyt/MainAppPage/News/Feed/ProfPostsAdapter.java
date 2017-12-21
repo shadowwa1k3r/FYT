@@ -286,9 +286,8 @@ public class ProfPostsAdapter extends RecyclerView.Adapter<ProfPostsAdapter.NFVH
     class NFVHolder extends RecyclerView.ViewHolder{
 
         private CircleImageView avatar;
-        private TextView username,createdAt,likeCount,commentCount;
+        private TextView username,createdAt,likeCount,commentCount,postTXT;
         private CarouselView post_img;
-        ExpandableTextView postTXT;
         private Button comment,share,like;
 
 
@@ -300,7 +299,7 @@ public class ProfPostsAdapter extends RecyclerView.Adapter<ProfPostsAdapter.NFVH
             avatar = (CircleImageView)itemview.findViewById(R.id.post_avaf);
             username = (TextView)itemview.findViewById(R.id.post_usernamef);
             createdAt = (TextView)itemview.findViewById(R.id.post_createdAtf);
-            postTXT = (ExpandableTextView) itemview.findViewById(R.id.expand_text_view);
+            postTXT = (TextView) itemview.findViewById(R.id.expandable_text);
             likeCount = (TextView)itemview.findViewById(R.id.likef);
             commentCount = (TextView)itemview.findViewById(R.id.commentf);
             post_img = (CarouselView)itemview.findViewById(R.id.post_imgf);

@@ -53,6 +53,7 @@ public class NewsPostsAdapter extends RecyclerView.Adapter<NewsPostsAdapter.NFVH
     private String token,username;
     private Retrofit retrofit;
     private ProfileInterface profileInt;
+    private View.OnClickListener listener;
 
 
 
@@ -167,6 +168,7 @@ public class NewsPostsAdapter extends RecyclerView.Adapter<NewsPostsAdapter.NFVH
                     }
                     catch (Exception e){
 
+
                         e.printStackTrace();
                     }
                     video_ico.setVisibility(View.INVISIBLE);
@@ -279,6 +281,15 @@ public class NewsPostsAdapter extends RecyclerView.Adapter<NewsPostsAdapter.NFVH
 
             }
         });
+        holder.feed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AppCompatActivity activity = (AppCompatActivity)mContext;
+                activity.getSupportFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                        .replace(R.id.contentContainer,FeedFullViewPattern.newInstance(currentItem))
+                        .addToBackStack(null).commit();
+            }
+        });
 
 
 
@@ -299,19 +310,20 @@ public class NewsPostsAdapter extends RecyclerView.Adapter<NewsPostsAdapter.NFVH
         private ExpandableTextView posttxt;
         private Button comment,share,like;
         private ExpandableLayout mediasrc,textsrc;
+        private FrameLayout feed;
 
 
         NFVHolder(final View itemview){
             super(itemview);
+            feed=(FrameLayout)itemview.findViewById(R.id.feed);
 
             comment=(Button)itemview.findViewById(R.id.commentBTN);
-
             share=(Button)itemview.findViewById(R.id.shareBTN);
             like=(Button)itemview.findViewById(R.id.likeBTN);
             avatar = (CircleImageView)itemview.findViewById(R.id.post_avaf);
             username = (TextView)itemview.findViewById(R.id.post_usernamef);
             createdAt = (TextView)itemview.findViewById(R.id.post_createdAtf);
-            posttxt = (ExpandableTextView) itemview.findViewById(R.id.expand_text_view);
+            postTXT = (TextView) itemview.findViewById(R.id.expandable_text);
             likeCount = (TextView)itemview.findViewById(R.id.likef);
             commentCount = (TextView)itemview.findViewById(R.id.commentf);
             post_img = (CarouselView)itemview.findViewById(R.id.post_imgf);
@@ -323,7 +335,7 @@ public class NewsPostsAdapter extends RecyclerView.Adapter<NewsPostsAdapter.NFVH
 
         void bindTo(final NewsFeedItemType current){
             post_img.setPageCount(current.getImages().size()+current.getVideos().size());
-            post_img.setSlideInterval(1000000);
+            post_img.setSlideInterval(5000000);
 
             if(current.getLikes().size()!=0){
                 current.setLiked(false);
@@ -351,21 +363,11 @@ public class NewsPostsAdapter extends RecyclerView.Adapter<NewsPostsAdapter.NFVH
 
             }
 
-
-
             username.setText(current.getUsername());
             DateTime dtIn = getDateTimeObject(current.getCreatedAt());
             createdAt.setText(jodaDateTimeToCustomString(dtIn,"HH:mm"));
-            posttxt.setText(current.getPostTXT(),current.text_expanded,0);
-            posttxt.setOnExpandStateChangeListener(new ExpandableTextView.OnExpandStateChangeListener() {
-                @Override
-                public void onExpandStateChanged(TextView textView, boolean isExpanded) {
+            postTXT.setText(current.getPostTXT());
 
-                    if (isExpanded)current.text_expanded.put(0,false);
-                    else current.text_expanded.put(0,true);
-                }
-
-            });
 
             likeCount.setText(current.getLikeCount());
             commentCount.setText(current.getCommentCount());

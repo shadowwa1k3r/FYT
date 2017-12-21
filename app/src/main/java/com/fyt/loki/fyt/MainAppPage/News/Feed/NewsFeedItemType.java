@@ -1,14 +1,17 @@
 package com.fyt.loki.fyt.MainAppPage.News.Feed;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.SparseBooleanArray;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by ergas on 11/20/2017.
  */
 
-public class NewsFeedItemType {
+public class NewsFeedItemType implements Parcelable {
 
     private String avatar;
     private int target_id;
@@ -37,6 +40,8 @@ public class NewsFeedItemType {
         this.target_id=tID;
         text_expanded.put(0,true);
     }
+
+
 
 
 
@@ -127,4 +132,54 @@ public class NewsFeedItemType {
     public void setLiked(boolean liked) {
         this.liked = liked;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.avatar);
+        dest.writeInt(this.target_id);
+        dest.writeString(this.username);
+        dest.writeString(this.createdAt);
+        dest.writeString(this.postTXT);
+        dest.writeString(this.likeCount);
+        dest.writeString(this.commentCount);
+        dest.writeList(this.images);
+        dest.writeList(this.videos);
+        dest.writeStringList(this.likes);
+        dest.writeByte(this.liked ? (byte) 1 : (byte) 0);
+        dest.writeSparseBooleanArray(this.text_expanded);
+    }
+
+    protected NewsFeedItemType(Parcel in) {
+        this.avatar = in.readString();
+        this.target_id = in.readInt();
+        this.username = in.readString();
+        this.createdAt = in.readString();
+        this.postTXT = in.readString();
+        this.likeCount = in.readString();
+        this.commentCount = in.readString();
+        this.images = new ArrayList<NewsFeedModel.Images>();
+        in.readList(this.images, NewsFeedModel.Images.class.getClassLoader());
+        this.videos = new ArrayList<NewsFeedModel.Videos>();
+        in.readList(this.videos, NewsFeedModel.Videos.class.getClassLoader());
+        this.likes = in.createStringArrayList();
+        this.liked = in.readByte() != 0;
+        this.text_expanded = in.readSparseBooleanArray();
+    }
+
+    public static final Parcelable.Creator<NewsFeedItemType> CREATOR = new Parcelable.Creator<NewsFeedItemType>() {
+        @Override
+        public NewsFeedItemType createFromParcel(Parcel source) {
+            return new NewsFeedItemType(source);
+        }
+
+        @Override
+        public NewsFeedItemType[] newArray(int size) {
+            return new NewsFeedItemType[size];
+        }
+    };
 }
