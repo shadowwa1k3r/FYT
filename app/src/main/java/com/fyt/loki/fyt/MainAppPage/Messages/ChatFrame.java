@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 import com.fyt.loki.fyt.R;
 import com.fyt.loki.fyt.Tools.DataWrapper;
+import com.fyt.loki.fyt.Tools.SharedPreference;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
@@ -75,6 +77,7 @@ public class ChatFrame extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View ChF=inflater.inflate(R.layout.fragment_chat_frame, container, false);
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         mListView=(ListView)ChF.findViewById(R.id.msg_list);
         send=(Button)ChF.findViewById(R.id.sendmessage);
         outputmsg=(EditText)ChF.findViewById(R.id.editmsg);
@@ -112,11 +115,12 @@ public class ChatFrame extends Fragment {
         return ChF;
     }
        private void start(){
+           SharedPreference sharedPreference=new SharedPreference();
         Request request= new Request.Builder()
                 //.url("ws://192.168.1.115:8000/chat/ZTpumabRiDUcmCan")
                 //.url("ws://echo.websocket.org")
-                .url("ws://192.168.1.116:8000/chat/28")
-                .addHeader("Authorization","e86523af27c0de1f31738aea89379822eee07e8f")
+                .url("wss://findyourtraining.com/chat/1")
+                .addHeader("Authorization",sharedPreference.getToken(getContext()))
 
                 .build();
         MsgWebSocketListener listener = new MsgWebSocketListener();
@@ -130,9 +134,11 @@ public class ChatFrame extends Fragment {
                    @Override
                    public void run() {
                        msg=DataWrapper.fromJson(txt);
-                       mMessageList.add(new ChatFrameItemType(BASE_URL+msg.getUser().getAvatar(),msg.getUser().getUsername(),msg.getMessage(),getCurrentTimeString()));
-                       mMessageAdapter.notifyDataSetChanged();
-                       mListView.setSelection(mMessageAdapter.getCount()-1);
+                       if(!msg.getUser().getUsername().equals("test")) {
+                           mMessageList.add(new ChatFrameItemType(BASE_URL + msg.getUser().getAvatar(), msg.getUser().getUsername(), msg.getMessage(), getCurrentTimeString()));
+                           mMessageAdapter.notifyDataSetChanged();
+                           mListView.setSelection(mMessageAdapter.getCount() - 1);
+                       }
                    }
                });
            }
@@ -147,7 +153,7 @@ public class ChatFrame extends Fragment {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    mMessageList.add(new ChatFrameItemType("https://findyourtraining.com/media/default/no_photo_male.png","farrukh",txt,getCurrentTimeString()));
+                    mMessageList.add(new ChatFrameItemType("https://findyourtraining.com/media/default/no_photo_male.png","ergash",txt,getCurrentTimeString()));
                     mMessageAdapter.notifyDataSetChanged();
                     mListView.setSelection(mMessageAdapter.getCount()-1);
                 }
@@ -166,6 +172,7 @@ public class ChatFrame extends Fragment {
         mWebSocket.send(text);
         mMessageAdapter.notifyDataSetChanged();
         mListView.setSelection(mMessageAdapter.getCount()-1);
+        mMessageList.add(new ChatFrameItemType(BASE_URL+"/media/profile_images/ergash/temp_rxB76xg.png","farrukh",text,getCurrentTimeString()));
 
 
     }

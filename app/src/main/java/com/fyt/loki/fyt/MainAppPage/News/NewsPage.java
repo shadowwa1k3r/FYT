@@ -1,15 +1,7 @@
 package com.fyt.loki.fyt.MainAppPage.News;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.provider.DocumentsContract;
-import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,7 +16,6 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -33,29 +24,15 @@ import com.fyt.loki.fyt.MainAppPage.News.Feed.NewsFeedModel;
 import com.fyt.loki.fyt.MainAppPage.News.Feed.NewsPostsAdapter;
 import com.fyt.loki.fyt.MainAppPage.ProfilePage.ProfileModel;
 import com.fyt.loki.fyt.MainAppPage.ProfilePage.ProfilePage;
-import com.fyt.loki.fyt.MainAppPage.ProfilePage.createPostResponse;
 import com.fyt.loki.fyt.R;
 import com.fyt.loki.fyt.Tools.ProfileInterface;
-import com.fyt.loki.fyt.Tools.ResizeAnimation;
-import com.kbeanie.multipicker.api.FilePicker;
-import com.kbeanie.multipicker.api.Picker;
-import com.kbeanie.multipicker.api.callbacks.FilePickerCallback;
-import com.kbeanie.multipicker.api.entity.ChosenFile;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import dmax.dialog.SpotsDialog;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -68,6 +45,7 @@ public class NewsPage extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    /*-------------------------publish--------------------------------------------
     List<MultipartBody.Part> parts=new ArrayList<MultipartBody.Part>();
     File file;
     RequestBody reqFile;
@@ -77,9 +55,9 @@ public class NewsPage extends Fragment {
 
 
 
-
     private FilePicker mFilePicker;
     private FilePickerCallback mFilePickerCallback;
+    //----------------------------------------------------------------------------*/
 
     private ProfileInterface profileInterface;
     private String mToken;
@@ -91,20 +69,18 @@ public class NewsPage extends Fragment {
     private EditText posttext;
     private Button include;
     private ExpandableLayout media,newstop;
+    private TextView new_post;
 
-    private RecyclerView mRecyclerView,mediaRV;
-    private RecyclerView.LayoutManager mLayoutManager,mediaLM;
-     NewsPostsAdapter mNewsPostsAdapter;
-    private MediaAdapter mMediaAdapter;
-    private String[] extension={"jpg","jpeg","png","gif","mp4","avi","3gp","mkv"};
+    private RecyclerView mRecyclerView;
+    private RecyclerView.LayoutManager mLayoutManager;
+    private NewsPostsAdapter mNewsPostsAdapter;
+
     private ArrayList<NewsFeedItemType> mDataset;
+   /* //---------------------------------publish-------------------------------------
+    private RecyclerView mediaRV;
+    private MediaAdapter mMediaAdapter;
     private ArrayList<String> mediaset;
-
-    private Parcelable mParcelable;
-
-    private TextView searchtext;
-    SearchView searchview;
-    private CircleImageView searchava;
+    private RecyclerView.LayoutManager mediaLM;
 
     static String[] IMAGE_EXTENSIONS = {
             "jpg",
@@ -130,13 +106,15 @@ public class NewsPage extends Fragment {
     };
     private static Set<String> SET_IMAGE_EXTENSIONS = new HashSet<String>(Arrays.asList(IMAGE_EXTENSIONS));
     private static Set<String> SET_VIDEO_EXTENSIONS = new HashSet<String>(Arrays.asList(VIDEO_EXTENSIONS));
-   // DialogProperties properties;
-    //FilePickerDialog dialog;
+
+    //-----------------------------------------------------------------------------*/
+
+
     static int y;
-    Boolean status=false;
-    private ResizeAnimation mResizeAnimation;
 
-
+    private TextView searchtext;
+    private SearchView searchview;
+    private CircleImageView searchava;
 
 
 
@@ -157,23 +135,18 @@ public class NewsPage extends Fragment {
             mUserName = getArguments().getString(ARG_PARAM2);
         }
     }
-  /*  @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case FilePickerDialog.EXTERNAL_READ_PERMISSION_GRANT: {
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    if(dialog!=null)
-                    {   //Show dialog if the read permission has been granted.
-                        dialog.show();
-                    }
-                }
-                else {
-                    //Permission has not been granted. Notify the user.
-                    Toast.makeText(getContext(),"Permission is Required for getting list of files",Toast.LENGTH_SHORT).show();
-                }
-            }
+
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        try {
+            mNewsPostsAdapter.notifyDataSetChanged();
         }
-    }*/
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
@@ -193,26 +166,7 @@ public class NewsPage extends Fragment {
 
 
 
-
-        sendpost=(ImageButton)NewsPage.findViewById(R.id.sendpost);
-        posttext=(EditText)NewsPage.findViewById(R.id.posttxt);
-        include=(Button)NewsPage.findViewById(R.id.photo_video);
-        media=(ExpandableLayout)NewsPage.findViewById(R.id.mediaexpand);
-        newstop=(ExpandableLayout)NewsPage.findViewById(R.id.newstop);
-        add=(ImageView)NewsPage.findViewById(R.id.media_add);
-        lay=(LinearLayout)NewsPage.findViewById(R.id.lay);
-/*
-        properties = new DialogProperties();
-
-        properties.selection_mode= DialogConfigs.MULTI_MODE;
-        properties.selection_type=DialogConfigs.FILE_SELECT;
-        properties.root=new File(DialogConfigs.DEFAULT_DIR);
-        properties.error_dir = new File(DialogConfigs.DEFAULT_DIR);
-        properties.offset = new File(DialogConfigs.DEFAULT_DIR);
-        properties.extensions=extension;
-        dialog = new FilePickerDialog(getContext(),properties);
-        dialog.setTitle("Select Photo");
-*/
+        new_post=(TextView)NewsPage.findViewById(R.id.posttxt);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL_API)
@@ -221,22 +175,15 @@ public class NewsPage extends Fragment {
         profileInterface = retrofit.create(ProfileInterface.class);
 
         mRecyclerView = (RecyclerView)NewsPage.findViewById(R.id.newsRV);
-        mediaRV = (RecyclerView)NewsPage.findViewById(R.id.mediacontainer);
-        mediaRV.setHasFixedSize(true);
+
         mRecyclerView.setHasFixedSize(true);
 
         mLayoutManager = new LinearLayoutManager(getActivity());
-        //mParcelable=mLayoutManager.onSaveInstanceState();
-        //mLayoutManager.onRestoreInstanceState(mParcelable);
-        mediaLM = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,true);
-        mediaRV.setLayoutManager(mediaLM);
+
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mLayoutParams=new LinearLayout.LayoutParams(0,lay.getHeight());
 
         mDataset = new ArrayList<NewsFeedItemType>();
-        mediaset = new ArrayList<String>();
-        mMediaAdapter = new MediaAdapter(getActivity(),mediaset);
 
         Call<ProfileModel> mprofileInfo = profileInterface.profileInfo(" Token "+mToken,mUserName);
         mprofileInfo.enqueue(new Callback<ProfileModel>() {
@@ -258,7 +205,6 @@ public class NewsPage extends Fragment {
                             mDataset.clear();
 
 
-                            //Button button = (Button)NewsPage.findViewById(R.id.button17);
 
                             for (int i = 0; i < response.body().size(); i++) {
 
@@ -299,171 +245,14 @@ public class NewsPage extends Fragment {
             }
         });
 
-        sendpost.setOnClickListener(new View.OnClickListener() {
+        new_post.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                final AlertDialog dial=new SpotsDialog(getContext());
-                dial.setTitle("Uploading Media");
-                dial.show();
-                context = RequestBody.create(MediaType.parse("text/plain"),posttext.getText().toString());
-                final retrofit2.Call<createPostResponse> req = profileInterface.postimage(" Token "+mToken,parts,name,context);
-                req.enqueue(new Callback<createPostResponse>() {
-                    @Override
-                    public void onResponse(Call<createPostResponse> call, Response<createPostResponse> response) {
-
-                        if (response.isSuccessful()){
-
-                            mDataset.add(0,new NewsFeedItemType(BASE_URL+response.body().owner.avatar,response.body().owner.username,response.body().created,response.body().context,response.body().likes_count,response.body().comments,
-                                    response.body().images,response.body().videos,response.body().id,response.body().likes));
-                            mNewsPostsAdapter.notifyItemInserted(0);
-                            mRecyclerView.smoothScrollToPosition(0);
-
-                            mediaset.clear();
-
-                            mMediaAdapter.notifyDataSetChanged();
-                            media.collapse();
-                            posttext.setText("");
-                            dial.dismiss();
-                        }
-                        else{ dial.dismiss();
-                       /* include.setText("resperror");*/}
-                    }
-
-
-                    @Override
-                    public void onFailure(Call<createPostResponse> call, Throwable t) {
-                        t.printStackTrace();
-                        //include.setText(t.toString());
-                        dial.dismiss();
-
-                    }
-                });
-            }
-        });
-        include.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (media.isExpanded()){
-                    media.collapse();
-                }
-                else {
-                    media.expand();
-                }
-            }
-        });
-
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-               // super.onScrolled(recyclerView, dx, dy);
-               if(dy >0){
-                    //newstop.collapse();
-                  }
-
-
-                else {
-                   // newstop.expand();
-
-                  }
-
-
-              y=dy;
-            }
-
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView,int newState){
-                super.onScrollStateChanged(recyclerView,newState);
-                if(mRecyclerView.SCROLL_STATE_DRAGGING==newState)
-                {
-
-
-                }
-                if(mRecyclerView.SCROLL_STATE_IDLE==newState){
-                    if (y<=0)newstop.expand();
-                    else {
-                        y=0;
-                        newstop.collapse();
-                    }
-
-                }
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).replace(R.id.contentContainer,new NewPostPublish()).addToBackStack(null).commit();
 
             }
         });
 
-        add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-                mFilePicker = new FilePicker(com.fyt.loki.fyt.MainAppPage.News.NewsPage.this);
-                Log.e("FilePick", "onClick: "+mFilePicker.toString() );
-                mFilePickerCallback = new FilePickerCallback() {
-                    @Override
-                    public void onFilesChosen(List<ChosenFile> list) {
-                        for (int i = 0; i <list.size() ; i++) {
-
-                            file = new File(list.get(i).getOriginalPath());
-
-                                Log.e("FilePick", "onImagesChosen: " + list.get(i).getOriginalPath());
-                                Log.e("FilePick", "onImagesChosen: " + list.get(i).getDisplayName());
-                                Log.e("FilePick", "onImagesChosenext: " + list.get(i).getOriginalPath().substring(list.get(i).getOriginalPath().length() - (list.get(i).getOriginalPath().length() - list.get(i).getOriginalPath().lastIndexOf(".") - 1)));
-                                Log.e("FilePick", "onImagesChosen: " + file.getName());
-
-                            String wholeID = DocumentsContract.getDocumentId(Uri.parse(list.get(i).getOriginalPath()));
-
-                            String id = wholeID.split(":")[1];
-
-                            String[] column = {MediaStore.Images.Media.DATA};
-
-                            String sel=MediaStore.Images.Media._ID + "=?";
-
-                            Cursor cursor = getActivity().getContentResolver()
-                                    .query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,column,sel,new String[]{id},null);
-
-                            String filepathh="";
-                            int columnIndex = cursor.getColumnIndex(column[0]);
-
-                            if(cursor.moveToFirst()){
-                                filepathh=cursor.getString(columnIndex);
-                            }
-                            cursor.close();
-                            Log.e("FilePick", "onImagesChosen: "+filepathh );
-                            file=new File(filepathh);
-
-                            if (SET_IMAGE_EXTENSIONS.contains((filepathh.substring(filepathh.length() - (filepathh.length() - filepathh.lastIndexOf(".") - 1))).toLowerCase()) || SET_VIDEO_EXTENSIONS.contains((filepathh.substring(filepathh.length() - (filepathh.length() - filepathh.lastIndexOf(".") - 1))).toLowerCase())) {
-
-
-                                reqFile = RequestBody.create(MediaType.parse("file/*"), file);
-                                parts.add(MultipartBody.Part.createFormData("file", file.getName(), reqFile));
-                                mediaset.add(list.get(i).getOriginalPath());
-                                //include.setText(list.get(i).getOriginalPath());
-
-
-                                name = RequestBody.create(MediaType.parse("text/plain"), "text");
-                                mMediaAdapter = new MediaAdapter(getActivity(), mediaset);
-                                mMediaAdapter.notifyDataSetChanged();
-
-                                mediaRV.setAdapter(mMediaAdapter);
-                                mediaRV.smoothScrollToPosition(mediaset.size() - 1);
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onError(String s) {
-                        Log.e("FilePick", "onError: "+s );
-
-                    }
-                };
-                mFilePicker.setFilePickerCallback(mFilePickerCallback);
-                mFilePicker.allowMultiple();
-
-
-                mFilePicker.pickFile();
-
-
-            }
-        });
 
         requestPermissions(new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},10);
 
@@ -476,27 +265,6 @@ public class NewsPage extends Fragment {
     }
 
 
-    @Override
-    public void onActivityResult(int requestCode,int resultCode,Intent data){
 
-        if(requestCode == Picker.PICK_FILE){
-            if(resultCode==Activity.RESULT_OK){
-                if(mFilePicker==null){
-                    mFilePicker=new FilePicker(NewsPage.this);
-                    mFilePicker.setFilePickerCallback(mFilePickerCallback);
-                }
-                mFilePicker.submit(data);
-
-
-            }
-           /* for (int i = 0; i <medialist.size() ; i++) {
-
-            }
-            */
-
-
-
-        }
-    }
 
 }

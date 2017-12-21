@@ -12,8 +12,8 @@
         <item name="android:textColorSecondary">@android:color/holo_orange_dark</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-      <!--  <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
-        <item name="buttonStyle">@style/RobotoButtonStyle</item>-->
+        <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
+        <item name="buttonStyle">@style/RobotoButtonStyle</item>
 
     </style>
     <style name="RobotoTextViewStyle" parent="android:Widget.TextView">

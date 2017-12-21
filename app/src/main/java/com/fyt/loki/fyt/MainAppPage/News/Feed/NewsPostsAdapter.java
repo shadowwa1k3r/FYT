@@ -122,11 +122,13 @@ public class NewsPostsAdapter extends RecyclerView.Adapter<NewsPostsAdapter.NFVH
           //  holder.post_img.setLayoutParams( new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             holder.mediasrc.collapse();
         }
+        else holder.mediasrc.expand();
         if(currentItem.getPostTXT().length()==0)
         {
            // holder.postTXT.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             holder.textsrc.collapse();
         }
+        else holder.textsrc.expand();
 
         holder.post_img.setImageClickListener(new ImageClickListener() {
             @Override
@@ -161,7 +163,7 @@ public class NewsPostsAdapter extends RecyclerView.Adapter<NewsPostsAdapter.NFVH
 
 
                        // Glide.with(mContext).load(post_media[position]).thumbnail(Glide.with(mContext).load(R.drawable.loader_transparent)).fitCenter().into(feedimage);
-                        Picasso.with(mContext).load(post_media[position]).placeholder(R.drawable.loading).fit().into(feedimage);
+                        Picasso.with(mContext).load(post_media[position]).placeholder(R.drawable.loading).fit().centerInside().into(feedimage);
                     }
                     catch (Exception e){
 

@@ -118,6 +118,7 @@
                 android:layout_marginBottom="5dp"
                 android:background="@drawable/loginbtns"
                 android:text="Change password"
+                android:textAllCaps="true"
                 android:textColor="@color/white"/>
 
             <TextView
@@ -221,6 +222,7 @@
                 android:layout_marginTop="10dp"
                 android:background="@drawable/loginbtns"
                 android:text="Change personal information"
+                android:textAllCaps="true"
                 android:textColor="@color/white"/>
 
             <TextView
@@ -278,9 +280,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25dp"
-                android:textColor="@color/white"
                 android:background="@drawable/loginbtns"
-                android:text="Change profile link"/>
+                android:text="Change profile link"
+                android:textColor="@color/white"
+                android:textAllCaps="true"/>
 
             <Spinner
                 android:id="@+id/spinner3"

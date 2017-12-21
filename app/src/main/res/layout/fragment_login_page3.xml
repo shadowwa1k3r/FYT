@@ -36,6 +36,7 @@
             android:layout_marginRight="20dp"
             android:background="@drawable/loginbtns"
             android:text="Create Account"
+            android:textAllCaps="true"
             android:textColor="@android:color/background_light"/>
 
         <LinearLayout
@@ -60,6 +61,7 @@
 
                 android:background="@android:color/transparent"
                 android:text="Login"
+                android:textAllCaps="true"
                 android:textColor="@color/colorAccent"/>
         </LinearLayout>
     </LinearLayout>

@@ -178,7 +178,7 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             app:el_duration="1"
-            app:el_expanded="true">
+            app:el_expanded="false">
 
             <com.synnapps.carouselview.CarouselView
                 android:id="@+id/post_imgf"
@@ -213,6 +213,7 @@
                 android:capitalize="none"
                 android:drawableLeft="@drawable/comment_icon"
                 android:text=" Comment"
+                android:textColor="#000000"
                 android:textSize="12sp"/>
 
             <Button
@@ -224,6 +225,7 @@
                 android:layout_marginRight="5dp"
                 android:drawableLeft="@drawable/share"
                 android:text="share"
+                android:textColor="#000000"
                 android:textSize="12sp"/>
 
             <Button
@@ -232,6 +234,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="35dp"
                 android:text="like"
+                android:textColor="#000000"
                 android:textSize="12sp"/>
 
         </LinearLayout>

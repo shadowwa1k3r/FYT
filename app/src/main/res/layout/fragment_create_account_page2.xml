@@ -213,6 +213,7 @@
                 android:background="@drawable/loginbtns"
                 android:duplicateParentState="false"
                 android:text="Next"
+                android:textAllCaps="true"
                 android:textColor="@android:color/background_light"/>
 
             <LinearLayout
@@ -237,6 +238,7 @@
 
                     android:background="@android:color/transparent"
                     android:text="Login"
+                    android:textAllCaps="true"
                     android:textColor="@color/colorAccent"/>
             </LinearLayout>
 

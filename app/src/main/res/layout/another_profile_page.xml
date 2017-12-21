@@ -151,7 +151,8 @@
 
                                 android:drawableTop="@drawable/newspaper"
                                 android:text="Activity log"
-                                android:textAllCaps="false"/>
+                                android:textAllCaps="false"
+                                android:textColor="#000000"/>
 
                             <Button
                                 android:id="@+id/button39"
@@ -162,7 +163,8 @@
 
                                 android:drawableTop="@drawable/mytm"
                                 android:text="My teams"
-                                android:textAllCaps="false"/>
+                                android:textAllCaps="false"
+                                android:textColor="#000000"/>
 
                             <Button
                                 android:id="@+id/button17"
@@ -174,7 +176,8 @@
                                 android:layout_gravity="right"
                                 android:drawableTop="@drawable/smallcalendar"
                                 android:text="My training"
-                                android:textAllCaps="false"/>
+                                android:textAllCaps="false"
+                                android:textColor="#000000"/>
                         </android.support.design.widget.CoordinatorLayout>
 
                         <View
@@ -414,6 +417,7 @@
                         android:drawableLeft="@drawable/pvico"
                         android:gravity="center_vertical"
                         android:text="  Media"
+                        android:textColor="#000000"
                         android:textSize="10sp"/>
 
                     <Button
@@ -427,6 +431,7 @@
                         android:drawableLeft="@drawable/chekinico"
                         android:gravity="center_vertical"
                         android:text="Chek in"
+                        android:textColor="#000000"
                         android:textSize="10sp"/>
 
                     <Button
@@ -442,6 +447,7 @@
                         android:drawableLeft="@drawable/tagfico"
                         android:gravity="center_vertical"
                         android:text="Tag friends"
+                        android:textColor="#000000"
                         android:textSize="10sp"/>
                 </LinearLayout>
 

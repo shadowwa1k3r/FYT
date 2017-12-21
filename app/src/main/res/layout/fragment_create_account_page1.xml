@@ -35,6 +35,7 @@
                 android:background="@drawable/twt"
                 android:drawableLeft="@drawable/tw"
                 android:text=" Twitter   "
+                android:textAllCaps="true"
                 android:textColor="#ffffff"/>
 
             <Button
@@ -46,6 +47,7 @@
                 android:drawableLeft="@drawable/gp"
                 android:text="google       "
                 android:textAlignment="center"
+                android:textAllCaps="true"
                 android:textColor="#ffffff"/>
         </LinearLayout>
 
@@ -69,6 +71,7 @@
                 android:drawableLeft="@drawable/fb"
                 android:paddingLeft="5dp"
                 android:text="Facebook"
+                android:textAllCaps="true"
                 android:textColor="#ffffff"/>
 
             <Button
@@ -80,6 +83,7 @@
                 android:drawableLeft="@drawable/vk"
                 android:text="vkontakte"
                 android:textAlignment="center"
+                android:textAllCaps="true"
                 android:textColor="#ffffff"/>
         </LinearLayout>
 
@@ -123,6 +127,7 @@
             android:background="@drawable/loginbtns"
             android:duplicateParentState="false"
             android:text="sign up with email"
+            android:textAllCaps="true"
             android:textColor="@android:color/background_light"/>
 
         <LinearLayout
@@ -147,6 +152,7 @@
 
                 android:background="@android:color/transparent"
                 android:text="Login"
+                android:textAllCaps="true"
                 android:textColor="@color/colorAccent"/>
         </LinearLayout>
 

@@ -63,6 +63,7 @@ public interface ProfileInterface {
     @POST("create/post/")
     Call<createPostResponse> post(@Header("Authorization")String token, @Body createPostBody createPostBody);
 
+
     @POST("accounts/set-new-password/")
     Call<General_pass_response> change_password(@Header("Authorization")String token,@Body General_pass_body body);
     @PUT("accounts/update-profile/")

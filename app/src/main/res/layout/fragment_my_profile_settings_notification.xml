@@ -196,6 +196,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/loginbtns"
                     android:text="Link email"
+                    android:textAllCaps="true"
                     android:textColor="@color/white"/>
             </LinearLayout>
 
