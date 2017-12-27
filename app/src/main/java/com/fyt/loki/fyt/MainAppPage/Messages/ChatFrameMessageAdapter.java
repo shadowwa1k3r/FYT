@@ -95,7 +95,7 @@ public class ChatFrameMessageAdapter extends ArrayAdapter<ChatFrameItemType>{
         }
 
 
-        if (datamodel.getUsername().equals("farrukh")){
+        if (datamodel.getUsername().equals(datamodel.getMe())){
             viewHolder.chat.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
             viewHolder.date_container.setGravity(Gravity.START);
             viewHolder.content.setBackground(getContext().getDrawable(R.drawable.rounded2));

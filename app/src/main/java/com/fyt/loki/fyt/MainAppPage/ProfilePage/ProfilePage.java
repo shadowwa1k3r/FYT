@@ -21,11 +21,11 @@ import com.bumptech.glide.Glide;
 import com.fyt.loki.fyt.MainAppPage.Menu.Friends.FriendInfoModel;
 import com.fyt.loki.fyt.MainAppPage.Menu.Friends.FriendItemType;
 import com.fyt.loki.fyt.MainAppPage.Menu.Friends.FriendPostBody;
-import com.fyt.loki.fyt.MainAppPage.Menu.Friends.FriendsList;
+import com.fyt.loki.fyt.MainAppPage.Menu.Friends.FriendsListAll;
 import com.fyt.loki.fyt.MainAppPage.News.Feed.ProfPostsAdapter;
 import com.fyt.loki.fyt.MainAppPage.News.FriendItemAdapter;
-import com.fyt.loki.fyt.Tools.ProfileInterface;
 import com.fyt.loki.fyt.R;
+import com.fyt.loki.fyt.Tools.ProfileInterface;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +56,7 @@ public class ProfilePage extends Fragment  {
     private CircleImageView iAvatar2,iAvatar;
     private TextView tFull_name,tBirth_date,tGender,tCountry,tCity,tEmail,tPhone;
     private Button edit,list_friends,activity_log;
-    private ImageView status;
+    private ImageView status,editava;
   //  private myCustomPane friendsPanel;
   //  private Button hidepanel;
 
@@ -135,6 +135,7 @@ public class ProfilePage extends Fragment  {
         friends = (TextView)Ppage.findViewById(R.id.friend_count);
         frcount = (TextView)Ppage.findViewById(R.id.friends_count);
         activity_log = (Button)Ppage.findViewById(R.id.activity_log);
+        editava=(ImageView)Ppage.findViewById(R.id.edit_ava);
 
 
 
@@ -187,11 +188,18 @@ public class ProfilePage extends Fragment  {
          status = (ImageView) inflatedView.findViewById(R.id.online);
 
 
+         editava.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                 getActivity().getSupportFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                         .replace(R.id.contentContainer, new EditProfileAva()).addToBackStack(null).commit();
+             }
+         });
         list_friends.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                getActivity().getSupportFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                       .replace(R.id.contentContainer, FriendsList.newInstance(mParam1,mParam2)).addToBackStack(null).commit();
+                       .replace(R.id.contentContainer, new FriendsListAll()).addToBackStack(null).commit();
             }
         });
 
@@ -237,8 +245,8 @@ public class ProfilePage extends Fragment  {
 
                                         for (int i=0; i<response.body().size();i++){
                                           //  mDataset_panel.add(new FriendItemType(response.body().get(i).getAvatar(), response.body().get(i).getUsername(), response.body().get(i).getIs_online()));
-                                            if(response.body().get(i).getIs_online()) {
-                                                mDataset.add(new FriendItemType(response.body().get(i).getAvatar(), response.body().get(i).getUsername(), response.body().get(i).getIs_online()));
+                                            if(response.body().get(i).profile.is_online) {
+                                                mDataset.add(new FriendItemType(response.body().get(i).profile.avatar, response.body().get(i).username, response.body().get(i).profile.is_online,response.body().get(i).id));
 
                                             }
 

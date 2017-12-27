@@ -117,7 +117,7 @@ public class NewsFeedItemType implements Parcelable {
         this.target_id = target_id;
     }
 
-    public List getLikes() {
+    public List<String> getLikes() {
         return likes;
     }
 

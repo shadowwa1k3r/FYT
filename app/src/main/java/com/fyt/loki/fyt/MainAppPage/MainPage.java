@@ -46,6 +46,7 @@ public class MainPage extends AppCompatActivity {
         FrameLayout fl=(FrameLayout)findViewById(R.id.contentContainer);
 
 
+
         BottomBar bottomBar = (BottomBar)findViewById(R.id.bottom_navigationbar);
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
@@ -54,7 +55,7 @@ public class MainPage extends AppCompatActivity {
                     case R.id.item1:
 
 
-                        ChangeFragment("item1");
+                        //ChangeFragment("item1");
 
 
                         break;
@@ -79,6 +80,7 @@ public class MainPage extends AppCompatActivity {
 
             }
         });
+        bottomBar.setDefaultTab(R.id.item4);
         messages= bottomBar.getTabWithId(R.id.item2);
         messages.setBadgeCount(1);
 

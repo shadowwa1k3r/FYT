@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,6 +50,9 @@ public class FriendFullInfoPage extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager_posts;
     private ProfPostsAdapter mAdapter_posts;
     private ArrayList<PostItemType> mDataset_posts;
+    private Button follow;
+    private boolean friend = false;
+    private int user_id;
 
 
 
@@ -94,6 +98,7 @@ public class FriendFullInfoPage extends Fragment {
         tPhone = (TextView)Fpage.findViewById(R.id.phonef);
         iAvatar =(CircleImageView) Fpage.findViewById(R.id.friend_profile_photo);
         frcount=(TextView)Fpage.findViewById(R.id.friends_count);
+        follow=(Button)Fpage.findViewById(R.id.follow);
 
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -109,6 +114,32 @@ public class FriendFullInfoPage extends Fragment {
         mRecyclerView_posts.setLayoutManager(mLayoutManager_posts);
 
         mDataset_posts = new ArrayList<PostItemType>();
+
+        final Call<List<FriendInfoModel>> friends = profileInterface.friendInfo(" Token "+mToken);
+
+        friends.enqueue(new Callback<List<FriendInfoModel>>() {
+            @Override
+            public void onResponse(Call<List<FriendInfoModel>> call, Response<List<FriendInfoModel>> response) {
+                if (response.isSuccessful()){
+                    for (int i = 0; i <response.body().size() ; i++) {
+                        if (mUserName.equals(response.body().get(i).username)) {
+                            follow.setText("Unfollow - ");
+                            friend=true;
+                        }
+                        else {
+                            follow.setText("Follow + ");
+                            friend=false;
+                        }
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<FriendInfoModel>> call, Throwable t) {
+
+            }
+        });
 
 
 
@@ -140,6 +171,7 @@ public class FriendFullInfoPage extends Fragment {
                     else if(response.body().getProfile().getGender()==0){
                         tGender.setText("Female");
                     }
+                    user_id=response.body().getId();
                     tCity.setText(response.body().getProfile().getCity());
                     tEmail.setText(response.body().getEmail());
                     tPhone.setText(response.body().getProfile().getPhone());
@@ -186,6 +218,51 @@ public class FriendFullInfoPage extends Fragment {
             public void onFailure(Call<ProfileModel> call, Throwable t) {
                 dialog.dismiss();
 
+            }
+        });
+
+        follow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!friend){
+                    FollowBody body=new FollowBody();
+                    body.user=user_id;
+                Call<FollowResponse> followUser=profileInterface.follow(" Token "+mToken,body);
+                followUser.enqueue(new Callback<FollowResponse>() {
+                    @Override
+                    public void onResponse(Call<FollowResponse> call, Response<FollowResponse> response) {
+                        if(response.isSuccessful()){
+
+                                follow.setText("Unfollow - ");
+                                friend=true;
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<FollowResponse> call, Throwable t) {
+
+                    }
+                });}
+                else {
+                    FollowBody body=new FollowBody();
+                    body.user=user_id;
+                    Call<FollowResponse> unFollowUser=profileInterface.unfollow(" Token "+mToken,body);
+                    unFollowUser.enqueue(new Callback<FollowResponse>() {
+                        @Override
+                        public void onResponse(Call<FollowResponse> call, Response<FollowResponse> response) {
+                            if (response.isSuccessful()){
+                                follow.setText("Follow + ");
+                                friend=false;
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<FollowResponse> call, Throwable t) {
+
+                        }
+                    });
+                }
             }
         });
 

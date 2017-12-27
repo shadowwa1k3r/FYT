@@ -15,13 +15,10 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.fyt.loki.fyt.MainAppPage.News.Comments.CommentPage;
 import com.fyt.loki.fyt.R;
-import com.fyt.loki.fyt.Tools.ImageViewer;
 import com.fyt.loki.fyt.Tools.ProfileInterface;
-import com.fyt.loki.fyt.Tools.VideoPlayer;
 import com.ms.square.android.expandabletextview.ExpandableTextView;
 import com.squareup.picasso.Picasso;
 import com.synnapps.carouselview.CarouselView;
-import com.synnapps.carouselview.ImageClickListener;
 import com.synnapps.carouselview.ViewListener;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
@@ -131,7 +128,7 @@ public class NewsPostsAdapter extends RecyclerView.Adapter<NewsPostsAdapter.NFVH
         }
         else holder.textsrc.expand();
 
-        holder.post_img.setImageClickListener(new ImageClickListener() {
+       /* holder.post_img.setImageClickListener(new ImageClickListener() {
             @Override
             public void onClick(int position) {
                 AppCompatActivity activity = (AppCompatActivity)mContext;
@@ -147,7 +144,7 @@ public class NewsPostsAdapter extends RecyclerView.Adapter<NewsPostsAdapter.NFVH
                     activity.getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.zoom_in, R.anim.zoom_out).replace(R.id.videocontainer, ImageViewer.newInstance(post_media[position])).addToBackStack(null).commit();
                 }
             }
-        });
+        });*/
 
        holder.post_img.setViewListener(new ViewListener() {
             @Override
@@ -191,7 +188,6 @@ public class NewsPostsAdapter extends RecyclerView.Adapter<NewsPostsAdapter.NFVH
                     return customView;
 
                 }
-
 
 
             }
@@ -290,6 +286,13 @@ public class NewsPostsAdapter extends RecyclerView.Adapter<NewsPostsAdapter.NFVH
                         .addToBackStack(null).commit();
             }
         });
+        holder.toComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AppCompatActivity activity =(AppCompatActivity)mContext;
+                activity.getSupportFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).replace(R.id.videocontainer, CommentPage.newInstance(currentItem.getTarget_id(),token,username)).addToBackStack(null).commit();
+            }
+        });
 
 
 
@@ -311,6 +314,7 @@ public class NewsPostsAdapter extends RecyclerView.Adapter<NewsPostsAdapter.NFVH
         private Button comment,share,like;
         private ExpandableLayout mediasrc,textsrc;
         private FrameLayout feed;
+        private ImageView toComment,toLikes;
 
 
         NFVHolder(final View itemview){
@@ -318,6 +322,8 @@ public class NewsPostsAdapter extends RecyclerView.Adapter<NewsPostsAdapter.NFVH
             feed=(FrameLayout)itemview.findViewById(R.id.feed);
 
             comment=(Button)itemview.findViewById(R.id.commentBTN);
+            toComment=(ImageView)itemview.findViewById(R.id.toComment);
+            toLikes=(ImageView)itemview.findViewById(R.id.toLikes);
             share=(Button)itemview.findViewById(R.id.shareBTN);
             like=(Button)itemview.findViewById(R.id.likeBTN);
             avatar = (CircleImageView)itemview.findViewById(R.id.post_avaf);

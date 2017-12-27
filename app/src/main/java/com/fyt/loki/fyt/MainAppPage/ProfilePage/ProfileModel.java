@@ -23,6 +23,9 @@ public class ProfileModel {
     @SerializedName("email")
     @Expose
     private String email;
+    @SerializedName("url")
+    @Expose
+    private String url;
     @SerializedName("profile")
     @Expose
     private Profile profile;
@@ -67,6 +70,14 @@ public class ProfileModel {
         this.email = email;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     public Profile getProfile() {
         return profile;
     }
@@ -109,10 +120,13 @@ public class ProfileModel {
         private String avatar;
         @SerializedName("location")
         @Expose
-        private String location;
+        private String  location;
         @SerializedName("language")
         @Expose
         private String language;
+        @SerializedName("is_online")
+        @Expose
+        private Boolean isOnline;
         @SerializedName("notifications_status")
         @Expose
         private Boolean notificationsStatus;
@@ -203,7 +217,7 @@ public class ProfileModel {
             this.avatar = avatar;
         }
 
-        public Object getLocation() {
+        public String getLocation() {
             return location;
         }
 
@@ -211,12 +225,20 @@ public class ProfileModel {
             this.location = location;
         }
 
-        public Object getLanguage() {
+        public String getLanguage() {
             return language;
         }
 
         public void setLanguage(String language) {
             this.language = language;
+        }
+
+        public Boolean getIsOnline() {
+            return isOnline;
+        }
+
+        public void setIsOnline(Boolean isOnline) {
+            this.isOnline = isOnline;
         }
 
         public Boolean getNotificationsStatus() {

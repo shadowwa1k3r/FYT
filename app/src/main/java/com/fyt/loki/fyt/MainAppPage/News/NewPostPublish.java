@@ -168,10 +168,11 @@ public class NewPostPublish extends Fragment {
         mediaRV=(RecyclerView)NPP.findViewById(R.id.media);
         progress=(ProgressBar)NPP.findViewById(R.id.progress);
         mSharedPreference=new SharedPreference();
-
+        action.setText(mSharedPreference.getUserName(getContext()));
         mediaRV.setHasFixedSize(true);
         mediaLM=new LinearLayoutManager(getActivity());
         mediaRV.setLayoutManager(mediaLM);
+
 
         mediaset= new ArrayList<>();
         mMediaAdapter=new MediaAdapter(getActivity(),mediaset);
@@ -181,6 +182,8 @@ public class NewPostPublish extends Fragment {
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                progress.setVisibility(View.VISIBLE);
 
                 context= RequestBody.create(MediaType.parse("text/plain"),post_txt.getText().toString());
                 final retrofit2.Call<createPostResponse> req=profileInterface.postimage(" Token "+mSharedPreference.getToken(getContext()),parts,name,context);

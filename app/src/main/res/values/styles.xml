@@ -20,6 +20,9 @@
         <item name="android:fontFamily">sans-serif-light</item>
     </style>
 
+    <style name="alert" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:colorAccent">#000000</item>
+    </style>
     <style name="RobotoButtonStyle" parent="android:Widget.Holo.Button">
         <item name="android:fontFamily">sans-serif-light</item>
     </style>

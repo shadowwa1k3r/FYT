@@ -9,11 +9,21 @@ public class FriendItemType {
     private String img;
     private String name;
     private Boolean status;
+    private int id;
 
-    public FriendItemType(String img,String name,Boolean status){
+    public FriendItemType(String img,String name,Boolean status,int id){
         this.img=img;
+        this.id=id;
         this.name=name;
         this.status=status;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Boolean getStatus() {

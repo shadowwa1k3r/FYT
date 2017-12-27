@@ -52,7 +52,7 @@ public class FeedFullViewPattern extends Fragment {
     private SharedPreference mSharedPreference;
 
     private String BASE_URL;
-    NewsFeedItemType current;
+    private NewsFeedItemType current;
 
     public FeedFullViewPattern() {
         // Required empty public constructor

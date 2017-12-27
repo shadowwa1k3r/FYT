@@ -10,17 +10,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.fyt.loki.fyt.Tools.ImageViewer;
 import com.fyt.loki.fyt.MainAppPage.News.Comments.CommentPage;
 import com.fyt.loki.fyt.MainAppPage.ProfilePage.PostItemType;
-import com.fyt.loki.fyt.Tools.ProfileInterface;
 import com.fyt.loki.fyt.R;
+import com.fyt.loki.fyt.Tools.ImageViewer;
+import com.fyt.loki.fyt.Tools.ProfileInterface;
 import com.fyt.loki.fyt.Tools.VideoPlayer;
-import com.ms.square.android.expandabletextview.ExpandableTextView;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageClickListener;
 import com.synnapps.carouselview.ViewListener;
@@ -106,7 +104,7 @@ public class ProfPostsAdapter extends RecyclerView.Adapter<ProfPostsAdapter.NFVH
 
         if (currentItem.getVideos().size()==0&&currentItem.getImages().size()==0)
         {
-            holder.post_img.setLayoutParams( new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+           // holder.post_img.setLayoutParams( new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         }
 
 

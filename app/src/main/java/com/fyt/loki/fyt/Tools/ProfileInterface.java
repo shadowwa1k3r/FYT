@@ -1,11 +1,15 @@
 package com.fyt.loki.fyt.Tools;
 
+import com.fyt.loki.fyt.MainAppPage.Menu.Friends.FollowBody;
+import com.fyt.loki.fyt.MainAppPage.Menu.Friends.FollowResponse;
 import com.fyt.loki.fyt.MainAppPage.Menu.Friends.FriendInfoModel;
 import com.fyt.loki.fyt.MainAppPage.Menu.Friends.FriendPostBody;
 import com.fyt.loki.fyt.MainAppPage.Menu.Settings.General_info_body;
 import com.fyt.loki.fyt.MainAppPage.Menu.Settings.General_info_response;
 import com.fyt.loki.fyt.MainAppPage.Menu.Settings.General_pass_body;
 import com.fyt.loki.fyt.MainAppPage.Menu.Settings.General_pass_response;
+import com.fyt.loki.fyt.MainAppPage.Messages.RoomBody;
+import com.fyt.loki.fyt.MainAppPage.Messages.RoomResponse;
 import com.fyt.loki.fyt.MainAppPage.News.Comments.CommentModel;
 import com.fyt.loki.fyt.MainAppPage.News.Comments.CommentReplyBody;
 import com.fyt.loki.fyt.MainAppPage.News.Comments.commentBody;
@@ -15,6 +19,7 @@ import com.fyt.loki.fyt.MainAppPage.News.Feed.likebody;
 import com.fyt.loki.fyt.MainAppPage.News.Feed.likeresponse;
 import com.fyt.loki.fyt.MainAppPage.ProfilePage.PostItemModel;
 import com.fyt.loki.fyt.MainAppPage.ProfilePage.ProfileModel;
+import com.fyt.loki.fyt.MainAppPage.ProfilePage.ProfilePhotoChangeResponse;
 import com.fyt.loki.fyt.MainAppPage.ProfilePage.createPostBody;
 import com.fyt.loki.fyt.MainAppPage.ProfilePage.createPostResponse;
 
@@ -40,10 +45,14 @@ import retrofit2.http.Query;
 public interface ProfileInterface {
 
     //@Headers("Authorization: Token c87dfaf88e22a588a983faf2f0f89642dcc77d27")
-    @GET("user/detail/{username}/")
+    @GET("profile/{username}/detail/")
     Call<ProfileModel> profileInfo(@Header("Authorization") String token, @Path("username") String username);
     @GET("user/friends/")
     Call<List<FriendInfoModel>> friendInfo(@Header("Authorization") String token);
+
+    @Multipart
+    @PUT("profile/{username}/update-avatar/")
+    Call<ProfilePhotoChangeResponse> setava(@Header("Authorization")String token,@Part MultipartBody.Part image,@Path("username")String username);
     @GET("list/post/")
     Call<List<PostItemModel>> getPosts(@Header("Authorization")String token);
     @POST("list/post/")
@@ -62,14 +71,23 @@ public interface ProfileInterface {
     Call<commentResponse> reply(@Header("Authorization")String token, @Body CommentReplyBody commentBody);
     @POST("create/post/")
     Call<createPostResponse> post(@Header("Authorization")String token, @Body createPostBody createPostBody);
+    @POST("follower/follow/")
+    Call<FollowResponse> follow(@Header("Authorization")String token, @Body FollowBody body);
+    @POST("follower/unfollow/")
+    Call<FollowResponse> unfollow(@Header("Authorization")String token,@Body FollowBody body);
+    @POST("get-room/")
+    Call<RoomResponse> getRoomInfo(@Header("Authorization")String token, @Body RoomBody roomBody);
 
 
-    @POST("accounts/set-new-password/")
+
+    @POST("profile/new-password/")
     Call<General_pass_response> change_password(@Header("Authorization")String token,@Body General_pass_body body);
     @PUT("accounts/update-profile/")
     Call<General_info_response> change_info(@Header("Authorization")String token, @Body General_info_body body);
 
 
+    @GET("profile/list/search/")
+    Call<List<ProfileModel>> search_user(@Header("Authorization")String token,@Query("q")String username);
 
     @Multipart
     @POST("create/post/")

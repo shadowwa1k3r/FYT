@@ -9,6 +9,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fyt.loki.fyt.R;
@@ -36,8 +37,11 @@ public class ChatFrame extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PARAM3 = "param3";
+    private static final String ARG_PARAM4 = "param4";
 
-    private String mUserName,mOpponentName,BASE_URL;
+
+    private String mUserName,mOpponentName,BASE_URL,BASE_WS,userava;
     private ArrayList<ChatFrameItemType> mMessageList;
     private ListView mListView;
     private WebSocket mWebSocket;
@@ -45,9 +49,12 @@ public class ChatFrame extends Fragment {
     private DataWrapper msg;
     private ChatFrameMessageAdapter mMessageAdapter;
     private OkHttpClient mClient;
+    private TextView username;
 
+    private String room;
     private EditText outputmsg;
     private Button send;
+    private SharedPreference mSharedPreference;
 
 
     public ChatFrame() {
@@ -55,11 +62,13 @@ public class ChatFrame extends Fragment {
     }
 
 
-    public static ChatFrame newInstance(String username,String opponent_name) {
+    public static ChatFrame newInstance(String username,String opponent_name,String room,String userava) {
         ChatFrame fragment = new ChatFrame();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, username);
         args.putString(ARG_PARAM2, opponent_name);
+        args.putString(ARG_PARAM3, room);
+        args.putString(ARG_PARAM4,userava);
         fragment.setArguments(args);
         return fragment;
     }
@@ -70,6 +79,8 @@ public class ChatFrame extends Fragment {
         if (getArguments() != null) {
             mUserName = getArguments().getString(ARG_PARAM1);
             mOpponentName=getArguments().getString(ARG_PARAM2);
+            room=getArguments().getString(ARG_PARAM3);
+            userava=getArguments().getString(ARG_PARAM4);
         }
     }
 
@@ -81,8 +92,12 @@ public class ChatFrame extends Fragment {
         mListView=(ListView)ChF.findViewById(R.id.msg_list);
         send=(Button)ChF.findViewById(R.id.sendmessage);
         outputmsg=(EditText)ChF.findViewById(R.id.editmsg);
+        username=(Button)ChF.findViewById(R.id.userName);
+        username.setText(mUserName);
         mMessageList=new ArrayList<>();
         BASE_URL= getContext().getString(R.string.BASE_URL);
+        BASE_WS=getContext().getString(R.string.BASE_WS);
+        mSharedPreference=new SharedPreference();
 
 
         mClient=new OkHttpClient();
@@ -117,9 +132,9 @@ public class ChatFrame extends Fragment {
        private void start(){
            SharedPreference sharedPreference=new SharedPreference();
         Request request= new Request.Builder()
-                //.url("ws://192.168.1.115:8000/chat/ZTpumabRiDUcmCan")
+                .url(BASE_WS+room)
                 //.url("ws://echo.websocket.org")
-                .url("wss://findyourtraining.com/chat/1")
+                //.url("wss://findyourtraining.com/chat/1")
                 .addHeader("Authorization",sharedPreference.getToken(getContext()))
 
                 .build();
@@ -135,7 +150,7 @@ public class ChatFrame extends Fragment {
                    public void run() {
                        msg=DataWrapper.fromJson(txt);
                        if(!msg.getUser().getUsername().equals("test")) {
-                           mMessageList.add(new ChatFrameItemType(BASE_URL + msg.getUser().getAvatar(), msg.getUser().getUsername(), msg.getMessage(), getCurrentTimeString()));
+                           mMessageList.add(new ChatFrameItemType(BASE_URL + msg.getUser().getAvatar(),mSharedPreference.getUserName(getContext()), msg.getUser().getUsername(), msg.getMessage(), getCurrentTimeString()));
                            mMessageAdapter.notifyDataSetChanged();
                            mListView.setSelection(mMessageAdapter.getCount() - 1);
                        }
@@ -153,7 +168,7 @@ public class ChatFrame extends Fragment {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    mMessageList.add(new ChatFrameItemType("https://findyourtraining.com/media/default/no_photo_male.png","ergash",txt,getCurrentTimeString()));
+                 //   mMessageList.add(new ChatFrameItemType("https://findyourtraining.com/media/default/no_photo_male.png","ergash",txt,getCurrentTimeString()));
                     mMessageAdapter.notifyDataSetChanged();
                     mListView.setSelection(mMessageAdapter.getCount()-1);
                 }
@@ -172,7 +187,7 @@ public class ChatFrame extends Fragment {
         mWebSocket.send(text);
         mMessageAdapter.notifyDataSetChanged();
         mListView.setSelection(mMessageAdapter.getCount()-1);
-        mMessageList.add(new ChatFrameItemType(BASE_URL+"/media/profile_images/ergash/temp_rxB76xg.png","farrukh",text,getCurrentTimeString()));
+        mMessageList.add(new ChatFrameItemType(userava,mSharedPreference.getUserName(getContext()),mUserName,text,getCurrentTimeString()));
 
 
     }

@@ -5,13 +5,22 @@ package com.fyt.loki.fyt.MainAppPage.Messages;
  */
 
 public class ChatFrameItemType {
-    private String ava,username,date,msg;
+    private String ava,me,username,date,msg;
 
-    public ChatFrameItemType(String ava,String username,String msg,String date){
+    public ChatFrameItemType(String ava,String me,String username,String msg,String date){
         this.ava=ava;
+        this.me=me;
         this.username=username;
         this.msg=msg;
         this.date=date;
+    }
+
+    public String getMe() {
+        return me;
+    }
+
+    public void setMe(String me) {
+        this.me = me;
     }
 
     public String getUsername() {

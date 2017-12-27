@@ -45,7 +45,7 @@ public class FriendItemAdapterPanel extends RecyclerView.Adapter<FriendItemAdapt
 
         BASE_URL=mContext.getString(R.string.BASE_URL);
         try {
-            Glide.with(mContext).load(BASE_URL+currentFitem.getImg()).into(holder.imgv);
+            Glide.with(mContext).load(currentFitem.getImg()).into(holder.imgv);
         }catch (Exception e){
             e.printStackTrace();
         }

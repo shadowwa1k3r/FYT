@@ -1,8 +1,6 @@
 package com.fyt.loki.fyt.MainAppPage.Messages;
 
 import android.content.Context;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,7 +39,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChLHol
         BASE_URL=mContext.getString(R.string.BASE_URL);
         Picasso.with(mContext).load(currentItem.getImg()).into(holder.ava);
 
-        holder.item.setOnClickListener(new View.OnClickListener() {
+        /*holder.item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AppCompatActivity activity=(AppCompatActivity)mContext;
@@ -50,7 +48,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChLHol
 
 
             }
-        });
+        });*/
         holder.bindTo(currentItem);
     }
 

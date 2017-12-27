@@ -2,15 +2,18 @@ package com.fyt.loki.fyt.MainAppPage.Menu.Friends;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.fyt.loki.fyt.MainAppPage.News.FriendItemAdapterPanel;
 import com.fyt.loki.fyt.Tools.ProfileInterface;
 import com.fyt.loki.fyt.R;
+import com.fyt.loki.fyt.Tools.SharedPreference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +39,8 @@ public class FriendsListAll extends Fragment {
     private ArrayList<FriendItemType> mDataset;
     private String BASE_URL,BASE_URL_API;
     private ProfileInterface mProfileInterface;
+    private SharedPreference mSharedPreference;
+    private Button searchfriend;
 
 
 
@@ -67,9 +72,13 @@ public class FriendsListAll extends Fragment {
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View FListAll=inflater.inflate(R.layout.fragment_friends_list_all, container, false);
+        searchfriend=(Button)FListAll.findViewById(R.id.searchfriend);
 
         BASE_URL = getContext().getString(R.string.BASE_URL);
         BASE_URL_API =BASE_URL+"/api/";
+        mSharedPreference=new SharedPreference();
+        mParam1=mSharedPreference.getToken(getContext());
+        mParam2=mSharedPreference.getUserName(getContext());
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL_API)
@@ -97,7 +106,7 @@ public class FriendsListAll extends Fragment {
 
                     for (int i=0; i<response.body().size();i++){
 
-                         mDataset.add(new FriendItemType(response.body().get(i).getAvatar(), response.body().get(i).getUsername(), response.body().get(i).getIs_online()));
+                         mDataset.add(new FriendItemType(response.body().get(i).profile.avatar, response.body().get(i).username, response.body().get(i).profile.is_online,response.body().get(i).id));
 
 
 
@@ -112,6 +121,14 @@ public class FriendsListAll extends Fragment {
 
             @Override
             public void onFailure(Call<List<FriendInfoModel>> call, Throwable t) {
+
+            }
+        });
+
+        searchfriend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).replace(R.id.contentContainer,new SearchUser()).addToBackStack(null).commit();
 
             }
         });

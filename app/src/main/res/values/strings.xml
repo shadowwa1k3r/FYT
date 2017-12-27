@@ -5,10 +5,16 @@
     <string name="lp3_text">By clicking Create Account, you agree to our <a href="http://www.google.com">Terms</a> and that you have read our <a href="google.com">Data Policy</a>, including our <a href="google.com">Cookie Use.</a></string>
 
 
+    <string name="google_api_key">AIzaSyDNjX4pUcBkAL_BURwR_aUFiN66XRuW1gM</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="BASE_URL2">http://192.168.1.104:8000</string>
+    <string name="BASE_URL2">http://192.168.1.103:8000</string>
     <string name="BASE_URL">https://findyourtraining.com</string>
+    <string name="BASE_WS2">ws://192.168.1.103:8000/chat/</string>
+    <string name="BASE_WS">wss://findyourtraining.com/chat/</string>
+
+    <dimen name="map_inset_margin">100dp</dimen>
+
 
     <string name="facebook_app_id">1963632580549769</string>
     <string name="fb_login_protocol_scheme">fb405601763191434</string>

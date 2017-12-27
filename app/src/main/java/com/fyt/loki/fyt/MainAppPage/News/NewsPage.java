@@ -76,38 +76,7 @@ public class NewsPage extends Fragment {
     private NewsPostsAdapter mNewsPostsAdapter;
 
     private ArrayList<NewsFeedItemType> mDataset;
-   /* //---------------------------------publish-------------------------------------
-    private RecyclerView mediaRV;
-    private MediaAdapter mMediaAdapter;
-    private ArrayList<String> mediaset;
-    private RecyclerView.LayoutManager mediaLM;
 
-    static String[] IMAGE_EXTENSIONS = {
-            "jpg",
-            "jpeg",
-            "bmp",
-            "png",
-            "gif",
-            "tiff",
-            "webp",
-            "ico"
-    };
-
-    static String[] VIDEO_EXTENSIONS = {
-            "avi",
-            "asf",
-            "mov",
-            "flv",
-            "swf",
-            "mpg",
-            "mpeg",
-            "mp4",
-            "wmv",
-    };
-    private static Set<String> SET_IMAGE_EXTENSIONS = new HashSet<String>(Arrays.asList(IMAGE_EXTENSIONS));
-    private static Set<String> SET_VIDEO_EXTENSIONS = new HashSet<String>(Arrays.asList(VIDEO_EXTENSIONS));
-
-    //-----------------------------------------------------------------------------*/
 
 
     static int y;
@@ -115,6 +84,7 @@ public class NewsPage extends Fragment {
     private TextView searchtext;
     private SearchView searchview;
     private CircleImageView searchava;
+    private Bundle mBundle;
 
 
 
@@ -134,6 +104,15 @@ public class NewsPage extends Fragment {
             mToken = getArguments().getString(ARG_PARAM1);
             mUserName = getArguments().getString(ARG_PARAM2);
         }
+        BASE_URL= getContext().getString(R.string.BASE_URL);
+        BASE_URL_API =BASE_URL+"/api/";
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL_API)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        profileInterface = retrofit.create(ProfileInterface.class);
+
     }
 
 
@@ -141,6 +120,7 @@ public class NewsPage extends Fragment {
     public void onResume(){
         super.onResume();
         try {
+
             mNewsPostsAdapter.notifyDataSetChanged();
         }
         catch (Exception e){
@@ -152,8 +132,7 @@ public class NewsPage extends Fragment {
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
        final View NewsPage=inflater.inflate(R.layout.fragment_news_page, container, false);
-        BASE_URL= getContext().getString(R.string.BASE_URL);
-        BASE_URL_API =BASE_URL+"/api/";
+
         FrameLayout fl=(FrameLayout)getActivity().findViewById(R.id.mainFrame);
         fl.setVisibility(View.VISIBLE);
         searchview=(SearchView)NewsPage.findViewById(R.id.search);
@@ -168,11 +147,7 @@ public class NewsPage extends Fragment {
 
         new_post=(TextView)NewsPage.findViewById(R.id.posttxt);
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL_API)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        profileInterface = retrofit.create(ProfileInterface.class);
+
 
         mRecyclerView = (RecyclerView)NewsPage.findViewById(R.id.newsRV);
 
@@ -238,6 +213,7 @@ public class NewsPage extends Fragment {
         });
 
 
+
         searchava.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -252,6 +228,7 @@ public class NewsPage extends Fragment {
 
             }
         });
+
 
 
         requestPermissions(new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},10);

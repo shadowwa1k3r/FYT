@@ -97,8 +97,8 @@ public class FriendsListOnline extends Fragment {
 
                     for (int i=0; i<response.body().size();i++){
 
-                        if(response.body().get(i).getIs_online()) {
-                            mDataset.add(new FriendItemType(response.body().get(i).getAvatar(), response.body().get(i).getUsername(), response.body().get(i).getIs_online()));
+                        if(response.body().get(i).profile.is_online) {
+                            mDataset.add(new FriendItemType(response.body().get(i).profile.avatar, response.body().get(i).username, response.body().get(i).profile.is_online,response.body().get(i).id));
 
                         }
 

@@ -5,12 +5,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.fyt.loki.fyt.Auth.LoginActivity;
+import com.fyt.loki.fyt.MainAppPage.Menu.Friends.FriendsListAll;
 import com.fyt.loki.fyt.MainAppPage.Menu.Settings.MyProfileSettings;
 import com.fyt.loki.fyt.R;
 import com.fyt.loki.fyt.Tools.SharedPreference;
@@ -55,6 +57,7 @@ public class MenuPage extends Fragment {
         mSharedPreference=new SharedPreference();
         Button my_profile = (Button)Menu.findViewById(R.id.myprofile_btn);
         Button logout=(Button)Menu.findViewById(R.id.logoout);
+        Button friends=(Button)Menu.findViewById(R.id.friends);
         BadgeView badge = new BadgeView(getContext(),my_profile);
         badge.setText("*");
         badge.setBadgeMargin(0,0);
@@ -68,11 +71,12 @@ public class MenuPage extends Fragment {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext(),R.style.alert);
                 builder.setTitle("Error")
                         .setMessage("Are you sure want to logout?")
                         .setIcon(R.drawable.warning)
                         .setCancelable(false)
+
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -98,6 +102,14 @@ public class MenuPage extends Fragment {
                         });
                 AlertDialog alert = builder.create();
                 alert.show();
+            }
+        });
+
+        friends.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                        .replace(R.id.contentContainer, new FriendsListAll()).addToBackStack(null).commit();
             }
         });
 
